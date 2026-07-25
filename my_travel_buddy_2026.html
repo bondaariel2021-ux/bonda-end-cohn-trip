@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Heebo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    },
+                    colors: {
+                        alpine: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        austria: {
+                            red: '#ef4444',
+                            dark: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .tab-btn.active { border-bottom: 3px solid #0284c7; color: #0284c7; font-weight: 700; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col pb-12">
+
+    <!-- Header Navigation -->
+    <header class="bg-gradient-to-r from-slate-900 via-alpine-900 to-slate-900 text-white sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-alpine-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl shadow">
+                    🏔️
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold leading-tight">אלפים 2026 ✈️</h1>
+                    <p class="text-xs text-slate-300">משפחות בונדה & כהן | 30.07 - 14.08.2026</p>
+                </div>
+            </div>
+
+            <!-- Auth Status & Controls -->
+            <div class="flex items-center gap-3">
+                <div id="userInfo" class="hidden text-xs md:text-sm bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span id="userNameDisplay">הורה מורשה</span>
+                </div>
+                <button id="authBtn" onclick="toggleAuthModal()" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-3 py-1.5 rounded-lg text-xs md:text-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-lock" id="authIcon"></i>
+                    <span id="authBtnText">התחברות עריכה</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-slate-800/80 border-t border-slate-700/50 px-4 overflow-x-auto hide-scrollbar">
+            <div class="max-w-7xl mx-auto flex gap-2 text-slate-300 text-sm font-medium whitespace-nowrap">
+                <button onclick="switchTab('dashboard')" class="tab-btn active py-2.5 px-4 flex items-center gap-2 transition" id="tab-dashboard">
+                    <i class="fa-solid fa-house"></i> סקירה וספירה לאחור
+                </button>
+                <button onclick="switchTab('itinerary')" class="tab-btn py-2.5 px-4 flex items-center gap-2 transition" id="tab-itinerary">
+                    <i class="fa-solid fa-calendar-days"></i> תוכנית יומית ואטרקציות
+                </button>
+                <button onclick="switchTab('lodging')" class="tab-btn py-2.5 px-4 flex items-center gap-2 transition" id="tab-lodging">
+                    <i class="fa-solid fa-bed"></i> מקומות אירוח (4)
+                </button>
+                <button onclick="switchTab('transport')" class="tab-btn py-2.5 px-4 flex items-center gap-2 transition" id="tab-transport">
+                    <i class="fa-solid fa-plane"></i> טיסות ורכב SIXT
+                </button>
+                <button onclick="switchTab('budget')" class="tab-btn py-2.5 px-4 flex items-center gap-2 transition" id="tab-budget">
+                    <i class="fa-solid fa-wallet"></i> תקציב וחשבוניות 🔒
+                </button>
+                <button onclick="switchTab('checklist')" class="tab-btn py-2.5 px-4 flex items-center gap-2 transition" id="tab-checklist">
+                    <i class="fa-solid fa-clipboard-check"></i> רשימת ציוד
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 pt-6 flex-grow w-full">
+
+        <!-- Banner Alert for Viewers -->
+        <div id="viewerNotice" class="mb-6 bg-blue-50 border-r-4 border-blue-500 p-4 rounded-xl shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">👋</span>
+                <div>
+                    <h3 class="font-bold text-blue-900 text-sm md:text-base">ברוכים הבאים לאפליקציית הטיול המשפחתי!</h3>
+                    <p class="text-xs md:text-sm text-blue-700">האתר פתוח לצפייה חופשית לכל בני המשפחה. כדי להוסיף או לערוך פעילויות וחשבוניות יש להתחבר כהורה.</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-blue-400 hover:text-blue-600 px-2">✕</button>
+        </div>
+
+        <!-- TAB 1: DASHBOARD -->
+        <section id="sec-dashboard" class="space-y-6">
+            <!-- Countdown Banner -->
+            <div class="bg-gradient-to-r from-alpine-800 to-slate-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -left-10 -bottom-10 opacity-10 text-9xl">🏔️</div>
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div>
+                        <span class="bg-alpine-500/30 text-alpine-100 text-xs font-semibold px-3 py-1 rounded-full border border-alpine-400/30">
+                            30 ביולי 2026 - 14 באוגוסט 2026
+                        </span>
+                        <h2 class="text-2xl md:text-4xl font-extrabold mt-2">המסע לגרמניה ואוסטריה מתקרב!</h2>
+                        <p class="text-slate-300 text-sm mt-1">16 ימים | 2 משפחות (10 מטיילים: 6 מבוגרים, 4 ילדים)</p>
+                    </div>
+
+                    <!-- Countdown Timer -->
+                    <div class="flex gap-3 text-center">
+                        <div class="bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 min-w-[70px]">
+                            <span id="cd-days" class="text-2xl md:text-3xl font-black text-amber-300">00</span>
+                            <span class="block text-[10px] text-slate-300 uppercase mt-0.5">ימים</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 min-w-[70px]">
+                            <span id="cd-hours" class="text-2xl md:text-3xl font-black text-amber-300">00</span>
+                            <span class="block text-[10px] text-slate-300 uppercase mt-0.5">שעות</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 min-w-[70px]">
+                            <span id="cd-mins" class="text-2xl md:text-3xl font-black text-amber-300">00</span>
+                            <span class="block text-[10px] text-slate-300 uppercase mt-0.5">דקות</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats & Highlights -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl">✈️</div>
+                    <div>
+                        <div class="text-xs text-slate-500">טיסות</div>
+                        <div class="font-bold text-slate-800 text-sm">אל על LY351</div>
+                        <div class="text-[11px] text-emerald-600 font-medium">הלוך וחזור מינכן</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl">🚗</div>
+                    <div>
+                        <div class="text-xs text-slate-500">רכב שכור</div>
+                        <div class="font-bold text-slate-800 text-sm">SIXT München</div>
+                        <div class="text-[11px] text-slate-500">קבוצה IWAR</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl">🏡</div>
+                    <div>
+                        <div class="text-xs text-slate-500">לינה מרכזית</div>
+                        <div class="font-bold text-slate-800 text-sm">בקתת פרימיום</div>
+                        <div class="text-[11px] text-slate-500">בריכה + סאונה בבית</div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl">👨‍👩‍👧‍👦</div>
+                    <div>
+                        <div class="text-xs text-slate-500">מטיילים</div>
+                        <div class="font-bold text-slate-800 text-sm">10 משתתפים</div>
+                        <div class="text-[11px] text-purple-600 font-medium">בונדה & כהן</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Route Map Stations Overview -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-alpine-600"></i> תחנות המסלול הראשיות
+                    </h3>
+                    <a href="https://maps.app.goo.gl/wJd1v3qP3yJ3" target="_blank" class="text-xs font-semibold text-alpine-600 hover:underline flex items-center gap-1">
+                        פתחי מפה ב-Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                    <!-- Station 1 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-alpine-400 transition">
+                        <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">לילה 1 (30-31.07)</span>
+                        <h4 class="font-bold mt-2 text-slate-800">Gästehaus Zehmerhof</h4>
+                        <p class="text-xs text-slate-500 mt-1">ארדינג / מינכן, גרמניה</p>
+                        <p class="text-xs text-slate-600 mt-2">נחיתה, קבלת רכב SIXT ומנוחה קרובה לשדה.</p>
+                    </div>
+
+                    <!-- Station 2 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-alpine-400 transition">
+                        <span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">לילות 2-6 (31.07-05.08)</span>
+                        <h4 class="font-bold mt-2 text-slate-800">Alpen Resort Schrofenblick</h4>
+                        <p class="text-xs text-slate-500 mt-1">מיירהופן, עמק צילרטל, אוסטריה</p>
+                        <p class="text-xs text-slate-600 mt-2">דירות Penken, אגמים, רכבלים ואלפים ירוקים.</p>
+                    </div>
+
+                    <!-- Station 3 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-alpine-400 transition">
+                        <span class="text-[10px] font-bold bg-purple-100 text-purple-700 px-2 py-0.5 rounded">לילות 7-12 (05-11.08)</span>
+                        <h4 class="font-bold mt-2 text-slate-800">Bergresort Hauser Kaibling</h4>
+                        <p class="text-xs text-slate-500 mt-1">Haus im Ennstal / שילדמינג, אוסטריה</p>
+                        <p class="text-xs text-slate-600 mt-2">בקתת פרימיום עם סאונה ובריכה פרטית!</p>
+                    </div>
+
+                    <!-- Station 4 -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-alpine-400 transition">
+                        <span class="text-[10px] font-bold bg-amber-100 text-amber-700 px-2 py-0.5 rounded">לילות 13-15 (11-14.08)</span>
+                        <h4 class="font-bold mt-2 text-slate-800">Flatista Homes - Munich</h4>
+                        <p class="text-xs text-slate-500 mt-1">מרכז מינכן (Schillerstraße 14)</p>
+                        <p class="text-xs text-slate-600 mt-2">דירת Airbnb גדולה, שופינג, פארק אנגלי וסיור עירוני.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ITINERARY & ACTIVITIES -->
+        <section id="sec-itinerary" class="space-y-6 hidden">
+            <!-- Action Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900">תוכנית טיול ואטרקציות</h2>
+                    <p class="text-xs text-slate-500">לחצו על הוספה כדי להציע פעילות חדשה (נדרשת התחברות הורה)</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <!-- Category filter -->
+                    <select id="filterCategory" onchange="renderActivities()" class="bg-slate-100 border border-slate-300 text-xs rounded-lg p-2.5 focus:ring-alpine-500 focus:border-alpine-500">
+                        <option value="ALL">כל הקטגוריות</option>
+                        <option value="טבע ומסלולים">🌿 טבע ומסלולים</option>
+                        <option value="אקסטרים ומגלשות">🎢 אקסטרים ומגלשות</option>
+                        <option value="מים וספא">🏊 מים וספא</option>
+                        <option value="עיר ושופינג">🛍️ עיר ושופינג</option>
+                    </select>
+
+                    <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-700 text-white font-medium text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> הוספת פעילות / אטרקציה
+                    </button>
+                </div>
+            </div>
+
+            <!-- Activities Grid -->
+            <div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Dynamic Content Rendered Here -->
+            </div>
+        </section>
+
+        <!-- TAB 3: LODGING -->
+        <section id="sec-lodging" class="space-y-6 hidden">
+            <h2 class="text-xl font-bold text-slate-900">פרטי מקומות האירוח (4 תחנות)</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Lodging 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] bg-blue-500 text-white font-bold px-2 py-0.5 rounded">לילה 1 | 30.07 - 31.07</span>
+                            <h3 class="font-bold text-lg mt-1">Gästehaus Zehmerhof bei Erding</h3>
+                        </div>
+                        <i class="fa-solid fa-hotel text-2xl text-blue-400"></i>
+                    </div>
+                    <div class="p-5 space-y-3 text-sm">
+                        <p class="text-slate-600"><i class="fa-solid fa-location-dot text-red-500 ml-2"></i> Hauptstr. 7 a, 85469 Walpertskirchen, Germany</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-phone text-blue-500 ml-2"></i> +49 8122 959200</p>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
+                            <strong>פרטים נוספים:</strong> הגעה צפויה 20:00-21:00. כולל חניה פרטית בחינם ואינטרנט אלחוטי. קרוב לשדה התעופה במינכן ולתרמה ארדינג.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lodging 2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] bg-emerald-500 text-white font-bold px-2 py-0.5 rounded">5 לילות | 31.07 - 05.08</span>
+                            <h3 class="font-bold text-lg mt-1">Alpen Resort Schrofenblick</h3>
+                        </div>
+                        <i class="fa-solid fa-mountain-sun text-2xl text-emerald-400"></i>
+                    </div>
+                    <div class="p-5 space-y-3 text-sm">
+                        <p class="text-slate-600"><i class="fa-solid fa-location-dot text-red-500 ml-2"></i> Burgstall 373, Mayrhofen, Tirol 6290, Austria</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-phone text-blue-500 ml-2"></i> +43 5285 62276</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-bookmark text-amber-500 ml-2"></i> מספר הזמנה: <strong>4SCHPB5H81</strong> (Penken Apartment x2)</p>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
+                            <strong>מיקום מעולה:</strong> לב עמק צילרטל, גישה ישירה לרכבלים (Penken & Ahorn), נוף מרהיב לאלפים.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lodging 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] bg-purple-500 text-white font-bold px-2 py-0.5 rounded">6 לילות | 05.08 - 11.08</span>
+                            <h3 class="font-bold text-lg mt-1">Bergresort Hauser Kaibling (ALPS RESORTS)</h3>
+                        </div>
+                        <i class="fa-solid fa-house-chimney-window text-2xl text-purple-400"></i>
+                    </div>
+                    <div class="p-5 space-y-3 text-sm">
+                        <p class="text-slate-600"><i class="fa-solid fa-location-dot text-red-500 ml-2"></i> Haus im Ennstal / שילדמינג, אוסטריה</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-bookmark text-amber-500 ml-2"></i> מספר הזמנה: <strong>31580165-1602500300</strong></p>
+                        <div class="bg-purple-50 p-3 rounded-xl border border-purple-100 text-xs text-purple-900 font-medium">
+                            🌟 <strong>בקתת פרימיום מטורפת:</strong> 5 חדרי שינה, קיבולת 10 נפשות, סאונה פרטית ובריכה מחוממת בבקתה!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lodging 4 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] bg-amber-500 text-white font-bold px-2 py-0.5 rounded">3 לילות | 11.08 - 14.08</span>
+                            <h3 class="font-bold text-lg mt-1">Flatista Homes - Central Station</h3>
+                        </div>
+                        <i class="fa-solid fa-building text-2xl text-amber-400"></i>
+                    </div>
+                    <div class="p-5 space-y-3 text-sm">
+                        <p class="text-slate-600"><i class="fa-solid fa-location-dot text-red-500 ml-2"></i> Schillerstraße 14, 80336 Munich, Germany</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-phone text-blue-500 ml-2"></i> +49 89 90184655 (מארח: Thomas)</p>
+                        <p class="text-slate-600"><i class="fa-solid fa-bookmark text-amber-500 ml-2"></i> קוד אישור Airbnb: <strong>HM2M2M232</strong></p>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
+                            <strong>דירת 4 חדרים גדולה במרכז מינכן:</strong> מרחק הליכה מתחנת הרכבת המרכזית (נוח להחזרת רכב SIXT ב-12.08).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: TRANSPORT -->
+        <section id="sec-transport" class="space-y-6 hidden">
+            <h2 class="text-xl font-bold text-slate-900">טיסות והשכרת רכב</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Flight Card -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-plane-departure text-blue-600"></i> טיסת אל על (LY351)
+                        </h3>
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">מנגנון PNR: YHUICS</span>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl space-y-3 text-sm">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-xs text-slate-500">יציאה</div>
+                                <div class="font-bold text-base text-slate-800">תל אביב (TLV) - טרמינל 3</div>
+                                <div class="text-xs text-blue-600">30 ביולי 2026 בשעה 15:45</div>
+                            </div>
+                            <div class="text-center text-slate-400">
+                                <i class="fa-solid fa-arrow-left text-lg"></i>
+                                <div class="text-[10px]">4 שעות ו-5 דק'</div>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-xs text-slate-500">נחיתה</div>
+                                <div class="font-bold text-base text-slate-800">מינכן (MUC) - טרמינל 1</div>
+                                <div class="text-xs text-blue-600">30 ביולי 2026 בשעה 18:50</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-slate-600 space-y-1">
+                        <p>• <strong>נוסעים:</strong> 10 נפשות (בונדה Alma, Liat, Gil + משפחת כהן)</p>
+                        <p>• כולל כבודה בתא המטען לכל הנוסעים (1PC).</p>
+                    </div>
+                </div>
+
+                <!-- Car Rental Card -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-car text-amber-600"></i> השכרת רכב - SIXT
+                        </h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">מספר הזמנה: 9730234401</span>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-3 bg-amber-50/50 p-3 rounded-xl border border-amber-100">
+                            <i class="fa-solid fa-key text-amber-600 mt-1"></i>
+                            <div>
+                                <strong>איסוף:</strong> 30.07.2026 בשעה ~19:30 בשדה התעופה מינכן (München Flughafen).
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <i class="fa-solid fa-flag-checkered text-slate-600 mt-1"></i>
+                            <div>
+                                <strong>החזרה:</strong> 12.08.2026 בשעה 21:00 בתחנת הרכבת המרכזית במינכן (Munich Central Station).
+                            </div>
+                        </div>
+                        <div class="text-xs text-slate-600 space-y-1 pt-1">
+                            <p>• <strong>קבוצת רכב:</strong> IWAR | נהג רשום: Gil Bonda</p>
+                            <p>• <strong>כיסוי ביטוחי:</strong> כולל ביטול השתתפות עצמית (LDW) וגניבה.</p>
+                            <p>• <strong>עלות שולמה מראש:</strong> €816.30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: BUDGET & INVOICES -->
+        <section id="sec-budget" class="space-y-6 hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-emerald-600"></i> ניהול תקציב וחשבוניות 🔒
+                    </h2>
+                    <p class="text-xs text-slate-500">רק הורים מורשים יכולים להוסיף או לערוך הוצאות וקבצים.</p>
+                </div>
+
+                <button onclick="protectedAction(openAddExpenseModal)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs md:text-sm px-4 py-2.5 rounded-lg shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> הוספת הוצאה / חשבונית
+                </button>
+            </div>
+
+            <!-- Budget Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-sm">
+                        <thead class="bg-slate-100 text-slate-700 font-bold border-b text-xs">
+                            <tr>
+                                <th class="p-3">סעיף / תיאור</th>
+                                <th class="p-3">ספק / מקום</th>
+                                <th class="p-3">סכום</th>
+                                <th class="p-3">סטטוס תשלום</th>
+                                <th class="p-3">משלם / משפחה</th>
+                                <th class="p-3 text-center">פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="budgetTableBody" class="divide-y divide-slate-100">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: CHECKLIST -->
+        <section id="sec-checklist" class="space-y-6 hidden">
+            <h2 class="text-xl font-bold text-slate-900">רשימת ציוד וארגונים לטיול</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Checklist Card 1 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <h3 class="font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-passport text-blue-600"></i> מסמכים ותקשורת
+                    </h3>
+                    <div id="checkListDocs" class="space-y-2 text-sm">
+                        <!-- Rendered Checkbox Items -->
+                    </div>
+                </div>
+
+                <!-- Checklist Card 2 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <h3 class="font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-shirt text-amber-600"></i> ביגוד וציוד לאלפים
+                    </h3>
+                    <div id="checkListGear" class="space-y-2 text-sm">
+                        <!-- Rendered Checkbox Items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- AUTHENTICATION MODAL -->
+    <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative border border-slate-100 animate-fadeIn">
+            <button onclick="toggleAuthModal()" class="absolute left-4 top-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">🔒</div>
+                <h3 class="text-xl font-bold text-slate-900">על מנת לשנות עליך להתחבר</h3>
+                <p class="text-xs text-slate-500 mt-1">הכנס שם משתמש וסיסמה של הורה מורשה לבצע שינויים:</p>
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">שם משתמש:</label>
+                    <input type="text" id="authUsername" required placeholder="לדוגמה: gil.bonda" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-alpine-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">סיסמה:</label>
+                    <input type="password" id="authPassword" required class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-alpine-500 outline-none">
+                </div>
+
+                <div id="authError" class="text-red-500 text-xs font-medium hidden text-center bg-red-50 p-2 rounded">
+                    שם משתמש או סיסמה שגויים. נסו שוב.
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="button" onclick="toggleAuthModal()" class="w-1/2 py-2.5 border border-slate-300 rounded-lg text-sm text-slate-700 hover:bg-slate-50">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-alpine-600 hover:bg-alpine-700 text-white font-bold rounded-lg text-sm shadow">התחבר</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT ACTIVITY MODAL -->
+    <div id="activityModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative">
+            <button onclick="closeActivityModal()" class="absolute left-4 top-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-4" id="modalActTitle">+ הוספת אטרקציה / פעילות</h3>
+
+            <form onsubmit="saveActivity(event)" class="space-y-3 text-right">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">שם הפעילות:</label>
+                    <input type="text" id="actTitle" required class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-alpine-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">תאריך/יום:</label>
+                        <input type="text" id="actDay" placeholder="לדוגמה: יום 3 (01.08)" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">קטגוריה:</label>
+                        <select id="actCategory" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                            <option value="טבע ומסלולים">🌿 טבע ומסלולים</option>
+                            <option value="אקסטרים ומגלשות">🎢 אקסטרים ומגלשות</option>
+                            <option value="מים וספא">🏊 מים וספא</option>
+                            <option value="עיר ושופינג">🛍️ עיר ושופינג</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">מיקום / אזור:</label>
+                        <input type="text" id="actLocation" placeholder="מיירהופן / שילדמינג" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">מתאים לילדים?</label>
+                        <select id="actTarget" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                            <option value="חובה לילדים!">👧 חובה לילדים!</option>
+                            <option value="לכל המשפחה">👨‍👩‍👧‍👦 לכל המשפחה</option>
+                            <option value="מבוגרים/נוער">🏔️ מבוגרים/נוער</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">תיאור והערות:</label>
+                    <textarea id="actDesc" rows="3" class="w-full border border-slate-300 rounded-lg p-2 text-sm"></textarea>
+                </div>
+
+                <div class="pt-3 flex gap-3">
+                    <button type="button" onclick="closeActivityModal()" class="w-1/2 py-2 border rounded-lg text-sm">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-alpine-600 text-white font-bold rounded-lg text-sm">שמור פעילות</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD EXPENSE MODAL -->
+    <div id="expenseModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative">
+            <button onclick="closeExpenseModal()" class="absolute left-4 top-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-4">+ הוספת הוצאה / חשבונית</h3>
+
+            <form onsubmit="saveExpense(event)" class="space-y-3 text-right">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">תיאור ההוצאה:</label>
+                    <input type="text" id="expDesc" required placeholder="לדוגמה: כרטיסים לרכבל" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ספק / מקום:</label>
+                        <input type="text" id="expVendor" placeholder="AlpenResort / SIXT" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">סכום (€ / ₪):</label>
+                        <input type="text" id="expAmount" required placeholder="€ 150" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">סטטוס תשלום:</label>
+                        <select id="expStatus" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                            <option value="שולם מלא">✅ שולם מלא</option>
+                            <option value="מקדמה שולמה">⏳ מקדמה שולמה</option>
+                            <option value="לתשלום במקום">💶 לתשלום במקום</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">משלם רשום:</label>
+                        <input type="text" id="expPayer" placeholder="גיל / ליאת / אפי" class="w-full border border-slate-300 rounded-lg p-2 text-sm">
+                    </div>
+                </div>
+
+                <div class="pt-3 flex gap-3">
+                    <button type="button" onclick="closeExpenseModal()" class="w-1/2 py-2 border rounded-lg text-sm">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-emerald-600 text-white font-bold rounded-lg text-sm">שמור הוצאה</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Authorized Users List
+        const USERS = [
+            { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה' },
+            { username: 'liat.bonda', pass: 'L!atB#2026$nd', name: 'ליאת בונדה' },
+            { username: 'effi.cohen', pass: 'E3f!Ch#2026$', name: 'אפי כהן' },
+            { username: 'shelly.cohen', pass: 'Sh3ll!C#2026$', name: 'שלי כהן' },
+            { username: 'arielbonda', pass: 'bonda2196', name: 'אריאל בונדה (מאסטר)' }
+        ];
+
+        let currentUser = null;
+        let pendingAction = null;
+
+        // Initial Data Structure
+        let activities = JSON.parse(localStorage.getItem('trip_activities')) || [
+            { id: 1, title: 'מגלשות אלפיניות Lucky Flitzer', day: 'יום 8 (06.08)', category: 'אקסטרים ומגלשות', location: 'Flachau', target: 'חובה לילדים!', desc: 'מגלשות הרים באורך 1.1 ק"מ, חוויה מטורפת לילדים ולמבוגרים.' },
+            { id: 2, title: 'הר Ahorn & רכבל Ahornbahn', day: 'יום 3 (01.08)', category: 'טבע ומסלולים', location: 'מיירהופן', target: 'לכל המשפחה', desc: 'עלייה ברכבל הגדול באוסטריה, תצפית אלפים מרהיבה, מופע עופות דורסים בראש ההר.' },
+            { id: 3, title: 'מרכז הספא והבריכות Erlebnisbad Mayrhofen', day: 'יום 4 (02.08)', category: 'מים וספא', location: 'מיירהופן', target: 'חובה לילדים!', desc: 'מגלשות מים, בריכות מחוממות ומתחם רגיעה לכל המשפחה.' },
+            { id: 4, title: 'קניון הקרח Dachstein Glacier & מסלול תלוי', day: 'יום 9 (07.08)', category: 'טבע ומסלולים', location: 'שילדמינג', target: 'לכל המשפחה', desc: 'קרחון דאכשטיין, גשר תלוי מעל התהום והיכל הקרח המודגש.' },
+            { id: 5, title: 'ביקור ב-BMW Welt & מוזיאון BMW', day: 'יום 14 (12.08)', category: 'עיר ושופינג', location: 'מינכן', target: 'לכל המשפחה', desc: 'אולם התצוגה הענקי והחדשני של ב.מ.וו במרכז מינכן.' }
+        ];
+
+        let budgetItems = JSON.parse(localStorage.getItem('trip_budget')) || [
+            { id: 1, desc: 'כרטיסי טיסה אל על (10 נוסעים)', vendor: 'EL AL Israel Airlines', amount: '₪ 18,500', status: 'שולם מלא', payer: 'גיל & אפי' },
+            { id: 2, desc: 'השכרת רכב קבוצת IWAR', vendor: 'SIXT München Airport', amount: '€ 816.30', status: 'שולם מלא', payer: 'גיל בונדה' },
+            { id: 3, desc: 'לינה 1: Gästehaus Zehmerhof', vendor: 'Booking.com', amount: '€ 492.80', status: 'לתשלום במקום', payer: 'ליאת בונדה' },
+            { id: 4, desc: 'לינה 2: Alpen Resort Schrofenblick', vendor: 'Resort Schrofenblick', amount: '€ 2,450', status: 'מקדמה שולמה', payer: 'ליאת בונדה' },
+            { id: 5, desc: 'לינה 3: בקתת פרימיום Hauser Kaibling', vendor: 'ALPS RESORTS', amount: '€ 4,897.40', status: 'מקדמה שולמה', payer: 'גיל בונדה' },
+            { id: 6, desc: 'לינה 4: דירת Airbnb מרכז מינכן', vendor: 'Airbnb (Thomas)', amount: '₪ 6,772.54', status: 'שולם מלא', payer: 'ליאת בונדה' }
+        ];
+
+        const checklistData = {
+            docs: [
+                { id: 'c1', text: 'דרכונים בתוקף (לפחות 6 חודשים)', done: true },
+                { id: 'c2', text: 'רישיונות נהיגה בינלאומיים + ישראליים (גיל, אפי)', done: false },
+                { id: 'c3', text: 'אישורי הזמנות למלונות וקוד PNR טיסות', done: true },
+                { id: 'c4', text: 'ביטוחי בריאות וספורט אתגרי לכולם', done: false }
+            ],
+            gear: [
+                { id: 'g1', text: 'נעלי הליכה נוחות ומנגד מים למסלולים', done: false },
+                { id: 'g2', text: 'בגדי ים ומגבות (לבקתת הפרימיום ולספא במיירהופן)', done: false },
+                { id: 'g3', text: 'מעילי גשם/רוח קלים וסוודרים לאלפים הגבוהים', done: false },
+                { id: 'g4', text: 'מתאמי שקעים / המלצת מטענים ניידים', done: true }
+            ]
+        };
+
+        // On Load Initializer
+        window.addEventListener('DOMContentLoaded', () => {
+            initCountdown();
+            renderActivities();
+            renderBudget();
+            renderChecklists();
+        });
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        }
+
+        // Countdown Logic (Target: 30 July 2026, 15:45)
+        function initCountdown() {
+            const targetDate = new Date('2026-07-30T15:45:00').getTime();
+
+            function update() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById('cd-days').innerText = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 60000);
+        }
+
+        // On-Demand Authorization Wrapper
+        function protectedAction(actionCallback) {
+            if (currentUser) {
+                actionCallback();
+            } else {
+                pendingAction = actionCallback;
+                document.getElementById('authModal').classList.remove('hidden');
+            }
+        }
+
+        function toggleAuthModal() {
+            if (currentUser) {
+                currentUser = null;
+                document.getElementById('userInfo').classList.add('hidden');
+                document.getElementById('authBtnText').innerText = 'התחברות עריכה';
+                document.getElementById('authIcon').className = 'fa-solid fa-lock';
+            } else {
+                document.getElementById('authModal').classList.toggle('hidden');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('authUsername').value.trim();
+            const p = document.getElementById('authPassword').value.trim();
+
+            const match = USERS.find(user => user.username.toLowerCase() === u.toLowerCase() && user.pass === p);
+
+            if (match) {
+                currentUser = match;
+                document.getElementById('authError').classList.add('hidden');
+                document.getElementById('authModal').classList.add('hidden');
+                document.getElementById('userInfo').classList.remove('hidden');
+                document.getElementById('userNameDisplay').innerText = currentUser.name;
+                document.getElementById('authBtnText').innerText = 'התנתק';
+                document.getElementById('authIcon').className = 'fa-solid fa-unlock';
+
+                if (pendingAction) {
+                    pendingAction();
+                    pendingAction = null;
+                }
+            } else {
+                document.getElementById('authError').classList.remove('hidden');
+            }
+        }
+
+        // Render Activities Grid
+        function renderActivities() {
+            const grid = document.getElementById('activitiesGrid');
+            const cat = document.getElementById('filterCategory').value;
+            grid.innerHTML = '';
+
+            const filtered = cat === 'ALL' ? activities : activities.filter(a => a.category === cat);
+
+            filtered.forEach(act => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition relative flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full">${act.day || 'כללי'}</span>
+                            <span class="text-[10px] font-semibold bg-alpine-100 text-alpine-800 px-2 py-0.5 rounded">${act.target}</span>
+                        </div>
+                        <h4 class="font-bold text-lg text-slate-900">${act.title}</h4>
+                        <p class="text-xs text-slate-500 mb-2"><i class="fa-solid fa-location-dot ml-1 text-red-500"></i>${act.location}</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">${act.desc}</p>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                        <span class="text-slate-400 font-medium">${act.category}</span>
+                        <button onclick="protectedAction(() => deleteActivity(${act.id}))" class="text-slate-400 hover:text-red-500 transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openAddActivityModal() {
+            document.getElementById('activityModal').classList.remove('hidden');
+        }
+
+        function closeActivityModal() {
+            document.getElementById('activityModal').classList.add('hidden');
+        }
+
+        function saveActivity(e) {
+            e.preventDefault();
+            const newAct = {
+                id: Date.now(),
+                title: document.getElementById('actTitle').value,
+                day: document.getElementById('actDay').value,
+                category: document.getElementById('actCategory').value,
+                location: document.getElementById('actLocation').value,
+                target: document.getElementById('actTarget').value,
+                desc: document.getElementById('actDesc').value
+            };
+
+            activities.unshift(newAct);
+            localStorage.setItem('trip_activities', JSON.stringify(activities));
+            renderActivities();
+            closeActivityModal();
+            // Reset form
+            e.target.reset();
+        }
+
+        function deleteActivity(id) {
+            activities = activities.filter(a => a.id !== id);
+            localStorage.setItem('trip_activities', JSON.stringify(activities));
+            renderActivities();
+        }
+
+        // Render Budget Table
+        function renderBudget() {
+            const tbody = document.getElementById('budgetTableBody');
+            tbody.innerHTML = '';
+
+            budgetItems.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-800">${item.desc}</td>
+                    <td class="p-3 text-slate-600 text-xs">${item.vendor}</td>
+                    <td class="p-3 font-bold text-alpine-800">${item.amount}</td>
+                    <td class="p-3">
+                        <span class="text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                            item.status === 'שולם מלא' ? 'bg-emerald-100 text-emerald-800' :
+                            item.status === 'מקדמה שולמה' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-700'
+                        }">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="p-3 text-xs text-slate-600">${item.payer}</td>
+                    <td class="p-3 text-center">
+                        <button onclick="protectedAction(() => deleteExpense(${item.id}))" class="text-slate-400 hover:text-red-500">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openAddExpenseModal() {
+            document.getElementById('expenseModal').classList.remove('hidden');
+        }
+
+        function closeExpenseModal() {
+            document.getElementById('expenseModal').classList.add('hidden');
+        }
+
+        function saveExpense(e) {
+            e.preventDefault();
+            const newExp = {
+                id: Date.now(),
+                desc: document.getElementById('expDesc').value,
+                vendor: document.getElementById('expVendor').value,
+                amount: document.getElementById('expAmount').value,
+                status: document.getElementById('expStatus').value,
+                payer: document.getElementById('expPayer').value
+            };
+
+            budgetItems.unshift(newExp);
+            localStorage.setItem('trip_budget', JSON.stringify(budgetItems));
+            renderBudget();
+            closeExpenseModal();
+            e.target.reset();
+        }
+
+        function deleteExpense(id) {
+            budgetItems = budgetItems.filter(b => b.id !== id);
+            localStorage.setItem('trip_budget', JSON.stringify(budgetItems));
+            renderBudget();
+        }
+
+        // Render Checklists
+        function renderChecklists() {
+            const docsContainer = document.getElementById('checkListDocs');
+            const gearContainer = document.getElementById('checkListGear');
+
+            docsContainer.innerHTML = checklistData.docs.map(item => `
+                <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleCheck('${item.id}')" class="w-4 h-4 text-alpine-600 rounded">
+                    <span class="${item.done ? 'line-through text-slate-400' : 'text-slate-700'}">${item.text}</span>
+                </label>
+            `).join('');
+
+            gearContainer.innerHTML = checklistData.gear.map(item => `
+                <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleCheck('${item.id}')" class="w-4 h-4 text-alpine-600 rounded">
+                    <span class="${item.done ? 'line-through text-slate-400' : 'text-slate-700'}">${item.text}</span>
+                </label>
+            `).join('');
+        }
+
+        function toggleCheck(id) {
+            let found = checklistData.docs.find(i => i.id === id) || checklistData.gear.find(i => i.id === id);
+            if (found) found.done = !found.done;
+            renderChecklists();
+        }
+    </script>
+</body>
+</html>
