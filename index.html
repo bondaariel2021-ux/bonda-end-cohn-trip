@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | גרסה 2.1</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | גרסה 3.0 (Firebase)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Heebo) -->
@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- html2pdf.js library for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Firebase SDK (v9 Compatibility) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -56,7 +61,7 @@
                 <div>
                     <div class="flex items-center gap-2">
                         <h1 class="text-lg md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-alpine-500/20 text-alpine-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-alpine-500/30">v2.1</span>
+                        <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">v3.0 Live Sync</span>
                     </div>
                     <p class="text-xs text-slate-400">משפחות בונדה & כהן | 30.07 - 14.08.2026</p>
                 </div>
@@ -107,12 +112,12 @@
     <main class="max-w-7xl mx-auto px-4 pt-6 flex-grow w-full">
 
         <!-- Banner Notice -->
-        <div id="viewerNotice" class="mb-6 bg-slate-900 border-r-4 border-alpine-500 p-4 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800">
+        <div id="viewerNotice" class="mb-6 bg-slate-900 border-r-4 border-emerald-500 p-4 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800">
             <div class="flex items-center gap-3">
-                <span class="text-2xl">💶</span>
+                <span class="text-2xl">🔥</span>
                 <div>
-                    <h3 class="font-bold text-white text-sm md:text-base">אתר הטיול מעודכן בגרסה v2.1</h3>
-                    <p class="text-xs text-slate-400">שער היורו עודכן לשער היציג המדויק (3.47 ₪) לחישוב תקציב מדויק!</p>
+                    <h3 class="font-bold text-white text-sm md:text-base">אתר הטיול מחובר בלייב ל-Firebase (bonda-trip)</h3>
+                    <p class="text-xs text-slate-400">כל אטרקציה או הוצאה שגיל, אפי או אריאל יוסיפו תתעדכן מיידית לכל המשתמשים!</p>
                 </div>
             </div>
             <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-slate-500 hover:text-slate-300 px-2 text-sm">✕</button>
@@ -236,7 +241,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 glass-card p-4 rounded-2xl">
                 <div>
                     <h2 class="text-xl font-bold text-white">תוכנית טיול ואטרקציות</h2>
-                    <p class="text-xs text-slate-400">אטרקציות מתוכננות לכל המשפחה והילדים</p>
+                    <p class="text-xs text-slate-400">אטרקציות מתוכננות לכל המשפחה והילדים (מסונכרן בלייב)</p>
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
@@ -412,7 +417,7 @@
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-receipt text-emerald-400"></i> ניהול תקציב וחשבוניות 🔒
                     </h2>
-                    <p class="text-xs text-slate-400">אזור מוגן להורים בלבד לצפייה, הוספה ועריכה</p>
+                    <p class="text-xs text-slate-400">אזור מוגן להורים בלבד לצפייה, הוספה ועריכה (מסונכרן בלייב)</p>
                 </div>
 
                 <div class="flex gap-2">
@@ -511,8 +516,8 @@
                         </h2>
                         <p class="text-xs text-slate-400">מידע טכני, משתמש מחובר ופרמטרים של הטיול</p>
                     </div>
-                    <span class="bg-alpine-500/20 text-alpine-300 border border-alpine-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full">
-                        גירסה v2.1
+                    <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full">
+                        גירסה v3.0 (Firebase)
                     </span>
                 </div>
 
@@ -539,20 +544,20 @@
                 <!-- Release Notes / Changelog Box -->
                 <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-3">
                     <h3 class="text-sm font-bold text-alpine-400 flex items-center gap-2">
-                        <i class="fa-solid fa-code-branch"></i> מה התחדש בגרסה v2.1? (Changelog)
+                        <i class="fa-solid fa-code-branch"></i> מה התחדש בגרסה v3.0? (Changelog)
                     </h3>
                     <div class="text-xs text-slate-300 space-y-2">
                         <div class="p-2.5 bg-slate-950/80 rounded-xl border border-slate-800">
-                            <strong class="text-amber-400 block mb-1">💶 תיקון שער יורו יציג (v2.1):</strong>
-                            עדכון שער החליפין היציג ל-<strong>3.47 ₪ ליורו</strong>.
+                            <strong class="text-emerald-400 block mb-1">🔥 סנכרון בלייב עם Firebase (v3.0):</strong>
+                            חיבור בסיס נתונים בענן. כל אטרקציה או הוצאה שנוספת על ידי גיל, אפי או אריאל מופיעה באופן מיידי לכולם!
                         </div>
                         <div class="p-2.5 bg-slate-950/80 rounded-xl border border-slate-800">
-                            <strong class="text-emerald-400 block mb-1">📄 צירוף קבצי PDF / כרטיסים לאטרקציות (v2.0):</strong>
-                            אפשרות להעלות כרטיסי כניסה ואישורים לאטרקציות.
+                            <strong class="text-amber-400 block mb-1">💶 שער יורו מעודכן (v2.1):</strong>
+                            עדכון שער החליפין היציג ל-3.47 ₪.
                         </div>
                         <div class="p-2.5 bg-slate-950/80 rounded-xl border border-slate-800">
-                            <strong class="text-purple-400 block mb-1">📊 ייצוא PDF מסודר של התקציב (v2.0):</strong>
-                            הפקת דוח תקציב מעוצב בפורמט PDF בלחיצת כפתור אחת.
+                            <strong class="text-sky-400 block mb-1">📄 צירוף PDF וייצוא דוחות (v2.0):</strong>
+                            צירוף קבצי כרטיסים לאטרקציות וייצוא דוח תקציב ב-PDF.
                         </div>
                     </div>
                 </div>
@@ -757,6 +762,27 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // FIREBASE CONFIGURATION (bonda-trip)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRBkulDNqrtDlQQB4AC1yX3YpzrKQWRTE",
+            authDomain: "bonda-trip.firebaseapp.com",
+            databaseURL: "https://bonda-trip-default-rtdb.firebaseio.com",
+            projectId: "bonda-trip",
+            storageBucket: "bonda-trip.firebasestorage.app",
+            messagingSenderId: "247723575710",
+            appId: "1:247723575710:web:6c8b80ab22fb46dac9ae8f",
+            measurementId: "G-H4C9MDS2YS"
+        };
+
+        // Initialize Firebase
+        let db = null;
+        try {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.database();
+        } catch (e) {
+            console.warn("Firebase initialization failed, falling back to local mode.", e);
+        }
+
         // System Authorized Users
         const USERS = [
             { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה' },
@@ -769,16 +795,16 @@
         let currentUser = null;
         let pendingAction = null;
 
-        // Dynamic Activities
-        let activities = JSON.parse(localStorage.getItem('trip_activities_v2')) || [
+        // Default Initial Activities
+        const defaultActivities = [
             { id: 1, title: 'מגלשות אלפיניות Lucky Flitzer', day: 'יום 8 (06.08)', category: 'אקסטרים ומגלשות', location: 'Flachau', target: 'חובה לילדים!', desc: 'מגלשות הרים באורך 1.1 ק"מ, חוויה מטורפת לילדים ולמבוגרים.', cost: '€ 120', payer: 'גיל בונדה', fileData: null, fileName: null },
             { id: 2, title: 'הר Ahorn & רכבל Ahornbahn', day: 'יום 3 (01.08)', category: 'טבע ומסלולים', location: 'מיירהופן', target: 'לכל המשפחה', desc: 'עלייה ברכבל הגדול באוסטריה, תצפית אלפים מרהיבה.', cost: '€ 180', payer: 'אפי כהן', fileData: null, fileName: null },
             { id: 3, title: 'מרכז הספא והבריכות Erlebnisbad Mayrhofen', day: 'יום 4 (02.08)', category: 'מים וספא', location: 'מיירהופן', target: 'חובה לילדים!', desc: 'מגלשות מים, בריכות מחוממות ומתחם רגיעה לכל המשפחה.', cost: '€ 95', payer: 'ליאת בונדה', fileData: null, fileName: null },
             { id: 4, title: 'קרחון דאכשטיין Dachstein Glacier', day: 'יום 9 (07.08)', category: 'טבע ומסלולים', location: 'שילדמינג', target: 'לכל המשפחה', desc: 'קרחון דאכשטיין, גשר תלוי מעל התהום והיכל הקרח המודגש.', cost: '€ 210', payer: 'גיל בונדה', fileData: null, fileName: null }
         ];
 
-        // Dynamic Budget Items (Supports Edit)
-        let budgetItems = JSON.parse(localStorage.getItem('trip_budget_v2')) || [
+        // Default Initial Budget Items
+        const defaultBudgetItems = [
             { id: 1, desc: 'כרטיסי טיסה אל על (10 נוסעים)', vendor: 'EL AL Israel Airlines', amount: '₪ 18,500', status: 'שולם במלואו', payer: 'גיל & אפי' },
             { id: 2, desc: 'השכרת רכב קבוצת IWAR', vendor: 'SIXT München Airport', amount: '€ 816.30', status: 'שולם במלואו', payer: 'גיל בונדה' },
             { id: 3, desc: 'לינה 1: Gästehaus Zehmerhof', vendor: 'Booking.com', amount: '€ 492.80', status: 'לתשלום במקום', payer: 'ליאת בונדה' },
@@ -786,6 +812,9 @@
             { id: 5, desc: 'לינה 3: בקתת פרימיום Hauser Kaibling', vendor: 'ALPS RESORTS', amount: '€ 4,897.40', status: 'מקדמה שולמה', payer: 'גיל בונדה' },
             { id: 6, desc: 'לינה 4: דירת Airbnb מרכז מינכן', vendor: 'Airbnb (Thomas)', amount: '₪ 6,772.54', status: 'שולם במלואו', payer: 'ליאת בונדה' }
         ];
+
+        let activities = defaultActivities;
+        let budgetItems = defaultBudgetItems;
 
         // Comprehensive Detailed Packing List
         const packingListCategories = [
@@ -855,13 +884,45 @@
             }
         ];
 
-        // Init App
+        // Init App & Firebase Realtime Listeners
         window.addEventListener('DOMContentLoaded', () => {
             initCountdown();
-            renderActivities();
             renderChecklists();
             updateSettingsUI();
+
+            if (db) {
+                // Realtime sync for Activities
+                db.ref('activities').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        activities = Array.isArray(data) ? data : Object.values(data);
+                    } else {
+                        db.ref('activities').set(defaultActivities);
+                    }
+                    renderActivities();
+                });
+
+                // Realtime sync for Budget
+                db.ref('budget').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        budgetItems = Array.isArray(data) ? data : Object.values(data);
+                    } else {
+                        db.ref('budget').set(defaultBudgetItems);
+                    }
+                    renderBudget();
+                });
+            } else {
+                renderActivities();
+                renderBudget();
+            }
         });
+
+        function syncDataToFirebase(path, data) {
+            if (db) {
+                db.ref(path).set(data);
+            }
+        }
 
         // Tab Switching Logic
         function switchTab(tabId) {
@@ -1118,11 +1179,11 @@
                             status: 'שולם במלואו',
                             payer: payer || 'לא צוין'
                         });
-                        localStorage.setItem('trip_budget_v2', JSON.stringify(budgetItems));
+                        syncDataToFirebase('budget', budgetItems);
                     }
                 }
 
-                localStorage.setItem('trip_activities_v2', JSON.stringify(activities));
+                syncDataToFirebase('activities', activities);
                 renderActivities();
                 closeActivityModal();
             };
@@ -1141,7 +1202,7 @@
 
         function deleteActivity(id) {
             activities = activities.filter(a => a.id !== id);
-            localStorage.setItem('trip_activities_v2', JSON.stringify(activities));
+            syncDataToFirebase('activities', activities);
             renderActivities();
         }
 
@@ -1243,14 +1304,14 @@
                 budgetItems.unshift({ id: Date.now(), desc, vendor, amount, status, payer });
             }
 
-            localStorage.setItem('trip_budget_v2', JSON.stringify(budgetItems));
+            syncDataToFirebase('budget', budgetItems);
             renderBudget();
             closeExpenseModal();
         }
 
         function deleteExpense(id) {
             budgetItems = budgetItems.filter(b => b.id !== id);
-            localStorage.setItem('trip_budget_v2', JSON.stringify(budgetItems));
+            syncDataToFirebase('budget', budgetItems);
             renderBudget();
         }
 
