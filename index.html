@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- Apple Home Screen Icon (לוגו מותאם למסך הבית באייפון) -->
+    <!-- Apple Home Screen Icon -->
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Full Excel Edition v5.1</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Clean Edition v5.5</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -48,18 +48,33 @@
         }
     </script>
     <style>
-        body { font-family: 'Heebo', sans-serif; background-color: #090d16; color: #f8fafc; -webkit-tap-highlight-color: transparent; }
-        .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        /* Dark Theme Styles */
+        html.dark body { background-color: #090d16; color: #f8fafc; }
+        html.dark .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        html.dark header, html.dark footer, html.dark .bottom-nav { background-color: rgba(15, 23, 42, 0.95); border-color: #1e293b; }
+        html.dark input, html.dark select, html.dark textarea { background-color: #020617; color: #ffffff; border-color: #1e293b; }
+        
+        /* Light Theme Styles */
+        html.light body { background-color: #f1f5f9; color: #0f172a; }
+        html.light .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
+        html.light header, html.light footer, html.light .bottom-nav { background-color: rgba(255, 255, 255, 0.95); border-color: #e2e8f0; }
+        html.light .text-white { color: #0f172a !important; }
+        html.light .text-slate-300 { color: #334155 !important; }
+        html.light .text-slate-400 { color: #64748b !important; }
+        html.light .bg-slate-900 { background-color: #ffffff !important; border-color: #cbd5e1 !important; }
+        html.light .bg-slate-950 { background-color: #f8fafc !important; border-color: #cbd5e1 !important; }
+        html.light input, html.light select, html.light textarea { background-color: #ffffff; color: #0f172a; border-color: #cbd5e1; }
+
         .tab-btn.active { border-bottom: 3px solid #38bdf8; color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.1); }
         .bottom-nav-item.active { color: #38bdf8; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-24 md:pb-12 selection:bg-alpine-500 selection:text-white relative">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-24 md:pb-12 selection:bg-alpine-500 selection:text-white relative transition-colors duration-200">
 
     <!-- Top Navigation Bar -->
-    <header class="bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md shadow-2xl">
+    <header class="bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md shadow-2xl transition-colors">
         <div class="max-w-7xl mx-auto px-3 py-2.5 flex justify-between items-center">
             <div class="flex items-center gap-2.5">
                 <!-- הלוגו -->
@@ -67,14 +82,19 @@
                 <div>
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v5.1 Fixed</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v5.5 Clean</span>
                     </div>
                     <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
             </div>
 
-            <!-- Auth Controls -->
+            <!-- Auth & Settings Controls -->
             <div class="flex items-center gap-2">
+                <!-- כפתור גלגל שיניים להגדרות -->
+                <button onclick="switchTab('settings')" title="הגדרות" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white w-8 h-8 md:w-9 md:h-9 rounded-xl transition flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-gear text-sm md:text-base text-alpine-400"></i>
+                </button>
+
                 <div id="userInfo" class="hidden text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
                     <i class="fa-solid fa-user-check text-[10px]"></i>
                     <span id="userNameDisplay" class="truncate max-w-[80px] md:max-w-none">מחובר</span>
@@ -86,29 +106,30 @@
             </div>
         </div>
 
-        <!-- Desktop Horizontal Navigation Tabs (Hidden on Mobile) -->
+        <!-- Desktop Horizontal Navigation Tabs -->
         <nav class="hidden md:block bg-slate-900/50 border-t border-slate-800 px-4 overflow-x-auto hide-scrollbar">
             <div class="max-w-7xl mx-auto flex gap-1 text-slate-400 text-sm font-medium whitespace-nowrap">
-                <button onclick="switchTab('dashboard')" class="tab-btn active py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-dashboard">
+                <button onclick="switchTab('dashboard')" class="tab-btn active py-3 px-4 flex items-center gap-2 transition" id="tab-dashboard">
                     <i class="fa-solid fa-house"></i> סקירה
                 </button>
-                <button onclick="switchTab('itinerary')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-itinerary">
+                <button onclick="switchTab('itinerary')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-itinerary">
                     <i class="fa-solid fa-calendar-days"></i> תוכנית יומית
                 </button>
-                <button onclick="switchTab('lodging')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-lodging">
+                <button onclick="switchTab('lodging')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-lodging">
                     <i class="fa-solid fa-bed"></i> מלונות (4)
                 </button>
-                <button onclick="switchTab('transport')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-transport">
+                <button onclick="switchTab('transport')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-transport">
                     <i class="fa-solid fa-plane"></i> טיסות ורכב
                 </button>
-                <button onclick="handleBudgetTabClick()" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-budget">
+                <button onclick="handleBudgetTabClick()" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-budget">
                     <i class="fa-solid fa-wallet text-amber-400"></i> תקציב 🔒
                 </button>
-                <button onclick="switchTab('checklist')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-checklist">
+                <button onclick="switchTab('checklist')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-checklist">
                     <i class="fa-solid fa-list-check"></i> ציוד
                 </button>
-                <button onclick="switchTab('settings')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-settings">
-                    <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות
+                <!-- Dedicated Chatbot Tab (Desktop) -->
+                <button onclick="switchTab('botpage')" class="tab-btn py-3 px-4 hidden items-center gap-2 transition text-purple-400" id="tab-botpage">
+                    <i class="fa-solid fa-robot"></i> עוזר AI
                 </button>
             </div>
         </nav>
@@ -116,18 +137,6 @@
 
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-3 pt-4 flex-grow w-full">
-
-        <!-- Banner Notice -->
-        <div id="viewerNotice" class="mb-4 bg-slate-900 border-r-4 border-emerald-500 p-3 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800 text-xs">
-            <div class="flex items-center gap-2.5">
-                <span class="text-xl">📊</span>
-                <div>
-                    <h3 class="font-bold text-white text-xs">סנכרון מלא מהאקסל של אבא בוצע! (v5.1)</h3>
-                    <p class="text-[10px] text-slate-400">כל 23 האטרקציות, הלינות, ההערות והקישורים עודכנו בהצלחה.</p>
-                </div>
-            </div>
-            <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-slate-500 hover:text-slate-300 px-1">✕</button>
-        </div>
 
         <!-- TAB 1: DASHBOARD -->
         <section id="sec-dashboard" class="space-y-4">
@@ -244,16 +253,11 @@
                 <div class="flex justify-between items-center">
                     <div>
                         <h2 class="text-base font-bold text-white">תוכנית טיול ואטרקציות מלאה</h2>
-                        <p class="text-[10px] text-slate-400">מוזנח ב-100% מטבלת האקסל של אבא (23 אטרקציות)</p>
+                        <p class="text-[10px] text-slate-400">אטרקציות ופעילויות נבחרות לטיול</p>
                     </div>
-                    <div class="flex gap-2">
-                        <button onclick="resetToExcelData()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-2 rounded-xl transition flex items-center gap-1 border border-slate-700 shrink-0">
-                            <i class="fa-solid fa-rotate text-amber-400"></i> איפוס לאקסל
-                        </button>
-                        <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-lg shrink-0">
-                            <i class="fa-solid fa-plus"></i> הוספה
-                        </button>
-                    </div>
+                    <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-lg shrink-0">
+                        <i class="fa-solid fa-plus"></i> הוספה
+                    </button>
                 </div>
                 
                 <div>
@@ -291,7 +295,7 @@
                     <div class="p-4 space-y-2.5 text-xs">
                         <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Hauptstr. 7 a, 85469 Walpertskirchen, גרמניה</p>
                         <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
-                            <strong>הערות מתוך האקסל:</strong> 20 דק' נסיעה מהשדה ללינה. לברר לגבי ארוחת בוקר.
+                            <strong>הערות:</strong> 20 דק' נסיעה מהשדה ללינה. לברר לגבי ארוחת בוקר.
                         </div>
                     </div>
                 </div>
@@ -310,7 +314,7 @@
                     <div class="p-4 space-y-2.5 text-xs">
                         <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Burgstall 373, 6290 Burgstall, אוסטריה</p>
                         <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
-                            <strong>הערות מתוך האקסל:</strong> מלינה מינכן ללינה זו כ-2.5 שעות נסיעה.
+                            <strong>הערות:</strong> מלינה מינכן ללינה זו כ-2.5 שעות נסיעה.
                         </div>
                     </div>
                 </div>
@@ -370,7 +374,6 @@
                     </div>
 
                     <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-3 text-xs">
-                        <!-- ההמראה -->
                         <div>
                             <div class="font-bold text-amber-300 mb-1">הלוך: 30.07 (יום ה')</div>
                             <div class="flex justify-between items-center text-slate-300">
@@ -379,7 +382,6 @@
                             </div>
                         </div>
                         <hr class="border-slate-800">
-                        <!-- החזרה -->
                         <div>
                             <div class="font-bold text-amber-300 mb-1">חזור: 14.08 (יום שישי)</div>
                             <div class="flex justify-between items-center text-slate-300">
@@ -405,7 +407,7 @@
                             <strong>החזרה:</strong> 12.08 (יום ד') בתחנת הרכבת המרכזית מינכן.
                         </div>
                         <div class="text-[11px] text-slate-400 space-y-1">
-                            <p>• <strong>הערה מתוך האקסל:</strong> "לברר למה צריך יום של חניה בעיר".</p>
+                            <p>• <strong>הערה:</strong> לברר למה צריך יום של חניה בעיר.</p>
                         </div>
                     </div>
                 </div>
@@ -496,19 +498,59 @@
             </div>
         </section>
 
-        <!-- TAB 7: SETTINGS & STATUS -->
+        <!-- NEW TAB: DEDICATED AI CHAT PAGE (When mode is 'tab') -->
+        <section id="sec-botpage" class="space-y-4 hidden">
+            <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
+                <div class="flex items-center gap-2 border-b border-slate-800 pb-2.5">
+                    <div class="w-8 h-8 rounded-full bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-base">🤖</div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">עוזר האלפים האישי (AI Chat)</h2>
+                        <p class="text-[10px] text-slate-400">שאלות על מסלולים, דירות, טיסות ומסעדות</p>
+                    </div>
+                </div>
+
+                <!-- Dedicated Full-Page Chat Container -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl h-[60vh] flex flex-col overflow-hidden">
+                    <div id="botPageMessages" class="flex-grow p-3 overflow-y-auto space-y-2.5 text-xs">
+                        <div class="bg-slate-800/80 border border-slate-700/50 p-3 rounded-2xl text-slate-200 text-xs">
+                            👋 היי! אני עוזר ה-AI של הטיול. 
+                            <br><br>
+                            <strong>שאל אותי בכל רגע:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-400 text-[11px]">
+                                <li>"מה הכתובת של הדירה השנייה?"</li>
+                                <li>"איזה אטרקציות מומלצות לילדים?"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form onsubmit="handleBotPageSubmit(event)" class="p-2.5 bg-slate-950 border-t border-slate-800 flex gap-2">
+                        <input type="text" id="botPageInput" placeholder="שאל שאלה על הטיול..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition shrink-0">
+                            שלח <i class="fa-solid fa-paper-plane mr-1"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 7: SETTINGS & CUSTOM UI -->
         <section id="sec-settings" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-4">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות וסטטוס
+                            <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות ועיצוב אישי
                         </h2>
-                        <p class="text-[10px] text-slate-400">מידע טכני ומשתמש מחובר</p>
+                        <p class="text-[10px] text-slate-400">התאמת תצוגה אישית לכל משתמש</p>
                     </div>
                     <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
-                        v5.1 Fixed
+                        v5.5 Clean
                     </span>
+                </div>
+
+                <!-- Custom UI Controls (ONLY accessible for logged-in users) -->
+                <div id="userPrefsContainer" class="bg-slate-900/90 p-3.5 rounded-2xl border border-slate-800 space-y-3">
+                    <!-- Dynamic UI inserted depending on auth state -->
                 </div>
 
                 <!-- User Connection Box -->
@@ -549,7 +591,7 @@
                         </div>
                         <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
                             <span class="text-xl font-black text-purple-400">23</span>
-                            <span class="block text-[10px] text-slate-400 mt-0.5">אטרקציות באקסל</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">אטרקציות בתכנית</span>
                         </div>
                     </div>
                 </div>
@@ -559,7 +601,7 @@
     </main>
 
     <!-- MOBILE BOTTOM NAVIGATION BAR -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 border-t border-slate-800 backdrop-blur-lg px-2 py-1.5 flex justify-around items-center">
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 border-t border-slate-800 backdrop-blur-lg px-2 py-1.5 flex justify-around items-center transition-colors">
         <button onclick="switchTab('dashboard')" class="bottom-nav-item active flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-dashboard">
             <i class="fa-solid fa-house text-base"></i>
             <span>ראשי</span>
@@ -580,13 +622,17 @@
             <i class="fa-solid fa-list-check text-base"></i>
             <span>ציוד</span>
         </button>
+        <!-- Mobile Bottom Nav Bot Item (When mode is 'tab') -->
+        <button onclick="switchTab('botpage')" class="bottom-nav-item hidden flex-col items-center gap-0.5 text-purple-400 text-[10px]" id="bnav-botpage">
+            <i class="fa-solid fa-robot text-base"></i>
+            <span>עוזר AI</span>
+        </button>
     </div>
 
     <!-- FLOATING SMART BOT CHAT WIDGET -->
     <div id="botWidgetContainer" class="fixed bottom-16 md:bottom-5 left-3 z-50 flex flex-col items-start">
         <!-- Chat Window -->
         <div id="botChatWindow" class="hidden mb-2 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl w-[90vw] sm:w-[350px] h-[70vh] max-h-[480px] flex flex-col overflow-hidden backdrop-blur-lg">
-            <!-- Header -->
             <div class="bg-gradient-to-r from-purple-600 to-alpine-600 p-3 flex justify-between items-center text-white">
                 <div class="flex items-center gap-2">
                     <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">✨</div>
@@ -600,7 +646,6 @@
                 <button onclick="toggleBotChat()" class="text-white/80 hover:text-white p-1 text-xs">✕</button>
             </div>
 
-            <!-- Messages Box -->
             <div id="botMessages" class="flex-grow p-3 overflow-y-auto space-y-2.5 text-xs">
                 <div class="bg-slate-800/80 border border-slate-700/50 p-2.5 rounded-2xl text-slate-200 text-xs">
                     👋 היי! אני עוזר ה-AI של הטיול. 
@@ -608,19 +653,17 @@
                     <strong>שאל אותי בכל רגע:</strong>
                     <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-400 text-[11px]">
                         <li>"מה הכתובת של הדירה השנייה?"</li>
-                        <li>"איזה אטרקציות מופיעות באקסל של אבא?"</li>
+                        <li>"איזה אטרקציות מומלצות לילדים?"</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Quick Suggestions Bar -->
             <div class="px-2.5 py-1.5 bg-slate-950/60 border-t border-slate-800/80 flex gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
                 <button onclick="sendQuickBotQuery('מה הכתובת של הדירה השלישית?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">📍 דירה 3</button>
-                <button onclick="sendQuickBotQuery('איזה אטרקציות מומלצות לילדים באקסל?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">👧 לילדים</button>
+                <button onclick="sendQuickBotQuery('איזה אטרקציות מומלצות לילדים?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">👧 לילדים</button>
                 <button onclick="sendQuickBotQuery('מה פרטי הטיסה?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">✈️ טיסה</button>
             </div>
 
-            <!-- Input Box -->
             <form onsubmit="handleBotSubmit(event)" class="p-2 bg-slate-950 border-t border-slate-800 flex gap-1.5">
                 <input type="text" id="botInput" placeholder="שאל שאלה על הטיול..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none">
                 <button type="submit" id="botSendBtn" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0">
@@ -629,7 +672,6 @@
             </form>
         </div>
 
-        <!-- Floating Button Trigger -->
         <button onclick="toggleBotChat()" class="bg-gradient-to-tr from-purple-600 to-sky-500 text-white w-12 h-12 p-3 rounded-full shadow-2xl flex items-center justify-center text-lg hover:scale-105 transition duration-200 border-2 border-white/20">
             🤖
         </button>
@@ -642,8 +684,8 @@
 
             <div class="text-center mb-4">
                 <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-2 text-lg">🔒</div>
-                <h3 class="text-base font-bold text-white">התחברות הורה מורשה</h3>
-                <p class="text-[11px] text-slate-400 mt-0.5">לצפייה בתקציב ועריכת תכנים</p>
+                <h3 class="text-base font-bold text-white">התחברות משתמש רשום</h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">לעריכת תכנים והגדרות אישיות</p>
             </div>
 
             <form onsubmit="handleLogin(event)" class="space-y-3">
@@ -816,7 +858,7 @@
         // OPENROUTER API KEY INTEGRATION
         const OPENROUTER_API_KEY = "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";
 
-        // FIREBASE CONFIGURATION (bonda-trip)
+        // FIREBASE CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyCRBkulDNqrtDlQQB4AC1yX3YpzrKQWRTE",
             authDomain: "bonda-trip.firebaseapp.com",
@@ -828,7 +870,6 @@
             measurementId: "G-H4C9MDS2YS"
         };
 
-        // Initialize Firebase
         let db = null;
         try {
             firebase.initializeApp(firebaseConfig);
@@ -837,57 +878,13 @@
             console.warn("Firebase fallback mode.", e);
         }
 
-        // CURRENCY CONVERTER LOGIC
-        function convertCurrency(source) {
-            const eurRate = parseFloat(document.getElementById('eurRate').value) || 3.47;
-            const eurInput = document.getElementById('calcEur');
-            const ilsInput = document.getElementById('calcIls');
+        // Default Guest UI State
+        let currentUIConfig = {
+            theme: 'dark',
+            botMode: 'floating'
+        };
 
-            if (source === 'eur') {
-                const eurVal = parseFloat(eurInput.value);
-                if (!isNaN(eurVal)) {
-                    ilsInput.value = (eurVal * eurRate).toFixed(2);
-                } else {
-                    ilsInput.value = '';
-                }
-            } else if (source === 'ils') {
-                const ilsVal = parseFloat(ilsInput.value);
-                if (!isNaN(ilsVal)) {
-                    eurInput.value = (ilsVal / eurRate).toFixed(2);
-                } else {
-                    eurInput.value = '';
-                }
-            }
-        }
-
-        // AUTO-CURRENCY NORMALIZER
-        function normalizeCurrencyString(inputStr) {
-            if (!inputStr || typeof inputStr !== 'string') return inputStr;
-            let str = inputStr.trim();
-            if (str === '') return str;
-
-            const euroPattern = /(יורו|אירו|euros|euro|eur)/gi;
-            const shekelPattern = /(שקל|שקלים|ש"ח|שח|nis|ils|shekel|shekels)/gi;
-
-            let isEuro = euroPattern.test(str);
-            let isShekel = shekelPattern.test(str);
-
-            let cleanNumber = str.replace(euroPattern, '').replace(shekelPattern, '').replace(/[€₪]/g, '').trim();
-
-            if (isEuro) {
-                return `€ ${cleanNumber}`;
-            } else if (isShekel) {
-                return `₪ ${cleanNumber}`;
-            }
-
-            if (!str.includes('€') && !str.includes('₪') && !isNaN(parseFloat(cleanNumber))) {
-                return `€ ${cleanNumber}`;
-            }
-
-            return str;
-        }
-
-        // System Authorized Users
+        // Authorized System Users
         const USERS = [
             { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה' },
             { username: 'liat.bonda', pass: 'L!atB#2026$nd', name: 'ליאת בונדה' },
@@ -899,313 +896,37 @@
         let currentUser = null;
         let pendingAction = null;
 
-        // Default Initial Activities - EXACT 23 EXCEL ACTIVITIES IMPORT
+        // Default Activities Data
         const defaultActivities = [
-            // --- עמק צילרטל (Zillertal) & סביבת הלינה הראשונה/שנייה ---
-            { 
-                id: 101, 
-                title: 'מרכז ימי Atoll Achensee', 
-                day: 'בדרך ללינה 1', 
-                category: 'מים וספא', 
-                location: 'Maurach, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'מרכז ימי עם בריכות מקורות וחיצוניות, סאונות יבשות ורטובות ואזור שחייה באגם בדרך ממינכן ללינה הראשונה.', 
-                link: 'https://www.atoll-achensee.com/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 102, 
-                title: 'Panoramabrücke Olpererhütte (גשר אולפרר)', 
-                day: 'עמק צילרטל', 
-                category: 'טבע ומסלולים', 
-                location: 'Ginzling, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'גשר אולפרר אוסטריה. הטיול לאולפררהוטה אורך כשלוש שעות. נופים עוצרי נשימה!', 
-                link: '',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 103, 
-                title: 'Hintertux Glacier (קרחון הינטרטוקס)', 
-                day: 'עמק צילרטל', 
-                category: 'טבע ומסלולים', 
-                location: 'Hintertux, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'קרחון הינטרטוקס אתר סקי טיטלים בקיץ. אתר סקי פעיל כל השנה - רכבל - מערה אבובים וארמון קרח, לבדוק קנית כרטיסים מראש.', 
-                link: 'https://www.hintertuxergletscher.at/en/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 104, 
-                title: 'Arena Coaster (מזחלות הרים)', 
-                day: 'עמק צילרטל', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'Zell am Ziller, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מרוץ מזחלת שלג בקיץ. מגלשות הרים במקום גם רכבל ארוך.', 
-                link: 'https://www.zillertalarena.com/sommer/sport-freizeit/arena-coaster/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 105, 
-                title: 'Zillertal Arena (קורקינט הרים וסקי)', 
-                day: 'עמק צילרטל', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'Rohrberg, אוסטריה', 
-                target: 'מבוגרים/נוער', 
-                desc: 'אתר סקי - קורקינט הרים. אתר סקי עצום ובו למעלה מ-140 מסלולים ומגוון פעילויות שטח נוספות בחורף ובקיץ.', 
-                link: 'https://www.zillertalarena.com/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 106, 
-                title: 'רחצה באגם Schlitters', 
-                day: 'עמק צילרטל', 
-                category: 'טבע ומסלולים', 
-                location: 'Schlitters, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'אגם + בית קפה. בית קפה נחמד ופופולרי מאוד על שפת האגם.', 
-                link: 'https://seecafe-schlitters.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 107, 
-                title: 'Therme Zillertal (מרחצאות)', 
-                day: 'עמק צילרטל', 
-                category: 'מים וספא', 
-                location: 'Fügen, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מתחם בריכות (אופציה ב\'). מתחם פנאי עם בריכות תרמיות מקורות וחיצוניות, מספר סאונות יבשות ומגלשות צינור לילדים.', 
-                link: 'https://therme-zillertal.at/en/spa/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 108, 
-                title: 'Achen Lake (אגם אכן)', 
-                day: 'עמק צילרטל', 
-                category: 'טבע ומסלולים', 
-                location: 'Achensee, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'אגם אלפיני וציורי עם מי טורקיז מנצנצים, ובו הפלגות, שיט בסירות ומסלולי הליכה.', 
-                link: 'https://www.achensee.com/en/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 109, 
-                title: 'Krimml Waterfalls (מפלי קרימל)', 
-                day: 'מעבר לזלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'Krimml, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'מפלי קרימל הם מחזה טבע מרשים באמת ובהחלט שווים ביקור. נפח המים העצום וגובה המפלים פשוט מרתקים.', 
-                link: '',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 110, 
-                title: 'Gerlospass/Krimml (מעבר גרלוס)', 
-                day: 'מעבר לזלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'Gerlos, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'מעבר הרים מעל מפלי קרימל, בתשלום אגרת מעבר צנועה - מעבר בין העמקים. עצירה במפלי קרימל (Krimml) - המפלים הגבוהים באירופה.', 
-                link: '',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-
-            // --- אטרקציות במעבר בין הלינות ---
-            { 
-                id: 201, 
-                title: 'Weißsee Gletscherwelt (האגם הלבן)', 
-                day: 'בין הלינות', 
-                category: 'טבע ומסלולים', 
-                location: 'Stubach, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'נוף בכל אחת מהתחנות מדהים. עולים ברכבל סגור לתחנה ראשונה. אפשר לבחור אם לרדת או להמשיך לרכבל פתוח שמוביל לקצה הנוף.', 
-                link: 'https://www.gletscherwelt-weissee.at/de/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 202, 
-                title: 'Zell am See (צל-אם-זי)', 
-                day: 'בין הלינות', 
-                category: 'עיר ושופינג', 
-                location: 'Zell am See, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'ביקור באגם ובכפר (אופציה ב\'). טיילת מרהיבה, בית קפה ושיט באגם.', 
-                link: 'https://austriatravel.co.il/salzburgerland/zell-am-see-kaprun',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 203, 
-                title: 'Wild & Adventure Park Ferleiten', 
-                day: 'בין הלינות', 
-                category: 'טבע ומסלולים', 
-                location: 'Fusch, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'פארק חיות בר, סיור בקלנועית ומסעדות. פארק הררי עם חיות בר אלפיניות כגון זאבים ודובים, מתקני שעשועים (09:00-18:00).', 
-                link: 'http://www.wildpark-ferleiten.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 204, 
-                title: 'Top of Salzburg 3.029m (קיצשטיינהורן)', 
-                day: 'בין הלינות', 
-                category: 'טבע ומסלולים', 
-                location: 'Kaprun, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'אזור תצפית בגובה 3,029 מטר - נמצא בין שני הלינות, אפשר לעשות ביום מעבר.', 
-                link: 'https://www.kitzsteinhorn.at/en/top-of-salzburg',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 205, 
-                title: 'Maisiflitzer (מגלשות הרים קפרון)', 
-                day: 'בין הלינות', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'Kaprun, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מרוץ מזחלת שלג בקיץ. אתר נופש בהר שמתאים למשפחות עם רכבת הרים אלפינית בכל ימות השנה.', 
-                link: 'http://www.kitzsteinhorn.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 206, 
-                title: 'Flying Fox XXL (אומגה ענקית)', 
-                day: 'בין הלינות', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'Leogang, אוסטריה', 
-                target: 'מבוגרים/נוער', 
-                desc: 'אומגה ארוכה ומהירה מעל העמק - חוויה אתגרית מטורפת באוסטריה.', 
-                link: 'https://www.saalfelden-leogang.com/Flying-Fox-XXL',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 207, 
-                title: 'Sigmund-Thun-Klamm (נקיק זיגמונד)', 
-                day: 'בין הלינות', 
-                category: 'טבע ומסלולים', 
-                location: 'Kaprun, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'מסלול קצר, קליל ומאוד מהנה. עוצמת המים והצבע התכלכל מאוד מרשימים. מסלול מרענן לסיום היום.', 
-                link: '',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-
-            // --- אזור זלצבורגלנד & שילדמינג (Schladming) ---
-            { 
-                id: 301, 
-                title: 'Eisriesenwelt (מערת קרח)', 
-                day: 'בדרך לזלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'Werfen, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'מערת הקרח הגדולה בעולם. יש לקרוא כמה זמן נדרש במקום ורמת קושי - פתוח 08:00-15:00.', 
-                link: 'https://www.eisriesenwelt.at/en/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 302, 
-                title: 'Burg Hohenwerfen (טירת וורפן)', 
-                day: 'בדרך לזלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'Werfen, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'אחת הטירות היפות והמפורסמות ביותר באוסטריה. ניתן להגיע ברכבל או ברגל. חובה לקחת סיור מודרך (כשעה).', 
-                link: 'https://www.burg-hohenwerfen.at/de/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 303, 
-                title: 'Liechtensteinklamm (נקיק ליכטנשטיין)', 
-                day: 'אזור זלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'St. Johann im Pongau, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'קניון צר ועמוק עם שבילי הליכה, גשרים, נהר ומפל. פתוח למבקרים בחודשי הקיץ.', 
-                link: 'https://www.josalzburg.com/de/aktivitaeten/liechtensteinklamm.html',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 304, 
-                title: 'Salzwelten Salzburg (מכרה מלח)', 
-                day: 'בדרך לזלצבורג', 
-                category: 'טבע ומסלולים', 
-                location: 'Bad Dürrnberg, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מכרות מלח היסטוריים - כולל שיט בסירה תת קרקעית ומגלשות.', 
-                link: 'https://www.salzwelten.at/de/salzburg',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 305, 
-                title: 'Lucky Flitzer (מגלשות פלאכאו)', 
-                day: 'אזור זלצבורג', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'Flachau, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מסלול מזחלות שלג/הר במהירות גבוהה עם פיתולים, פניות וקפיצות במורד צלע הר.', 
-                link: 'https://www.lucky-flitzer.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 306, 
-                title: 'Wasserwelt Wagrain (פארק מים מומלץ)', 
-                day: 'אזור זלצבורג', 
-                category: 'מים וספא', 
-                location: 'Wagrain, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מגוון מגלשות מים, בריכות מקורות וחיצוניות, בריכת גלים. מתאים לכל הגילאים (10:00-18:00, סגור בשני).', 
-                link: 'http://www.wasserwelt.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 307, 
-                title: 'Erlebnis-Therme Amadé (פארק מים)', 
-                day: 'אזור זלצבורג', 
-                category: 'מים וספא', 
-                location: 'Altenmarkt, אוסטריה', 
-                target: 'חובה לילדים!', 
-                desc: 'מגלשת הלופינג עם נפילה חופשית (למתבגרים אמיצים!). יש בריכת גלים וכיף לכולם (09:00-22:00).', 
-                link: 'https://www.thermeamade.at/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 308, 
-                title: 'Alpentherme Gastein (מרחצאות חמים)', 
-                day: 'אזור גאשטיין', 
-                category: 'מים וספא', 
-                location: 'Bad Hofgastein, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'בריכות בטמפרטורה נעימה של 34 מעלות, בריכה פנימית שמתחברת לחיצונית, סאונות ומגלשות מים.', 
-                link: 'https://www.alpentherme.com/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 309, 
-                title: 'Alpincenter (קניונינג וספורט אתגרי)', 
-                day: 'ספורט אתגרי', 
-                category: 'אקסטרים ומגלשות', 
-                location: 'זלצבורגלנד, אוסטריה', 
-                target: 'מבוגרים/נוער', 
-                desc: 'קניונינג (Canyoning) – הליכה בתוך נקיק, קפיצה לבריכות מים טבעיות וסנפלינג מפלים.', 
-                link: 'https://www.salzburgadventures.com/en/adventures/list/canyoning',
-                cost: '', payer: '', fileData: null, fileName: null 
-            },
-            { 
-                id: 310, 
-                title: 'Felsentherme Bad Gastein (מרחצאות)', 
-                day: 'אזור גאשטיין', 
-                category: 'מים וספא', 
-                location: 'Bad Gastein, אוסטריה', 
-                target: 'לכל המשפחה', 
-                desc: 'המקום בנוי על צלע הר עם נוף לאלפים המושלגים. מים חמימים ואווירה מעולה.', 
-                link: 'https://www.felsentherme.com/',
-                cost: '', payer: '', fileData: null, fileName: null 
-            }
+            { id: 101, title: 'מרכז ימי Atoll Achensee', day: 'בדרך ללינה 1', category: 'מים וספא', location: 'Maurach, אוסטריה', target: 'לכל המשפחה', desc: 'מרכז ימי עם בריכות מקורות וחיצוניות, סאונות יבשות ורטובות ואזור שחייה באגם בדרך ממינכן ללינה הראשונה.', link: 'https://www.atoll-achensee.com/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 102, title: 'Panoramabrücke Olpererhütte (גשר אולפרר)', day: 'עמק צילרטל', category: 'טבע ומסלולים', location: 'Ginzling, אוסטריה', target: 'לכל המשפחה', desc: 'גשר אולפרר אוסטריה. הטיול לאולפררהוטה אורך כשלוש שעות. נופים עוצרי נשימה!', link: '', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 103, title: 'Hintertux Glacier (קרחון הינטרטוקס)', day: 'עמק צילרטל', category: 'טבע ומסלולים', location: 'Hintertux, אוסטריה', target: 'לכל המשפחה', desc: 'קרחון הינטרטוקס אתר סקי טיטלים בקיץ. אתר סקי פעיל כל השנה - רכבל - מערה אבובים וארמון קרח, לבדוק קנית כרטיסים מראש.', link: 'https://www.hintertuxergletscher.at/en/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 104, title: 'Arena Coaster (מזחלות הרים)', day: 'עמק צילרטל', category: 'אקסטרים ומגלשות', location: 'Zell am Ziller, אוסטריה', target: 'חובה לילדים!', desc: 'מרוץ מזחלת שלג בקיץ. מגלשות הרים במקום גם רכבל ארוך.', link: 'https://www.zillertalarena.com/sommer/sport-freizeit/arena-coaster/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 105, title: 'Zillertal Arena (קורקינט הרים וסקי)', day: 'עמק צילרטל', category: 'אקסטרים ומגלשות', location: 'Rohrberg, אוסטריה', target: 'מבוגרים/נוער', desc: 'אתר סקי - קורקינט הרים. אתר סקי עצום ובו למעלה מ-140 מסלולים ומגוון פעילויות שטח נוספות בחורף ובקיץ.', link: 'https://www.zillertalarena.com/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 106, title: 'רחצה באגם Schlitters', day: 'עמק צילרטל', category: 'טבע ומסלולים', location: 'Schlitters, אוסטריה', target: 'לכל המשפחה', desc: 'אגם + בית קפה. בית קפה נחמד ופופולרי מאוד על שפת האגם.', link: 'https://seecafe-schlitters.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 107, title: 'Therme Zillertal (מרחצאות)', day: 'עמק צילרטל', category: 'מים וספא', location: 'Fügen, אוסטריה', target: 'חובה לילדים!', desc: 'מתחם בריכות (אופציה ב\'). מתחם פנאי עם בריכות תרמיות מקורות וחיצוניות, מספר סאונות יבשות ומגלשות צינור לילדים.', link: 'https://therme-zillertal.at/en/spa/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 108, title: 'Achen Lake (אגם אכן)', day: 'עמק צילרטל', category: 'טבע ומסלולים', location: 'Achensee, אוסטריה', target: 'לכל המשפחה', desc: 'אגם אלפיני וציורי עם מי טורקיז מנצנצים, ובו הפלגות, שיט בסירות ומסלולי הליכה.', link: 'https://www.achensee.com/en/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 109, title: 'Krimml Waterfalls (מפלי קרימל)', day: 'מעבר לזלצבורג', category: 'טבע ומסלולים', location: 'Krimml, אוסטריה', target: 'לכל המשפחה', desc: 'מפלי קרימל הם מחזה טבע מרשים באמת ובהחלט שווים ביקור. נפח המים העצום וגובה המפלים פשוט מרתקים.', link: '', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 110, title: 'Gerlospass/Krimml (מעבר גרלוס)', day: 'מעבר לזלצבורג', category: 'טבע ומסלולים', location: 'Gerlos, אוסטריה', target: 'לכל המשפחה', desc: 'מעבר הרים מעל מפלי קרימל, בתשלום אגרת מעבר צנועה - מעבר בין העמקים. עצירה במפלי קרימל (Krimml) - המפלים הגבוהים באירופה.', link: '', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 201, title: 'Weißsee Gletscherwelt (האגם הלבן)', day: 'בין הלינות', category: 'טבע ומסלולים', location: 'Stubach, אוסטריה', target: 'לכל המשפחה', desc: 'נוף בכל אחת מהתחנות מדהים. עולים ברכבל סגור לתחנה ראשונה. אפשר לבחור אם לרדת או להמשיך לרכבל פתוח שמוביל לקצה הנוף.', link: 'https://www.gletscherwelt-weissee.at/de/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 202, title: 'Zell am See (צל-אם-זי)', day: 'בין הלינות', category: 'עיר ושופינג', location: 'Zell am See, אוסטריה', target: 'לכל המשפחה', desc: 'ביקור באגם ובכפר (אופציה ב\'). טיילת מרהיבה, בית קפה ושיט באגם.', link: 'https://austriatravel.co.il/salzburgerland/zell-am-see-kaprun', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 203, title: 'Wild & Adventure Park Ferleiten', day: 'בין הלינות', category: 'טבע ומסלולים', location: 'Fusch, אוסטריה', target: 'חובה לילדים!', desc: 'פארק חיות בר, סיור בקלנועית ומסעדות. פארק הררי עם חיות בר אלפיניות כגון זאבים ודובים, מתקני שעשועים (09:00-18:00).', link: 'http://www.wildpark-ferleiten.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 204, title: 'Top of Salzburg 3.029m (קיצשטיינהורן)', day: 'בין הלינות', category: 'טבע ומסלולים', location: 'Kaprun, אוסטריה', target: 'לכל המשפחה', desc: 'אזור תצפית בגובה 3,029 מטר - נמצא בין שני הלינות, אפשר לעשות ביום מעבר.', link: 'https://www.kitzsteinhorn.at/en/top-of-salzburg', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 205, title: 'Maisiflitzer (מגלשות הרים קפרון)', day: 'בין הלינות', category: 'אקסטרים ומגלשות', location: 'Kaprun, אוסטריה', target: 'חובה לילדים!', desc: 'מרוץ מזחלת שלג בקיץ. אתר נופש בהר שמתאים למשפחות עם רכבת הרים אלפינית בכל ימות השנה.', link: 'http://www.kitzsteinhorn.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 206, title: 'Flying Fox XXL (אומגה ענקית)', day: 'בין הלינות', category: 'אקסטרים ומגלשות', location: 'Leogang, אוסטריה', target: 'מבוגרים/נוער', desc: 'אומגה ארוכה ומהירה מעל העמק - חוויה אתגרית מטורפת באוסטריה.', link: 'https://www.saalfelden-leogang.com/Flying-Fox-XXL', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 207, title: 'Sigmund-Thun-Klamm (נקיק זיגמונד)', day: 'בין הלינות', category: 'טבע ומסלולים', location: 'Kaprun, אוסטריה', target: 'לכל המשפחה', desc: 'מסלול קצר, קליל ומאוד מהנה. עוצמת המים והצבע התכלכל מאוד מרשימים. מסלול מרענן לסיום היום.', link: '', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 301, title: 'Eisriesenwelt (מערת קרח)', day: 'בדרך לזלצבורג', category: 'טבע ומסלולים', location: 'Werfen, אוסטריה', target: 'לכל המשפחה', desc: 'מערת הקרח הגדולה בעולם. יש לקרוא כמה זמן נדרש במקום ורמת קושי - פתוח 08:00-15:00.', link: 'https://www.eisriesenwelt.at/en/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 302, title: 'Burg Hohenwerfen (טירת וורפן)', day: 'בדרך לזלצבורג', category: 'טבע ומסלולים', location: 'Werfen, אוסטריה', target: 'לכל המשפחה', desc: 'אחת הטירות היפות והמפורסמות ביותר באוסטריה. ניתן להגיע ברכבל או ברגל. חובה לקחת סיור מודרך (כשעה).', link: 'https://www.burg-hohenwerfen.at/de/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 303, title: 'Liechtensteinklamm (נקיק ליכטנשטיין)', day: 'אזור זלצבורג', category: 'טבע ומסלולים', location: 'St. Johann im Pongau, אוסטריה', target: 'לכל המשפחה', desc: 'קניון צר ועמוק עם שבילי הליכה, גשרים, נהר ומפל. פתוח למבקרים בחודשי הקיץ.', link: 'https://www.josalzburg.com/de/aktivitaeten/liechtensteinklamm.html', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 304, title: 'Salzwelten Salzburg (מכרה מלח)', day: 'בדרך לזלצבורג', category: 'טבע ומסלולים', location: 'Bad Dürrnberg, אוסטריה', target: 'חובה לילדים!', desc: 'מכרות מלח היסטוריים - כולל שיט בסירה תת קרקעית ומגלשות.', link: 'https://www.salzwelten.at/de/salzburg', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 305, title: 'Lucky Flitzer (מגלשות פלאכאו)', day: 'אזור זלצבורג', category: 'אקסטרים ומגלשות', location: 'Flachau, אוסטריה', target: 'חובה לילדים!', desc: 'מסלול מזחלות שלג/הר במהירות גבוהה עם פיתולים, פניות וקפיצות במורד צלע הר.', link: 'https://www.lucky-flitzer.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 306, title: 'Wasserwelt Wagrain (פארק מים מומלץ)', day: 'אזור זלצבורג', category: 'מים וספא', location: 'Wagrain, אוסטריה', target: 'חובה לילדים!', desc: 'מגוון מגלשות מים, בריכות מקורות וחיצוניות, בריכת גלים. מתאים לכל הגילאים (10:00-18:00, סגור בשני).', link: 'http://www.wasserwelt.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 307, title: 'Erlebnis-Therme Amadé (פארק מים)', day: 'אזור זלצבורג', category: 'מים וספא', location: 'Altenmarkt, אוסטריה', target: 'חובה לילדים!', desc: 'מגלשת הלופינג עם נפילה חופשית (למתבגרים אמיצים!). יש בריכת גלים וכיף לכולם (09:00-22:00).', link: 'https://www.thermeamade.at/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 308, title: 'Alpentherme Gastein (מרחצאות חמים)', day: 'אזור גאשטיין', category: 'מים וספא', location: 'Bad Hofgastein, אוסטריה', target: 'לכל המשפחה', desc: 'בריכות בטמפרטורה נעימה של 34 מעלות, בריכה פנימית שמתחברת לחיצונית, סאונות ומגלשות מים.', link: 'https://www.alpentherme.com/', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 309, title: 'Alpincenter (קניונינג וספורט אתגרי)', day: 'ספורט אתגרי', category: 'אקסטרים ומגלשות', location: 'זלצבורגלנד, אוסטריה', target: 'מבוגרים/נוער', desc: 'קניונינג (Canyoning) – הליכה בתוך נקיק, קפיצה לבריכות מים טבעיות וסנפלינג מפלים.', link: 'https://www.salzburgadventures.com/en/adventures/list/canyoning', cost: '', payer: '', fileData: null, fileName: null },
+            { id: 310, title: 'Felsentherme Bad Gastein (מרחצאות)', day: 'אזור גאשטיין', category: 'מים וספא', location: 'Bad Gastein, אוסטריה', target: 'לכל המשפחה', desc: 'המקום בנוי על צלע הר עם נוף לאלפים המושלגים. מים חמימים ואווירה מעולה.', link: 'https://www.felsentherme.com/', cost: '', payer: '', fileData: null, fileName: null }
         ];
 
-        // Default Initial Budget Items
         const defaultBudgetItems = [
             { id: 1, desc: 'כרטיסי טיסה אל על (10 נוסעים)', vendor: 'EL AL Israel Airlines', amount: '₪ 18,500', status: 'שולם במלואו', payer: 'גיל & אפי' },
             { id: 2, desc: 'השכרת רכב קבוצת IWAR', vendor: 'SIXT München Airport', amount: '€ 816.30', status: 'שולם במלואו', payer: 'גיל בונדה' },
@@ -1218,7 +939,6 @@
         let activities = defaultActivities;
         let budgetItems = defaultBudgetItems;
 
-        // Static Knowledge Base
         const LODGINGS = [
             { id: 1, name: 'Gästehaus Zehmerhof', station: 'הדירה הראשונה / לילה 1', address: 'Hauptstr. 7 a, 85469 Walpertskirchen, Germany', phone: '+49 8122 959200', city: 'Erding / Munich' },
             { id: 2, name: 'Alpen Resort Schrofenblick', station: 'הדירה השנייה / תחנה 2 (5 לילות)', address: 'Burgstall 373, Mayrhofen, Tirol 6290, Austria', booking: '4SCHPB5H81', city: 'Mayrhofen, Zillertal' },
@@ -1226,21 +946,20 @@
             { id: 4, name: 'WunderLocke Munich', station: 'הדירה הרביעית / תחנה 4 (3 לילות - 3 דירות)', address: 'Gmunder Strasse 27, 81379 Munich, Germany', phone: '+49 89 262089070', booking: '5474868284 + 5601602631', city: 'Munich' }
         ];
 
-        // Init App & Force Sync
+        // Init & Listeners
         window.addEventListener('DOMContentLoaded', () => {
             initCountdown();
             renderChecklists();
             updateSettingsUI();
+            applyUISettings();
 
             if (db) {
-                // Force sync excel data to Firebase to overwrite outdated cached entries
-                db.ref('activities').set(defaultActivities);
                 db.ref('activities').on('value', (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
                         activities = Array.isArray(data) ? data : Object.values(data);
                     } else {
-                        activities = defaultActivities;
+                        db.ref('activities').set(defaultActivities);
                     }
                     renderActivities();
                 });
@@ -1260,11 +979,75 @@
             }
         });
 
-        function resetToExcelData() {
-            if (confirm("האם לאפס מחדש ולטעון את כל 23 האטרקציות מהאקסל?")) {
-                activities = defaultActivities;
-                syncDataToFirebase('activities', defaultActivities);
-                renderActivities();
+        // Load Personal User Preferences from Firebase
+        function loadUserPreferences(username) {
+            if (!db || !username) return;
+            const sanitizedUser = username.replace('.', '_');
+            
+            db.ref(`userPreferences/${sanitizedUser}`).once('value', (snapshot) => {
+                const prefs = snapshot.val();
+                if (prefs) {
+                    currentUIConfig = prefs;
+                } else {
+                    currentUIConfig = { theme: 'dark', botMode: 'floating' };
+                }
+                applyUISettings();
+                updateSettingsUI();
+            });
+        }
+
+        // Save Personal User Preferences to Firebase
+        function saveUserPreferences() {
+            if (!currentUser) return;
+            const themeVal = document.getElementById('settingTheme').value;
+            const botModeVal = document.getElementById('settingBotMode').value;
+
+            currentUIConfig = {
+                theme: themeVal,
+                botMode: botModeVal
+            };
+
+            applyUISettings();
+
+            if (db) {
+                const sanitizedUser = currentUser.username.replace('.', '_');
+                db.ref(`userPreferences/${sanitizedUser}`).set(currentUIConfig);
+            }
+        }
+
+        // Apply Dynamic UI Changes
+        function applyUISettings() {
+            // Theme Mode
+            const htmlEl = document.documentElement;
+            if (currentUIConfig.theme === 'light') {
+                htmlEl.classList.remove('dark');
+                htmlEl.classList.add('light');
+            } else {
+                htmlEl.classList.remove('light');
+                htmlEl.classList.add('dark');
+            }
+
+            // Bot Display Mode
+            const widget = document.getElementById('botWidgetContainer');
+            const navTab = document.getElementById('tab-botpage');
+            const bnavTab = document.getElementById('bnav-botpage');
+
+            if (currentUIConfig.botMode === 'tab') {
+                widget.classList.add('hidden');
+                navTab.classList.remove('hidden');
+                navTab.classList.add('flex');
+                bnavTab.classList.remove('hidden');
+                bnavTab.classList.add('flex');
+            } else {
+                widget.classList.remove('hidden');
+                navTab.classList.add('hidden');
+                navTab.classList.remove('flex');
+                bnavTab.classList.add('hidden');
+                bnavTab.classList.remove('flex');
+                
+                if (!document.getElementById('sec-botpage').classList.contains('hidden')) {
+                    switchTab('dashboard');
+                }
             }
         }
 
@@ -1274,7 +1057,6 @@
             }
         }
 
-        // Tab Switching Logic
         function switchTab(tabId) {
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1291,7 +1073,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Dedicated Locked Handler for Budget Tab
         function handleBudgetTabClick() {
             if (!currentUser) {
                 pendingAction = () => {
@@ -1305,7 +1086,6 @@
             }
         }
 
-        // Countdown Timer
         function initCountdown() {
             const targetDate = new Date('2026-07-30T15:45:00').getTime();
 
@@ -1331,7 +1111,7 @@
             setInterval(update, 60000);
         }
 
-        // SMART HYBRID BOT CHAT SYSTEM
+        // Bot Functions
         function toggleBotChat() {
             const win = document.getElementById('botChatWindow');
             win.classList.toggle('hidden');
@@ -1348,21 +1128,40 @@
             const query = inputEl.value.trim();
             if (!query) return;
 
-            appendBotMessage(query, 'user');
+            appendBotMessage(query, 'user', 'botMessages');
             inputEl.value = '';
 
             const localAns = searchLocalDatabase(query);
             if (localAns) {
-                appendBotMessage(localAns, 'bot');
+                appendBotMessage(localAns, 'bot', 'botMessages');
             } else {
-                appendBotMessage('⏳ <em>חוקר עבורך ב-AI...</em>', 'bot-loading');
-                await fetchOpenRouterAIResponse(query);
+                appendBotMessage('⏳ <em>חוקר עבורך ב-AI...</em>', 'bot-loading', 'botMessages');
+                await fetchOpenRouterAIResponse(query, 'botMessages');
             }
         }
 
-        function appendBotMessage(text, sender) {
-            const box = document.getElementById('botMessages');
-            
+        async function handleBotPageSubmit(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('botPageInput');
+            const query = inputEl.value.trim();
+            if (!query) return;
+
+            appendBotMessage(query, 'user', 'botPageMessages');
+            inputEl.value = '';
+
+            const localAns = searchLocalDatabase(query);
+            if (localAns) {
+                appendBotMessage(localAns, 'bot', 'botPageMessages');
+            } else {
+                appendBotMessage('⏳ <em>חוקר עבורך ב-AI...</em>', 'bot-loading', 'botPageMessages');
+                await fetchOpenRouterAIResponse(query, 'botPageMessages');
+            }
+        }
+
+        function appendBotMessage(text, sender, targetId) {
+            const box = document.getElementById(targetId);
+            if (!box) return;
+
             if (sender === 'bot-loading') {
                 const loadingMsg = document.createElement('div');
                 loadingMsg.id = 'geminiLoadingMsg';
@@ -1423,10 +1222,9 @@
             return null;
         }
 
-        // OPENROUTER FETCH FUNCTION
-        async function fetchOpenRouterAIResponse(userPrompt) {
+        async function fetchOpenRouterAIResponse(userPrompt, targetId) {
             const systemContext = `
-                אתה עוזר ה-AI הרשמי של טיול משפחתי לגרמניה ואוסטריה בקיץ 2026 עבור משפחות בונדה וכהן (10 מטיילים: 6 מבוגרים, 4 ילדים).
+                אתה עוזר ה-AI הרשמי של טיול משפחתי לגרמניה ואוסטריה בקיץ 2026 עבור משפחות בונדה וכהן (10 מטיילים).
                 תחנות הטיול:
                 1. לילה 1: Gästehaus Zehmerhof (Erding/Munich)
                 2. 5 לילות: Alpen Resort Schrofenblick (Mayrhofen, Austria)
@@ -1456,16 +1254,16 @@
                 if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
                     let textAns = data.choices[0].message.content;
                     textAns = textAns.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-                    appendBotMessage(`✨ <strong>AI:</strong><br>${textAns}`, 'bot');
+                    appendBotMessage(`✨ <strong>AI:</strong><br>${textAns}`, 'bot', targetId);
                 } else {
-                    appendBotMessage('⚠️ מצטער, לא הצלחתי לקבל תשובה כרגע.', 'bot');
+                    appendBotMessage('⚠️ מצטער, לא הצלחתי לקבל תשובה כרגע.', 'bot', targetId);
                 }
             } catch (err) {
-                appendBotMessage('⚠️ שגיאה בתקשורת עם AI.', 'bot');
+                appendBotMessage('⚠️ שגיאה בתקשורת עם AI.', 'bot', targetId);
             }
         }
 
-        // AUTHORIZATION & MODAL HANDLERS
+        // Auth Functions
         function protectedAction(actionCallback) {
             if (currentUser) {
                 actionCallback();
@@ -1478,6 +1276,9 @@
         function toggleAuthModal() {
             if (currentUser) {
                 currentUser = null;
+                currentUIConfig = { theme: 'dark', botMode: 'floating' };
+                applyUISettings();
+
                 document.getElementById('userInfo').classList.add('hidden');
                 document.getElementById('authBtnText').innerText = 'עריכה';
                 document.getElementById('authIcon').className = 'fa-solid fa-lock text-amber-400 text-xs';
@@ -1507,7 +1308,8 @@
                 document.getElementById('authBtnText').innerText = 'התנתק';
                 document.getElementById('authIcon').className = 'fa-solid fa-unlock text-emerald-400 text-xs';
                 
-                updateSettingsUI();
+                // Fetch personal preferences
+                loadUserPreferences(currentUser.username);
 
                 if (pendingAction) {
                     pendingAction();
@@ -1518,7 +1320,7 @@
             }
         }
 
-        // ACTIVITIES MODAL LOGIC
+        // Activities Modal Logic
         function openAddActivityModal() {
             document.getElementById('actEditId').value = '';
             document.getElementById('actTitle').value = '';
@@ -1684,7 +1486,7 @@
             });
         }
 
-        // EXPENSES MODAL LOGIC
+        // Budget Logic
         function toggleDepositFields() {
             const status = document.getElementById('expStatus').value;
             const container = document.getElementById('depositFieldsContainer');
@@ -1887,17 +1689,59 @@
             const userRoleEl = document.getElementById('settingsUserRole');
             const avatarEl = document.getElementById('userAvatar');
             const actionBtn = document.getElementById('settingsAuthActionBtn');
+            const prefsBox = document.getElementById('userPrefsContainer');
 
             if (currentUser) {
                 if (userNameEl) userNameEl.innerText = currentUser.name;
-                if (userRoleEl) userRoleEl.innerText = 'מחובר (עריכה + תקציב)';
+                if (userRoleEl) userRoleEl.innerText = 'מחובר (הגדרות שמורות ב-Firebase)';
                 if (avatarEl) avatarEl.innerText = '🔑';
                 if (actionBtn) actionBtn.innerText = 'התנתק';
+
+                if (prefsBox) {
+                    prefsBox.innerHTML = `
+                        <div class="flex justify-between items-center border-b border-slate-800/80 pb-2">
+                            <h3 class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-palette"></i> העדפות תצוגה אישיות עבור ${currentUser.name.split(' ')[0]}:
+                            </h3>
+                            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">אישי</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
+                            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800 space-y-1.5">
+                                <label class="block font-bold text-slate-200">ערכת נושא (Theme):</label>
+                                <select id="settingTheme" onchange="saveUserPreferences()" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2 text-xs">
+                                    <option value="dark" ${currentUIConfig.theme === 'dark' ? 'selected' : ''}>🌙 מצב כהה (Dark Mode)</option>
+                                    <option value="light" ${currentUIConfig.theme === 'light' ? 'selected' : ''}>☀️ מצב בהיר (Light Mode)</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800 space-y-1.5">
+                                <label class="block font-bold text-slate-200">מיקום צ'אט בוט ה-AI:</label>
+                                <select id="settingBotMode" onchange="saveUserPreferences()" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2 text-xs">
+                                    <option value="floating" ${currentUIConfig.botMode === 'floating' ? 'selected' : ''}>💬 כפתור צף בצד המסך</option>
+                                    <option value="tab" ${currentUIConfig.botMode === 'tab' ? 'selected' : ''}>🤖 לשונית נפרדת בסרגל</option>
+                                </select>
+                            </div>
+                        </div>
+                    `;
+                }
             } else {
                 if (userNameEl) userNameEl.innerText = 'אורח (צפייה בלבד)';
                 if (userRoleEl) userRoleEl.innerText = 'ללא הרשאות עריכה';
                 if (avatarEl) avatarEl.innerText = '👤';
                 if (actionBtn) actionBtn.innerText = 'התחבר';
+
+                if (prefsBox) {
+                    prefsBox.innerHTML = `
+                        <div class="text-center py-2 space-y-2">
+                            <div class="text-amber-400 text-sm font-bold"><i class="fa-solid fa-lock"></i> הגדרות נראות מותאמות אישית</div>
+                            <p class="text-[11px] text-slate-400">התחבר כמורשה (גיל, ליאת, אפי, שלי, אריאל) כדי להתאים ולשמור את העדפות התצוגה האישיות שלך.</p>
+                            <button onclick="toggleAuthModal()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition">
+                                התחבר עכשיו
+                            </button>
+                        </div>
+                    `;
+                }
             }
         }
     </script>
