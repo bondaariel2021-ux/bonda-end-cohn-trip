@@ -2,8 +2,14 @@
 <html lang="he" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | גרסה 4.6</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Apple Home Screen Icon (לוגו מותאם למסך הבית באייפון) -->
+    <link rel="apple-touch-icon" href="logo.jpg">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Mobile Edition</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (Heebo) -->
@@ -42,45 +48,46 @@
         }
     </script>
     <style>
-        body { font-family: 'Heebo', sans-serif; background-color: #090d16; color: #f8fafc; }
+        body { font-family: 'Heebo', sans-serif; background-color: #090d16; color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
         .tab-btn.active { border-bottom: 3px solid #38bdf8; color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.1); }
+        .bottom-nav-item.active { color: #38bdf8; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-12 selection:bg-alpine-500 selection:text-white relative">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-24 md:pb-12 selection:bg-alpine-500 selection:text-white relative">
 
     <!-- Top Navigation Bar -->
-    <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md shadow-2xl">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <!-- הלוגו החדש -->
-                <img src="logo.jpg" alt="מסע באוסטריה וגרמניה" class="w-12 h-12 object-contain rounded-full shadow-lg border border-slate-700/60 bg-slate-950">
+    <header class="bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md shadow-2xl">
+        <div class="max-w-7xl mx-auto px-3 py-2.5 flex justify-between items-center">
+            <div class="flex items-center gap-2.5">
+                <!-- הלוגו -->
+                <img src="logo.jpg" alt="מסע באוסטריה וגרמניה" class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full shadow-lg border border-slate-700/60 bg-slate-950">
                 <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="text-lg md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-500/30">v4.6 Logo Edition</span>
+                    <div class="flex items-center gap-1.5">
+                        <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v4.8 Mobile</span>
                     </div>
-                    <p class="text-xs text-slate-400">משפחות בונדה & כהן | 30.07 - 14.08.2026</p>
+                    <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
             </div>
 
             <!-- Auth Controls -->
-            <div class="flex items-center gap-3">
-                <div id="userInfo" class="hidden text-xs md:text-sm bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-2">
-                    <i class="fa-solid fa-user-check"></i>
-                    <span id="userNameDisplay">הורה מורשה</span>
+            <div class="flex items-center gap-2">
+                <div id="userInfo" class="hidden text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-check text-[10px]"></i>
+                    <span id="userNameDisplay" class="truncate max-w-[80px] md:max-w-none">מחובר</span>
                 </div>
-                <button id="authBtn" onclick="toggleAuthModal()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-3 py-1.5 rounded-xl text-xs md:text-sm transition flex items-center gap-2 shadow-sm">
-                    <i class="fa-solid fa-lock text-amber-400" id="authIcon"></i>
-                    <span id="authBtnText">התחברות עריכה</span>
+                <button id="authBtn" onclick="toggleAuthModal()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-2.5 py-1.5 rounded-xl text-xs transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-lock text-amber-400 text-xs" id="authIcon"></i>
+                    <span id="authBtnText" class="hidden sm:inline">עריכה</span>
                 </button>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <nav class="bg-slate-900/50 border-t border-slate-800 px-4 overflow-x-auto hide-scrollbar">
+        <!-- Desktop Horizontal Navigation Tabs (Hidden on Mobile) -->
+        <nav class="hidden md:block bg-slate-900/50 border-t border-slate-800 px-4 overflow-x-auto hide-scrollbar">
             <div class="max-w-7xl mx-auto flex gap-1 text-slate-400 text-sm font-medium whitespace-nowrap">
                 <button onclick="switchTab('dashboard')" class="tab-btn active py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-dashboard">
                     <i class="fa-solid fa-house"></i> סקירה
@@ -89,252 +96,251 @@
                     <i class="fa-solid fa-calendar-days"></i> תוכנית יומית
                 </button>
                 <button onclick="switchTab('lodging')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-lodging">
-                    <i class="fa-solid fa-bed"></i> מלונות ובקתות (4)
+                    <i class="fa-solid fa-bed"></i> מלונות (4)
                 </button>
                 <button onclick="switchTab('transport')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-transport">
-                    <i class="fa-solid fa-plane"></i> טיסות ורכב SIXT
+                    <i class="fa-solid fa-plane"></i> טיסות ורכב
                 </button>
                 <button onclick="handleBudgetTabClick()" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-budget">
-                    <i class="fa-solid fa-wallet text-amber-400"></i> תקציב וחשבוניות 🔒
+                    <i class="fa-solid fa-wallet text-amber-400"></i> תקציב 🔒
                 </button>
                 <button onclick="switchTab('checklist')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-checklist">
-                    <i class="fa-solid fa-list-check"></i> רשימת ציוד
+                    <i class="fa-solid fa-list-check"></i> ציוד
                 </button>
                 <button onclick="switchTab('settings')" class="tab-btn py-3 px-4 flex items-center gap-2 transition hover:text-slate-200" id="tab-settings">
-                    <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות וסטטוס
+                    <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות
                 </button>
             </div>
         </nav>
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 pt-6 flex-grow w-full">
+    <main class="max-w-7xl mx-auto px-3 pt-4 flex-grow w-full">
 
         <!-- Banner Notice -->
-        <div id="viewerNotice" class="mb-6 bg-slate-900 border-r-4 border-emerald-500 p-4 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800">
-            <div class="flex items-center gap-3">
-                <span class="text-2xl">✅</span>
+        <div id="viewerNotice" class="mb-4 bg-slate-900 border-r-4 border-emerald-500 p-3 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800 text-xs">
+            <div class="flex items-center gap-2.5">
+                <span class="text-xl">📱</span>
                 <div>
-                    <h3 class="font-bold text-white text-sm md:text-base">גירסה v4.6 - הלוגו החדש של המסע עודכן בהצלחה!</h3>
-                    <p class="text-xs text-slate-400">מחשבון המרת המטבע והצ'אט-בוט מוכנים לפעולה.</p>
+                    <h3 class="font-bold text-white text-xs">מוכן לאייפון! (v4.8)</h3>
+                    <p class="text-[10px] text-slate-400">הוסף למסך הבית בספארי לקבלת אייקון ואפליקציה מלאה.</p>
                 </div>
             </div>
-            <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-slate-500 hover:text-slate-300 px-2 text-sm">✕</button>
+            <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-slate-500 hover:text-slate-300 px-1">✕</button>
         </div>
 
         <!-- TAB 1: DASHBOARD -->
-        <section id="sec-dashboard" class="space-y-6">
-            <div class="glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-2xl border border-slate-800">
-                <div class="absolute -left-12 -bottom-12 opacity-10 text-9xl">🏔️</div>
-                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <section id="sec-dashboard" class="space-y-4">
+            <div class="glass-card rounded-3xl p-5 relative overflow-hidden shadow-2xl border border-slate-800">
+                <div class="absolute -left-10 -bottom-10 opacity-10 text-8xl">🏔️</div>
+                <div class="relative z-10 flex flex-col gap-4">
                     <div>
-                        <span class="bg-alpine-500/20 text-alpine-300 text-xs font-semibold px-3 py-1 rounded-full border border-alpine-500/30">
-                            30 ביולי 2026 ➔ 14 באוגוסט 2026
+                        <span class="bg-alpine-500/20 text-alpine-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-alpine-500/30">
+                            30.07.2026 ➔ 14.08.2026
                         </span>
-                        <h2 class="text-2xl md:text-4xl font-extrabold mt-3 text-white">המסע לגרמניה ואוסטריה!</h2>
-                        <p class="text-slate-400 text-sm mt-1">16 ימים קסומים | 2 משפחות (10 מטיילים: 6 מבוגרים, 4 ילדים)</p>
+                        <h2 class="text-xl md:text-3xl font-extrabold mt-2 text-white">המסע לגרמניה ואוסטריה!</h2>
+                        <p class="text-slate-400 text-xs mt-0.5">16 ימים | 2 משפחות (10 מטיילים)</p>
                     </div>
 
                     <!-- Countdown Timer -->
-                    <div class="flex gap-3 text-center">
-                        <div class="bg-slate-950/80 backdrop-blur-md px-4 py-3 rounded-2xl border border-slate-800 min-w-[75px] shadow-inner">
-                            <span id="cd-days" class="text-2xl md:text-3xl font-black text-amber-400">00</span>
-                            <span class="block text-[10px] text-slate-400 uppercase mt-0.5">ימים</span>
+                    <div class="flex gap-2 justify-between text-center pt-1">
+                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
+                            <span id="cd-days" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                            <span class="block text-[9px] text-slate-400 uppercase mt-0.5">ימים</span>
                         </div>
-                        <div class="bg-slate-950/80 backdrop-blur-md px-4 py-3 rounded-2xl border border-slate-800 min-w-[75px] shadow-inner">
-                            <span id="cd-hours" class="text-2xl md:text-3xl font-black text-amber-400">00</span>
-                            <span class="block text-[10px] text-slate-400 uppercase mt-0.5">שעות</span>
+                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
+                            <span id="cd-hours" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                            <span class="block text-[9px] text-slate-400 uppercase mt-0.5">שעות</span>
                         </div>
-                        <div class="bg-slate-950/80 backdrop-blur-md px-4 py-3 rounded-2xl border border-slate-800 min-w-[75px] shadow-inner">
-                            <span id="cd-mins" class="text-2xl md:text-3xl font-black text-amber-400">00</span>
-                            <span class="block text-[10px] text-slate-400 uppercase mt-0.5">דקות</span>
+                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
+                            <span id="cd-mins" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                            <span class="block text-[9px] text-slate-400 uppercase mt-0.5">דקות</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 border border-amber-500/30 p-4 rounded-2xl shadow-lg flex items-center gap-3">
-                <div class="w-10 h-10 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl shrink-0">⏰</div>
+            <div class="bg-gradient-to-r from-amber-950/60 to-slate-900 border border-amber-500/30 p-3.5 rounded-2xl shadow-lg flex items-center gap-3">
+                <div class="w-9 h-9 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-lg shrink-0">⏰</div>
                 <div>
-                    <h4 class="font-bold text-amber-300 text-sm">תזכורת חשובה: צ'ק-אין לטיסת אל על (LY351)</h4>
-                    <p class="text-xs text-slate-300 mt-0.5">הצ'ק-אין נפתח ב-<strong>29.07.2026 בשעה 15:45</strong> (מדויק 24 שעות לפני מועד ההמראה!).</p>
+                    <h4 class="font-bold text-amber-300 text-xs">תזכורת צ'ק-אין טיסה (LY351)</h4>
+                    <p class="text-[11px] text-slate-300 mt-0.5">נפתח ב-<strong>29.07.2026 בשעה 15:45</strong> (בדיוק 24 שעות לפני!).</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center text-xl border border-sky-500/20">✈️</div>
+            <div class="grid grid-cols-2 gap-2.5">
+                <div class="glass-card p-3 rounded-2xl flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center text-base border border-sky-500/20 shrink-0">✈️</div>
                     <div>
-                        <div class="text-xs text-slate-400">טיסה אל על</div>
-                        <div class="font-bold text-white text-sm">LY351</div>
-                        <div class="text-[11px] text-emerald-400">30.07 בשעה 15:45</div>
+                        <div class="text-[10px] text-slate-400">טיסה אל על</div>
+                        <div class="font-bold text-white text-xs">LY351</div>
+                        <div class="text-[10px] text-emerald-400">30.07 (15:45)</div>
                     </div>
                 </div>
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl border border-amber-500/20">🚗</div>
+                <div class="glass-card p-3 rounded-2xl flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-base border border-amber-500/20 shrink-0">🚗</div>
                     <div>
-                        <div class="text-xs text-slate-400">רכב שכור</div>
-                        <div class="font-bold text-white text-sm">SIXT IWAR</div>
-                        <div class="text-[11px] text-slate-400">מינכן שדה ➔ תחנה מרכזית</div>
+                        <div class="text-[10px] text-slate-400">רכב שכור</div>
+                        <div class="font-bold text-white text-xs">SIXT IWAR</div>
+                        <div class="text-[10px] text-slate-400">איסוף: מינכן</div>
                     </div>
                 </div>
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl border border-emerald-500/20">🏡</div>
+                <div class="glass-card p-3 rounded-2xl flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-base border border-emerald-500/20 shrink-0">🏡</div>
                     <div>
-                        <div class="text-xs text-slate-400">לינת שיא</div>
-                        <div class="font-bold text-white text-sm">בקתת פרימיום</div>
-                        <div class="text-[11px] text-emerald-400">סאונה + בריכה פרטית</div>
+                        <div class="text-[10px] text-slate-400">לינת שיא</div>
+                        <div class="font-bold text-white text-xs">בקתה פרימיום</div>
+                        <div class="text-[10px] text-emerald-400">סאונה + בריכה</div>
                     </div>
                 </div>
-                <div class="glass-card p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-xl border border-purple-500/20">👨‍👩‍👧‍👦</div>
+                <div class="glass-card p-3 rounded-2xl flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-base border border-purple-500/20 shrink-0">👨‍👩‍👧‍👦</div>
                     <div>
-                        <div class="text-xs text-slate-400">משתתפים</div>
-                        <div class="font-bold text-white text-sm">10 נפשות</div>
-                        <div class="text-[11px] text-purple-300">בונדה & כהן</div>
+                        <div class="text-[10px] text-slate-400">משתתפים</div>
+                        <div class="font-bold text-white text-xs">10 נפשות</div>
+                        <div class="text-[10px] text-purple-300">בונדה & כהן</div>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl space-y-4">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <h3 class="font-bold text-lg text-white flex items-center gap-2">
-                        <i class="fa-solid fa-map-location-dot text-alpine-400"></i> תחנות הלינה במסלול
+            <div class="glass-card p-4 rounded-3xl space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                    <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
+                        <i class="fa-solid fa-map-location-dot text-alpine-400"></i> תחנות הלינה
                     </h3>
-                    <a href="https://maps.app.goo.gl/9QKebKHaSU8DAWpF8" target="_blank" class="text-xs font-semibold text-alpine-400 hover:underline flex items-center gap-1">
-                        פתחי מפה ב-Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <a href="https://maps.app.goo.gl/9QKebKHaSU8DAWpF8" target="_blank" class="text-[11px] font-semibold text-alpine-400 hover:underline flex items-center gap-1">
+                        מפה ב-Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-alpine-500/50 transition">
-                        <span class="text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2 py-0.5 rounded">לילה 1 (30-31.07)</span>
-                        <h4 class="font-bold mt-2 text-white">Gästehaus Zehmerhof</h4>
-                        <p class="text-xs text-slate-400 mt-1">ארדינג / מינכן</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[9px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2 py-0.5 rounded">לילה 1 (30-31.07)</span>
+                        <h4 class="font-bold mt-1 text-white text-xs">Gästehaus Zehmerhof</h4>
+                        <p class="text-[10px] text-slate-400">ארדינג / מינכן</p>
                     </div>
-                    <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-alpine-500/50 transition">
-                        <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded">5 לילות (31.07-05.08)</span>
-                        <h4 class="font-bold mt-2 text-white">Alpen Resort Schrofenblick</h4>
-                        <p class="text-xs text-slate-400 mt-1">מיירהופן, עמק צילרטל</p>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded">5 לילות (31.07-05.08)</span>
+                        <h4 class="font-bold mt-1 text-white text-xs">Alpen Resort Schrofenblick</h4>
+                        <p class="text-[10px] text-slate-400">מיירהופן, עמק צילרטל</p>
                     </div>
-                    <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-alpine-500/50 transition">
-                        <span class="text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded">6 לילות (05-11.08)</span>
-                        <h4 class="font-bold mt-2 text-white">Bergresort Hauser Kaibling</h4>
-                        <p class="text-xs text-slate-400 mt-1">שילדמינג, בקתת פרימיום</p>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded">6 לילות (05-11.08)</span>
+                        <h4 class="font-bold mt-1 text-white text-xs">Bergresort Hauser Kaibling</h4>
+                        <p class="text-[10px] text-slate-400">שילדמינג (בקתת פרימיום)</p>
                     </div>
-                    <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 hover:border-alpine-500/50 transition">
-                        <span class="text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded">3 לילות (11-14.08)</span>
-                        <h4 class="font-bold mt-2 text-white">WunderLocke Munich</h4>
-                        <p class="text-xs text-slate-400 mt-1">מינכן (3 דירות)</p>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <span class="text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded">3 לילות (11-14.08)</span>
+                        <h4 class="font-bold mt-1 text-white text-xs">WunderLocke Munich</h4>
+                        <p class="text-[10px] text-slate-400">מינכן (3 דירות)</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- TAB 2: ITINERARY & ACTIVITIES -->
-        <section id="sec-itinerary" class="space-y-6 hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 glass-card p-4 rounded-2xl">
-                <div>
-                    <h2 class="text-xl font-bold text-white">תוכנית טיול ואטרקציות</h2>
-                    <p class="text-xs text-slate-400">אטרקציות מתוכננות לכל המשפחה והילדים (מסונכרן בלייב)</p>
+        <section id="sec-itinerary" class="space-y-4 hidden">
+            <div class="flex flex-col gap-3 glass-card p-3.5 rounded-2xl">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-base font-bold text-white">תוכנית טיול ואטרקציות</h2>
+                        <p class="text-[10px] text-slate-400">אטרקציות מסונכרנות לכל המשפחה</p>
+                    </div>
+                    <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-lg shrink-0">
+                        <i class="fa-solid fa-plus"></i> הוספה
+                    </button>
                 </div>
                 
-                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-                    <select id="filterCategory" onchange="renderActivities()" class="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl p-2.5 focus:ring-alpine-500">
+                <div>
+                    <select id="filterCategory" onchange="renderActivities()" class="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-xl p-2 focus:ring-alpine-500">
                         <option value="ALL">כל הקטגוריות</option>
                         <option value="טבע ומסלולים">🌿 טבע ומסלולים</option>
                         <option value="אקסטרים ומגלשות">🎢 אקסטרים ומגלשות</option>
                         <option value="מים וספא">🏊 מים וספא</option>
                         <option value="עיר ושופינג">🛍️ עיר ושופינג</option>
                     </select>
-
-                    <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-plus"></i> הוספת אטרקציה
-                    </button>
                 </div>
             </div>
 
-            <div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <!-- Dynamic Content -->
             </div>
         </section>
 
         <!-- TAB 3: LODGING -->
-        <section id="sec-lodging" class="space-y-6 hidden">
-            <h2 class="text-xl font-bold text-white">מקומות האירוח (4 תחנות)</h2>
+        <section id="sec-lodging" class="space-y-4 hidden">
+            <h2 class="text-base font-bold text-white">מקומות האירוח (4 תחנות)</h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <!-- Lodging 1 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-xl border border-slate-800">
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 flex justify-between items-center">
+                    <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
                         <div>
-                            <span class="text-[10px] bg-sky-500/20 text-sky-300 font-bold px-2 py-0.5 rounded border border-sky-500/30">לילה 1 | 30.07 - 31.07</span>
-                            <h3 class="font-bold text-lg text-white mt-1">Gästehaus Zehmerhof bei Erding</h3>
+                            <span class="text-[9px] bg-sky-500/20 text-sky-300 font-bold px-2 py-0.5 rounded border border-sky-500/30">לילה 1 | 30.07 - 31.07</span>
+                            <h3 class="font-bold text-sm text-white mt-1">Gästehaus Zehmerhof bei Erding</h3>
                         </div>
-                        <i class="fa-solid fa-hotel text-2xl text-sky-400"></i>
+                        <i class="fa-solid fa-hotel text-xl text-sky-400"></i>
                     </div>
-                    <div class="p-5 space-y-3 text-sm">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-2"></i> Hauptstr. 7 a, 85469 Walpertskirchen, Germany</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-2"></i> +49 8122 959200</p>
-                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-300">
-                            <strong>פרטים:</strong> הגעה צפויה 20:00-21:00. חניה פרטית חינם, קרוב לשדה התעופה במינכן.
+                    <div class="p-4 space-y-2.5 text-xs">
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Hauptstr. 7 a, 85469 Walpertskirchen</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-1.5"></i> +49 8122 959200</p>
+                        <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
+                            <strong>פרטים:</strong> הגעה 20:00-21:00. חניה פרטית חינם.
                         </div>
                     </div>
                 </div>
 
                 <!-- Lodging 2 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-xl border border-slate-800">
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 flex justify-between items-center">
+                    <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
                         <div>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded border border-emerald-500/30">5 לילות | 31.07 - 05.08</span>
-                            <h3 class="font-bold text-lg text-white mt-1">Alpen Resort Schrofenblick</h3>
+                            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded border border-emerald-500/30">5 לילות | 31.07 - 05.08</span>
+                            <h3 class="font-bold text-sm text-white mt-1">Alpen Resort Schrofenblick</h3>
                         </div>
-                        <i class="fa-solid fa-mountain-sun text-2xl text-emerald-400"></i>
+                        <i class="fa-solid fa-mountain-sun text-xl text-emerald-400"></i>
                     </div>
-                    <div class="p-5 space-y-3 text-sm">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-2"></i> Burgstall 373, Mayrhofen, Tirol 6290, Austria</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-2"></i> הזמנה: <strong>4SCHPB5H81</strong> (Penken Apartment x2)</p>
-                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-300">
-                            <strong>מיקום:</strong> עמק צילרטל, גישה ישירה לרכבל Penken, נוף מרהיב לאלפים.
+                    <div class="p-4 space-y-2.5 text-xs">
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Burgstall 373, Mayrhofen, Tirol 6290</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> הזמנה: <strong>4SCHPB5H81</strong></p>
+                        <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
+                            <strong>מיקום:</strong> עמק צילרטל, גישה ישירה לרכבל Penken.
                         </div>
                     </div>
                 </div>
 
                 <!-- Lodging 3 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-xl border border-slate-800">
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 flex justify-between items-center">
+                    <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
                         <div>
-                            <span class="text-[10px] bg-purple-500/20 text-purple-300 font-bold px-2 py-0.5 rounded border border-purple-500/30">6 לילות | 05.08 - 11.08</span>
-                            <h3 class="font-bold text-lg text-white mt-1">Bergresort Hauser Kaibling</h3>
+                            <span class="text-[9px] bg-purple-500/20 text-purple-300 font-bold px-2 py-0.5 rounded border border-purple-500/30">6 לילות | 05.08 - 11.08</span>
+                            <h3 class="font-bold text-sm text-white mt-1">Bergresort Hauser Kaibling</h3>
                         </div>
-                        <i class="fa-solid fa-house-chimney-window text-2xl text-purple-400"></i>
+                        <i class="fa-solid fa-house-chimney-window text-xl text-purple-400"></i>
                     </div>
-                    <div class="p-5 space-y-3 text-sm">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-2"></i> Haus im Ennstal / שילדמינג, אוסטריה</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-2"></i> הזמנה: <strong>31580165-1602500300</strong></p>
-                        <div class="bg-purple-950/40 p-3 rounded-xl border border-purple-800/40 text-xs text-purple-200">
-                            🌟 <strong>בקתת פרימיום:</strong> 5 חדרי שינה, סאונה פרטית ובריכה מחוממת בבקתה!
+                    <div class="p-4 space-y-2.5 text-xs">
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Haus im Ennstal / שילדמינג</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> הזמנה: <strong>31580165-1602500300</strong></p>
+                        <div class="bg-purple-950/40 p-2.5 rounded-xl border border-purple-800/40 text-[11px] text-purple-200">
+                            🌟 <strong>בקתת פרימיום:</strong> 5 חדרי שינה, סאונה פרטית ובריכה מחוממת!
                         </div>
                     </div>
                 </div>
 
                 <!-- Lodging 4 -->
                 <div class="glass-card rounded-2xl overflow-hidden shadow-xl border border-slate-800">
-                    <div class="bg-slate-900 p-4 border-b border-slate-800 flex justify-between items-center">
+                    <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
                         <div>
-                            <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30">3 לילות | 11.08 - 14.08</span>
-                            <h3 class="font-bold text-lg text-white mt-1">WunderLocke Munich</h3>
+                            <span class="text-[9px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30">3 לילות | 11.08 - 14.08</span>
+                            <h3 class="font-bold text-sm text-white mt-1">WunderLocke Munich</h3>
                         </div>
-                        <i class="fa-solid fa-building-user text-2xl text-amber-400"></i>
+                        <i class="fa-solid fa-building-user text-xl text-amber-400"></i>
                     </div>
-                    <div class="p-5 space-y-3 text-sm">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-2"></i> Gmunder Strasse 27, 81379 Munich, Germany</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-2"></i> +49 89 262089070</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-2"></i> אישורי Booking: <strong>5474868284</strong> & <strong>5601602631</strong></p>
-                        <div class="bg-amber-950/30 p-3 rounded-xl border border-amber-800/40 text-xs text-amber-200 space-y-1">
-                            <p>🏢 <strong>הרכב 3 הדירות המאוחדות:</strong></p>
-                            <p>• 2x סוויטות עם 2 חדרי שינה (€1,798 מאוחד)</p>
-                            <p>• 1x סטודיו סיטי (€299)</p>
+                    <div class="p-4 space-y-2.5 text-xs">
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Gmunder Strasse 27, Munich</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-1.5"></i> +49 89 262089070</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> Booking: <strong>5474868284 / 5601602631</strong></p>
+                        <div class="bg-amber-950/30 p-2.5 rounded-xl border border-amber-800/40 text-[11px] text-amber-200 space-y-0.5">
+                            <p>🏢 <strong>הרכב 3 הדירות:</strong> 2x סוויטות (2 חדרי שינה) + 1x סטודיו.</p>
                         </div>
                     </div>
                 </div>
@@ -342,64 +348,63 @@
         </section>
 
         <!-- TAB 4: TRANSPORT -->
-        <section id="sec-transport" class="space-y-6 hidden">
-            <h2 class="text-xl font-bold text-white">טיסות והשכרת רכב</h2>
+        <section id="sec-transport" class="space-y-4 hidden">
+            <h2 class="text-base font-bold text-white">טיסות והשכרת רכב</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Flight Card -->
-                <div class="glass-card p-6 rounded-3xl border border-slate-800 space-y-4">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                        <h3 class="font-bold text-lg text-white flex items-center gap-2">
-                            <i class="fa-solid fa-plane-departure text-sky-400"></i> טיסת אל על (LY351)
+                <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-plane-departure text-sky-400"></i> אל על (LY351)
                         </h3>
-                        <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-xs font-bold px-2.5 py-1 rounded-full">PNR: YHUICS</span>
+                        <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full">PNR: YHUICS</span>
                     </div>
 
-                    <div class="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-2xl flex items-center gap-3">
-                        <i class="fa-solid fa-clock text-amber-400 text-xl"></i>
-                        <div class="text-xs">
-                            <strong class="text-amber-300 block text-sm">פתיחת צ'ק-אין טיסה:</strong>
-                            <span class="text-slate-200">29 ביולי 2026 בשעה 15:45 בדיוק (24 שעות לפני ההמראה)</span>
+                    <div class="bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-2xl flex items-center gap-2.5">
+                        <i class="fa-solid fa-clock text-amber-400 text-lg"></i>
+                        <div class="text-[11px]">
+                            <strong class="text-amber-300 block text-xs">צ'ק-אין נפתח:</strong>
+                            <span class="text-slate-200">29.07.2026 בשעה 15:45</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-3 text-sm">
+                    <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-2 text-xs">
                         <div class="flex justify-between items-center">
                             <div>
-                                <div class="text-xs text-slate-400">יציאה</div>
-                                <div class="font-bold text-base text-white">תל אביב (TLV) T3</div>
-                                <div class="text-xs text-sky-400">30.07.2026 בשעה 15:45</div>
+                                <div class="text-[10px] text-slate-400">יציאה</div>
+                                <div class="font-bold text-sm text-white">תל אביב (TLV)</div>
+                                <div class="text-[10px] text-sky-400">30.07 בשעה 15:45</div>
                             </div>
                             <div class="text-center text-slate-500">
-                                <i class="fa-solid fa-arrow-left text-lg"></i>
-                                <div class="text-[10px]">4 שעות ו-5 דק'</div>
+                                <i class="fa-solid fa-arrow-left text-sm"></i>
+                                <div class="text-[9px]">4ש' 5ד'</div>
                             </div>
                             <div class="text-left">
-                                <div class="text-xs text-slate-400">נחיתה</div>
-                                <div class="font-bold text-base text-white">מינכן (MUC) T1</div>
-                                <div class="text-xs text-sky-400">30.07.2026 בשעה 18:50</div>
+                                <div class="text-[10px] text-slate-400">נחיתה</div>
+                                <div class="font-bold text-sm text-white">מינכן (MUC)</div>
+                                <div class="text-[10px] text-sky-400">30.07 בשעה 18:50</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Rental Car Card -->
-                <div class="glass-card p-6 rounded-3xl border border-slate-800 space-y-4">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                        <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                        <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
                             <i class="fa-solid fa-car text-amber-400"></i> השכרת רכב - SIXT
                         </h3>
-                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold px-2.5 py-1 rounded-full">הזמנה: 9730234401</span>
+                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full"># 9730234401</span>
                     </div>
 
-                    <div class="space-y-3 text-sm">
-                        <div class="bg-amber-950/20 p-3 rounded-xl border border-amber-800/30 text-xs text-amber-200">
-                            <strong>איסוף:</strong> 30.07 בשעה 19:30 בשדה תעופה מינכן | <strong>החזרה:</strong> 12.08 בשעה 21:00 בתחנה מרכזית מינכן.
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-amber-950/20 p-2.5 rounded-xl border border-amber-800/30 text-[11px] text-amber-200">
+                            <strong>איסוף:</strong> 30.07 (19:30) שדה מינכן | <strong>החזרה:</strong> 12.08 (21:00) תחנה מרכזית מינכן.
                         </div>
-                        <div class="text-xs text-slate-400 space-y-1">
-                            <p>• <strong>קבוצת רכב:</strong> IWAR | נהג: Gil Bonda</p>
-                            <p>• <strong>ביטוח:</strong> כולל ביטול השתתפות עצמית (LDW)</p>
-                            <p>• <strong>עלות:</strong> €816.30</p>
+                        <div class="text-[11px] text-slate-400 space-y-1">
+                            <p>• <strong>קבוצה:</strong> IWAR | נהג: Gil Bonda</p>
+                            <p>• <strong>עלות:</strong> €816.30 (כולל ביטול השתתפות עצמית)</p>
                         </div>
                     </div>
                 </div>
@@ -407,181 +412,144 @@
         </section>
 
         <!-- TAB 5: BUDGET & INVOICES -->
-        <section id="sec-budget" class="space-y-6 hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 glass-card p-4 rounded-2xl">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-receipt text-emerald-400"></i> ניהול תקציב וחשבוניות 🔒
-                    </h2>
-                    <p class="text-xs text-slate-400">אזור מוגן להורים בלבד לצפייה, הוספה ועריכה (מסונכרן בלייב)</p>
+        <section id="sec-budget" class="space-y-4 hidden">
+            <div class="flex flex-col gap-3 glass-card p-3.5 rounded-2xl">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-receipt text-emerald-400"></i> תקציב וחשבוניות 🔒
+                        </h2>
+                        <p class="text-[10px] text-slate-400">אזור מוגן להורים בלבד</p>
+                    </div>
+
+                    <button onclick="protectedAction(openAddExpenseModal)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1 shadow-lg shrink-0">
+                        <i class="fa-solid fa-plus"></i> הוספה
+                    </button>
                 </div>
 
-                <div class="flex gap-2">
-                    <button onclick="exportBudgetPDF()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-file-pdf"></i> ייצוא דו"ח PDF
-                    </button>
-                    <button onclick="protectedAction(openAddExpenseModal)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-plus"></i> הוספת הוצאה
-                    </button>
-                </div>
+                <button onclick="exportBudgetPDF()" class="w-full bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs py-2 rounded-xl border border-slate-700 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i> ייצוא דו"ח PDF
+                </button>
             </div>
 
             <!-- Currency Converter Component -->
-            <div class="glass-card p-5 rounded-2xl border border-slate-800 bg-slate-900/60">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                    <h3 class="font-bold text-sm text-amber-400 flex items-center gap-2">
-                        <i class="fa-solid fa-calculator"></i> מחשבון המרת מטבע (€ &lt;-&gt; ₪)
+            <div class="glass-card p-4 rounded-2xl border border-slate-800 bg-slate-900/60 space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <h3 class="font-bold text-xs text-amber-400 flex items-center gap-1">
+                        <i class="fa-solid fa-calculator"></i> מחשבון המרה (€ &lt;-&gt; ₪)
                     </h3>
-                    <div class="flex items-center gap-2 text-xs text-slate-400">
-                        <span>שער יורו מעודכן:</span>
-                        <input type="number" id="eurRate" value="3.47" step="0.01" oninput="convertCurrency('eur'); renderBudget();" class="w-16 bg-slate-950 border border-slate-800 text-amber-400 font-bold text-center rounded p-1 text-xs">
+                    <div class="flex items-center gap-1 text-[11px] text-slate-400">
+                        <span>שער יורו:</span>
+                        <input type="number" id="eurRate" value="3.47" step="0.01" oninput="convertCurrency('eur'); renderBudget();" class="w-14 bg-slate-950 border border-slate-800 text-amber-400 font-bold text-center rounded p-0.5 text-xs">
                         <span>₪</span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex items-center gap-3 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                        <span class="text-lg">💶</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="flex items-center gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-base">💶</span>
                         <div class="w-full">
-                            <label class="block text-[10px] text-slate-400">סכום ביורו (€)</label>
-                            <input type="number" id="calcEur" placeholder="100" oninput="convertCurrency('eur')" class="w-full bg-transparent text-white font-bold text-base outline-none">
+                            <label class="block text-[9px] text-slate-400">סכום ביורו (€)</label>
+                            <input type="number" id="calcEur" placeholder="100" oninput="convertCurrency('eur')" class="w-full bg-transparent text-white font-bold text-xs outline-none">
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-                        <span class="text-lg">🇮🇱</span>
+                    <div class="flex items-center gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-base">🇮🇱</span>
                         <div class="w-full">
-                            <label class="block text-[10px] text-slate-400">סכום בשקלים (₪)</label>
-                            <input type="number" id="calcIls" placeholder="347" oninput="convertCurrency('ils')" class="w-full bg-transparent text-emerald-400 font-bold text-base outline-none">
+                            <label class="block text-[9px] text-slate-400">בשקלים (₪)</label>
+                            <input type="number" id="calcIls" placeholder="347" oninput="convertCurrency('ils')" class="w-full bg-transparent text-emerald-400 font-bold text-xs outline-none">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Budget Table -->
-            <div id="pdfExportArea" class="glass-card rounded-2xl overflow-hidden border border-slate-800 p-2 bg-slate-950">
-                <div class="p-4 border-b border-slate-800 flex justify-between items-center">
+            <!-- Budget Container -->
+            <div id="pdfExportArea" class="glass-card rounded-2xl overflow-hidden border border-slate-800 p-3 bg-slate-950 space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <div>
-                        <h3 class="font-bold text-lg text-white">סיכום הוצאות טיול אלפים 2026</h3>
-                        <p class="text-xs text-slate-400">משפחות בונדה & כהן | לפי שער 3.47 ₪</p>
+                        <h3 class="font-bold text-sm text-white">סיכום הוצאות</h3>
+                        <p class="text-[10px] text-slate-400">משפחות בונדה & כהן</p>
                     </div>
                     <div class="text-left">
-                        <div class="text-xs text-slate-400">סה"כ רשום (משוער)</div>
-                        <div id="budgetTotalDisplay" class="text-lg font-black text-emerald-400">₪ 0</div>
+                        <div class="text-[10px] text-slate-400">סה"כ משוער</div>
+                        <div id="budgetTotalDisplay" class="text-base font-black text-emerald-400">₪ 0</div>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right text-sm">
-                        <thead class="bg-slate-900 text-slate-300 font-bold border-b border-slate-800 text-xs">
-                            <tr>
-                                <th class="p-3">סעיף / תיאור</th>
-                                <th class="p-3">ספק / מקום</th>
-                                <th class="p-3">סכום (שולם / סה"כ)</th>
-                                <th class="p-3">סטטוס תשלום</th>
-                                <th class="p-3">משלם רשום</th>
-                                <th class="p-3 text-center no-pdf">עריכה / מחיקה</th>
-                            </tr>
-                        </thead>
-                        <tbody id="budgetTableBody" class="divide-y divide-slate-800/60">
-                            <!-- Dynamic Content -->
-                        </tbody>
-                    </table>
+                <!-- Responsive Budget Cards for Mobile -->
+                <div id="budgetMobileCards" class="space-y-2">
+                    <!-- Dynamic Content -->
                 </div>
             </div>
         </section>
 
         <!-- TAB 6: PACKING CHECKLIST -->
-        <section id="sec-checklist" class="space-y-6 hidden">
-            <div class="glass-card p-5 rounded-3xl border border-slate-800">
-                <h2 class="text-xl font-bold text-white">רשימת ציוד מומלצת ומקיפה לאלפים</h2>
-                <p class="text-xs text-slate-400 mt-1">💡 <strong>טיפ קטן:</strong> שיטת ה"בצל" (שכבות) היא הכי יעילה בקיץ האלפיני – מתחילים עם חולצה קצרה, מעליה פליז, ומעל מעיל רוח/גשם לפי הצורך.</p>
+        <section id="sec-checklist" class="space-y-4 hidden">
+            <div class="glass-card p-4 rounded-3xl border border-slate-800">
+                <h2 class="text-base font-bold text-white">רשימת ציוד מומלצת לאלפים</h2>
+                <p class="text-[10px] text-slate-400 mt-0.5">💡 שיטת ה"בצל" (שכבות) היא הכי יעילה בקיץ האלפיני.</p>
             </div>
 
-            <div id="checklistCategoriesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div id="checklistCategoriesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <!-- Dynamic Checklist Categories -->
             </div>
         </section>
 
         <!-- TAB 7: SETTINGS & STATUS -->
-        <section id="sec-settings" class="space-y-6 hidden">
-            <div class="glass-card p-6 rounded-3xl border border-slate-800 space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+        <section id="sec-settings" class="space-y-4 hidden">
+            <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                     <div>
-                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות מערכת וסטטוס
+                        <h2 class="text-base font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders text-alpine-400"></i> הגדרות וסטטוס
                         </h2>
-                        <p class="text-xs text-slate-400">מידע טכני, משתמש מחובר ופרמטרים של הטיול</p>
+                        <p class="text-[10px] text-slate-400">מידע טכני ומשתמש מחובר</p>
                     </div>
-                    <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full">
-                        גירסה v4.6 (Logo Edition)
+                    <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
+                        Mobile v4.8
                     </span>
                 </div>
 
                 <!-- User Connection Box -->
-                <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h3 class="text-sm font-bold text-slate-300">סטטוס התחברות נוכחי:</h3>
-                    <div id="settingsUserCard" class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-lg text-slate-400" id="userAvatar">
+                <div class="bg-slate-900/90 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
+                    <h3 class="text-xs font-bold text-slate-300">סטטוס התחברות נוכחי:</h3>
+                    <div id="settingsUserCard" class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-sm text-slate-400" id="userAvatar">
                                 👤
                             </div>
                             <div>
-                                <div class="font-bold text-white text-base" id="settingsUserName">אורח (מצב צפייה בלבד)</div>
-                                <div class="text-xs text-slate-400" id="settingsUserRole">ללא הרשאות עריכה או צפייה בתקציב</div>
+                                <div class="font-bold text-white text-xs" id="settingsUserName">אורח (צפייה בלבד)</div>
+                                <div class="text-[10px] text-slate-400" id="settingsUserRole">ללא הרשאות עריכה</div>
                             </div>
                         </div>
 
-                        <button id="settingsAuthActionBtn" onclick="toggleAuthModal()" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
-                            התחבר למערכת
+                        <button id="settingsAuthActionBtn" onclick="toggleAuthModal()" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-[11px] px-3 py-1.5 rounded-xl transition shrink-0">
+                            התחבר
                         </button>
-                    </div>
-                </div>
-
-                <!-- Release Notes / Changelog Box -->
-                <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h3 class="text-sm font-bold text-alpine-400 flex items-center gap-2">
-                        <i class="fa-solid fa-code-branch"></i> מה התחדש בגרסה v4.6? (Changelog)
-                    </h3>
-                    <div class="text-xs text-slate-300 space-y-2">
-                        <div class="p-2.5 bg-slate-950/80 rounded-xl border border-slate-800">
-                            <strong class="text-emerald-400 block mb-1">🖼️ הטמעת לוגו רשמי:</strong>
-                            הלוגו המעוצב של המסע לאוסטריה וגרמניה שולב בראש האתר.
-                        </div>
                     </div>
                 </div>
 
                 <!-- Parameters Grid -->
                 <div>
-                    <h3 class="text-sm font-bold text-slate-300 mb-3">פרמטרים ומדדים מעניינים על הטיול:</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
-                            <span class="text-2xl font-black text-amber-400">16</span>
-                            <span class="block text-xs text-slate-400 mt-1">סה"כ ימי טיול</span>
+                    <h3 class="text-xs font-bold text-slate-300 mb-2">מדדי הטיול:</h3>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-xl font-black text-amber-400">16</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">סה"כ ימי טיול</span>
                         </div>
-                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
-                            <span class="text-2xl font-black text-emerald-400">11</span>
-                            <span class="block text-xs text-slate-400 mt-1">לילות באוסטריה</span>
+                        <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-xl font-black text-emerald-400">11</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">לילות באוסטריה</span>
                         </div>
-                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
-                            <span class="text-2xl font-black text-sky-400">4</span>
-                            <span class="block text-xs text-slate-400 mt-1">לילות בגרמניה</span>
+                        <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-xl font-black text-sky-400">4</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">לילות בגרמניה</span>
                         </div>
-                        <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
-                            <span class="text-2xl font-black text-purple-400">4</span>
-                            <span class="block text-xs text-slate-400 mt-1">בתי מלון/בקתות</span>
+                        <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+                            <span class="text-xl font-black text-purple-400">4</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">מקומות אירוח</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Authorized Users Reference List -->
-                <div class="pt-2">
-                    <h3 class="text-sm font-bold text-slate-300 mb-2">משתמשים מורשים במערכת:</h3>
-                    <div class="text-xs text-slate-400 space-y-1 bg-slate-950/40 p-4 rounded-2xl border border-slate-800">
-                        <p>• גיל בונדה (`gil.bonda`)</p>
-                        <p>• ליאת בונדה (`liat.bonda`)</p>
-                        <p>• אפי כהן (`effi.cohen`)</p>
-                        <p>• שלי כהן (`shelly.cohen`)</p>
-                        <p>• אריאל בונדה - מאסטר (`arielbonda`)</p>
                     </div>
                 </div>
             </div>
@@ -589,116 +557,139 @@
 
     </main>
 
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 border-t border-slate-800 backdrop-blur-lg px-2 py-1.5 flex justify-around items-center">
+        <button onclick="switchTab('dashboard')" class="bottom-nav-item active flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-dashboard">
+            <i class="fa-solid fa-house text-base"></i>
+            <span>ראשי</span>
+        </button>
+        <button onclick="switchTab('itinerary')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-itinerary">
+            <i class="fa-solid fa-calendar-days text-base"></i>
+            <span>תוכנית</span>
+        </button>
+        <button onclick="switchTab('lodging')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-lodging">
+            <i class="fa-solid fa-bed text-base"></i>
+            <span>מלונות</span>
+        </button>
+        <button onclick="handleBudgetTabClick()" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-budget">
+            <i class="fa-solid fa-wallet text-base text-amber-400"></i>
+            <span>תקציב</span>
+        </button>
+        <button onclick="switchTab('checklist')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-checklist">
+            <i class="fa-solid fa-list-check text-base"></i>
+            <span>ציוד</span>
+        </button>
+    </div>
+
     <!-- FLOATING SMART BOT CHAT WIDGET -->
-    <div id="botWidgetContainer" class="fixed bottom-5 left-5 z-50 flex flex-col items-start">
+    <div id="botWidgetContainer" class="fixed bottom-16 md:bottom-5 left-3 z-50 flex flex-col items-start">
         <!-- Chat Window -->
-        <div id="botChatWindow" class="hidden mb-3 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl w-[320px] sm:w-[360px] h-[450px] flex flex-col overflow-hidden backdrop-blur-lg">
+        <div id="botChatWindow" class="hidden mb-2 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl w-[90vw] sm:w-[350px] h-[70vh] max-h-[480px] flex flex-col overflow-hidden backdrop-blur-lg">
             <!-- Header -->
-            <div class="bg-gradient-to-r from-purple-600 to-alpine-600 p-3.5 flex justify-between items-center text-white">
+            <div class="bg-gradient-to-r from-purple-600 to-alpine-600 p-3 flex justify-between items-center text-white">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-base">✨</div>
+                    <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">✨</div>
                     <div>
-                        <h4 class="font-bold text-sm leading-tight">עוזר האלפים האישי (OpenRouter AI)</h4>
-                        <span class="text-[10px] text-purple-200 flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מנוע AI חי
+                        <h4 class="font-bold text-xs leading-tight">עוזר האלפים האישי (AI)</h4>
+                        <span class="text-[9px] text-purple-200 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> OpenRouter AI
                         </span>
                     </div>
                 </div>
-                <button onclick="toggleBotChat()" class="text-white/80 hover:text-white p-1 text-sm">✕</button>
+                <button onclick="toggleBotChat()" class="text-white/80 hover:text-white p-1 text-xs">✕</button>
             </div>
 
             <!-- Messages Box -->
-            <div id="botMessages" class="flex-grow p-3.5 overflow-y-auto space-y-3 text-xs">
-                <div class="bg-slate-800/80 border border-slate-700/50 p-3 rounded-2xl text-slate-200">
-                    👋 היי! אני הבוט האישי של הטיול המחובר ל-OpenRouter AI. 
+            <div id="botMessages" class="flex-grow p-3 overflow-y-auto space-y-2.5 text-xs">
+                <div class="bg-slate-800/80 border border-slate-700/50 p-2.5 rounded-2xl text-slate-200 text-xs">
+                    👋 היי! אני עוזר ה-AI של הטיול. 
                     <br><br>
-                    <strong>שאל אותי כל דבר:</strong>
-                    <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-400">
-                        <li>"מה הכתובת של הדירה השלישית?"</li>
-                        <li>"תמליץ לי על 3 מסעדות ליד הדירה השנייה"</li>
-                        <li>"מה כדאי לארוז לילדים לטיול באלפים?"</li>
+                    <strong>שאל אותי בכל רגע:</strong>
+                    <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-400 text-[11px]">
+                        <li>"מה הכתובת של הדירה השנייה?"</li>
+                        <li>"תמליץ על מסעדות במיירהופן"</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Quick Suggestions Bar -->
-            <div class="px-3 py-1.5 bg-slate-950/60 border-t border-slate-800/80 flex gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
-                <button onclick="sendQuickBotQuery('מה הכתובת של הדירה השלישית?')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">📍 דירה 3</button>
-                <button onclick="sendQuickBotQuery('תמליץ לי על מסעדות במיירהופן')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">🍕 מסעדות במיירהופן</button>
-                <button onclick="sendQuickBotQuery('מה פרטי הטיסה?')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">✈️ טיסות</button>
+            <div class="px-2.5 py-1.5 bg-slate-950/60 border-t border-slate-800/80 flex gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
+                <button onclick="sendQuickBotQuery('מה הכתובת של הדירה השלישית?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">📍 דירה 3</button>
+                <button onclick="sendQuickBotQuery('תמליץ לי על מסעדות במיירהופן')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">🍕 מסעדות</button>
+                <button onclick="sendQuickBotQuery('מה פרטי הטיסה?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">✈️ טיסה</button>
             </div>
 
             <!-- Input Box -->
-            <form onsubmit="handleBotSubmit(event)" class="p-2.5 bg-slate-950 border-t border-slate-800 flex gap-2">
-                <input type="text" id="botInput" placeholder="שאל שאלה על הטיול..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:ring-1 focus:ring-purple-500 outline-none">
-                <button type="submit" id="botSendBtn" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition shrink-0">
+            <form onsubmit="handleBotSubmit(event)" class="p-2 bg-slate-950 border-t border-slate-800 flex gap-1.5">
+                <input type="text" id="botInput" placeholder="שאל שאלה על הטיול..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white outline-none">
+                <button type="submit" id="botSendBtn" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </form>
         </div>
 
         <!-- Floating Button Trigger -->
-        <button onclick="toggleBotChat()" class="bg-gradient-to-tr from-purple-600 to-sky-500 text-white w-13 h-13 p-3.5 rounded-full shadow-2xl flex items-center justify-center text-xl hover:scale-110 transition duration-200 border-2 border-white/20">
+        <button onclick="toggleBotChat()" class="bg-gradient-to-tr from-purple-600 to-sky-500 text-white w-12 h-12 p-3 rounded-full shadow-2xl flex items-center justify-center text-lg hover:scale-105 transition duration-200 border-2 border-white/20">
             🤖
         </button>
     </div>
 
     <!-- AUTHENTICATION MODAL -->
-    <div id="authModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md p-6 relative border border-slate-800">
-            <button onclick="toggleAuthModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-lg">✕</button>
+    <div id="authModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-sm p-5 relative border border-slate-800">
+            <button onclick="toggleAuthModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-base">✕</button>
 
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">🔒</div>
-                <h3 class="text-xl font-bold text-white">על מנת לשנות או לצפות בתקציב עליך להתחבר</h3>
-                <p class="text-xs text-slate-400 mt-1">הכנס שם משתמש וסיסמה של הורה מורשה:</p>
+            <div class="text-center mb-4">
+                <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-2 text-lg">🔒</div>
+                <h3 class="text-base font-bold text-white">התחברות הורה מורשה</h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">לצפייה בתקציב ועריכת תכנים</p>
             </div>
 
-            <form onsubmit="handleLogin(event)" class="space-y-4">
+            <form onsubmit="handleLogin(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">שם משתמש:</label>
-                    <input type="text" id="authUsername" required placeholder="gil.bonda" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:ring-2 focus:ring-alpine-500 outline-none">
+                    <input type="text" id="authUsername" required placeholder="gil.bonda" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">סיסמה:</label>
-                    <input type="password" id="authPassword" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:ring-2 focus:ring-alpine-500 outline-none">
+                    <input type="password" id="authPassword" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
                 </div>
 
-                <div id="authError" class="text-red-400 text-xs font-medium hidden text-center bg-red-950/30 border border-red-800/40 p-2.5 rounded-xl">
-                    שם משתמש או סיסמה שגויים. נסו שוב.
+                <div id="authError" class="text-red-400 text-xs hidden text-center bg-red-950/30 border border-red-800/40 p-2 rounded-xl">
+                    פרטים שגויים. נסו שוב.
                 </div>
 
-                <div class="pt-2 flex gap-3">
-                    <button type="button" onclick="toggleAuthModal()" class="w-1/2 py-2.5 border border-slate-800 rounded-xl text-sm text-slate-300 hover:bg-slate-800">ביטול</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-alpine-600 hover:bg-alpine-500 text-white font-bold rounded-xl text-sm shadow-lg">התחבר</button>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="toggleAuthModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-alpine-600 hover:bg-alpine-500 text-white font-bold rounded-xl text-xs shadow-lg">התחבר</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- ADD/EDIT ACTIVITY MODAL -->
-    <div id="activityModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-lg p-6 relative border border-slate-800 max-h-[90vh] overflow-y-auto">
-            <button onclick="closeActivityModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-lg">✕</button>
+    <div id="activityModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md p-5 relative border border-slate-800 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeActivityModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-base">✕</button>
 
-            <h3 class="text-lg font-bold text-white mb-4">+ הוספת / עריכת אטרקציה</h3>
+            <h3 class="text-base font-bold text-white mb-3">+ הוספת / עריכת אטרקציה</h3>
 
             <form onsubmit="saveActivity(event)" class="space-y-3 text-right">
                 <input type="hidden" id="actEditId">
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">שם הפעילות:</label>
-                    <input type="text" id="actTitle" required class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                    <input type="text" id="actTitle" required class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">תאריך/יום:</label>
-                        <input type="text" id="actDay" placeholder="יום 3 (01.08)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <input type="text" id="actDay" placeholder="יום 3 (01.08)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">קטגוריה:</label>
-                        <select id="actCategory" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <select id="actCategory" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                             <option value="טבע ומסלולים">🌿 טבע ומסלולים</option>
                             <option value="אקסטרים ומגלשות">🎢 אקסטרים ומגלשות</option>
                             <option value="מים וספא">🏊 מים וספא</option>
@@ -707,14 +698,14 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">מיקום / אזור:</label>
-                        <input type="text" id="actLocation" placeholder="מיירהופן / שילדמינג" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">מיקום:</label>
+                        <input type="text" id="actLocation" placeholder="מיירהופן" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">מתאים לילדים?</label>
-                        <select id="actTarget" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">מתאים ל:</label>
+                        <select id="actTarget" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                             <option value="חובה לילדים!">👧 חובה לילדים!</option>
                             <option value="לכל המשפחה">👨‍👩‍👧‍👦 לכל המשפחה</option>
                             <option value="מבוגרים/נוער">🏔️ מבוגרים/נוער</option>
@@ -722,67 +713,65 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3 bg-slate-950/50 p-3 rounded-2xl border border-slate-800">
+                <div class="grid grid-cols-2 gap-2 bg-slate-950/50 p-2.5 rounded-2xl border border-slate-800">
                     <div>
-                        <label class="block text-xs font-bold text-amber-400 mb-1">עלות האטרקציה (€ / ₪):</label>
-                        <input type="text" id="actCost" placeholder="120 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
-                        <span class="text-[10px] text-slate-500">יעודכן אוטומטית בדף התקציב (ניתן לרשום במילים)</span>
+                        <label class="block text-[11px] font-bold text-amber-400 mb-1">עלות (€ / ₪):</label>
+                        <input type="text" id="actCost" placeholder="120 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-sky-400 mb-1">משלם רשום:</label>
-                        <input type="text" id="actPayer" placeholder="גיל / אפי" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <label class="block text-[11px] font-bold text-sky-400 mb-1">משלם רשום:</label>
+                        <input type="text" id="actPayer" placeholder="גיל / אפי" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">צירוף כרטיסים / קובץ PDF:</label>
-                    <input type="file" id="actFile" accept="application/pdf,image/*" class="w-full bg-slate-950 border border-slate-800 text-slate-300 rounded-xl p-2 text-xs">
-                    <p class="text-[10px] text-slate-500 mt-1">ניתן להעלות כרטיסי כניסה או אישורים (PDF/תמונה)</p>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">כרטיסים / PDF:</label>
+                    <input type="file" id="actFile" accept="application/pdf,image/*" class="w-full bg-slate-950 border border-slate-800 text-slate-300 rounded-xl p-1.5 text-xs">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">תיאור והערות:</label>
-                    <textarea id="actDesc" rows="3" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm"></textarea>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">תיאור:</label>
+                    <textarea id="actDesc" rows="2" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs"></textarea>
                 </div>
 
-                <div class="pt-3 flex gap-3">
-                    <button type="button" onclick="closeActivityModal()" class="w-1/2 py-2.5 border border-slate-800 rounded-xl text-sm text-slate-300">ביטול</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-alpine-600 text-white font-bold rounded-xl text-sm shadow-lg">שמור פעילות</button>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeActivityModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-alpine-600 text-white font-bold rounded-xl text-xs shadow-lg">שמור</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- ADD / EDIT EXPENSE MODAL -->
-    <div id="expenseModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md p-6 relative border border-slate-800">
-            <button onclick="closeExpenseModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-lg">✕</button>
+    <div id="expenseModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-sm p-5 relative border border-slate-800">
+            <button onclick="closeExpenseModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-base">✕</button>
 
-            <h3 class="text-lg font-bold text-white mb-4" id="expenseModalTitle">+ הוספת / עריכת הוצאה</h3>
+            <h3 class="text-base font-bold text-white mb-3" id="expenseModalTitle">+ הוספת הוצאה</h3>
 
             <form onsubmit="saveExpense(event)" class="space-y-3 text-right">
                 <input type="hidden" id="expEditId">
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 mb-1">תיאור ההוצאה:</label>
-                    <input type="text" id="expDesc" required placeholder="כרטיסים לרכבל" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                    <input type="text" id="expDesc" required placeholder="כרטיסים לרכבל" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">ספק / מקום:</label>
-                        <input type="text" id="expVendor" placeholder="SIXT / Booking" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">ספק:</label>
+                        <input type="text" id="expVendor" placeholder="SIXT" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">סכום כולל (€ / ₪):</label>
-                        <input type="text" id="expAmount" required placeholder="300 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <label class="block text-xs font-bold text-slate-300 mb-1">סכום (€ / ₪):</label>
+                        <input type="text" id="expAmount" required placeholder="300 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">סטטוס תשלום:</label>
-                        <select id="expStatus" onchange="toggleDepositFields()" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <select id="expStatus" onchange="toggleDepositFields()" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                             <option value="שולם במלואו">✅ שולם במלואו</option>
                             <option value="מקדמה שולמה">⏳ מקדמה שולמה</option>
                             <option value="לתשלום במקום">💶 לתשלום במקום</option>
@@ -790,28 +779,27 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">משלם רשום:</label>
-                        <input type="text" id="expPayer" placeholder="גיל / ליאת / אפי" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2.5 text-sm">
+                        <input type="text" id="expPayer" placeholder="גיל / אפי" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
                     </div>
                 </div>
 
-                <!-- Fields for Deposit Breakdown -->
-                <div id="depositFieldsContainer" class="hidden bg-amber-950/20 border border-amber-800/40 p-3 rounded-2xl space-y-3">
-                    <span class="text-xs font-bold text-amber-400 block">💳 פירוט תשלום מקדמה:</span>
-                    <div class="grid grid-cols-2 gap-3">
+                <div id="depositFieldsContainer" class="hidden bg-amber-950/20 border border-amber-800/40 p-2.5 rounded-2xl space-y-2">
+                    <span class="text-[11px] font-bold text-amber-400 block">💳 פירוט מקדמה:</span>
+                    <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">מקדמה שולמה:</label>
-                            <input type="text" id="expDepositPaid" placeholder="120 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-emerald-400 font-bold rounded-xl p-2 text-xs">
+                            <label class="block text-[10px] text-slate-300 mb-1">מקדמה שולמה:</label>
+                            <input type="text" id="expDepositPaid" placeholder="120 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-emerald-400 font-bold rounded-xl p-1.5 text-xs">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">יתרה לתשלום סופי:</label>
-                            <input type="text" id="expDepositRemaining" placeholder="180 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-amber-400 font-bold rounded-xl p-2 text-xs">
+                            <label class="block text-[10px] text-slate-300 mb-1">יתרה לתשלום:</label>
+                            <input type="text" id="expDepositRemaining" placeholder="180 יורו" onblur="this.value = normalizeCurrencyString(this.value)" class="w-full bg-slate-950 border border-slate-800 text-amber-400 font-bold rounded-xl p-1.5 text-xs">
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-3 flex gap-3">
-                    <button type="button" onclick="closeExpenseModal()" class="w-1/2 py-2.5 border border-slate-800 rounded-xl text-sm text-slate-300">ביטול</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-sm shadow-lg">שמור הוצאה</button>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeExpenseModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-lg">שמור</button>
                 </div>
             </form>
         </div>
@@ -820,7 +808,6 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // OPENROUTER API KEY INTEGRATION
-        // 👇 הדבק פה את המפתח שלך מ-OpenRouter
         const OPENROUTER_API_KEY = "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";
 
         // FIREBASE CONFIGURATION (bonda-trip)
@@ -841,7 +828,7 @@
             firebase.initializeApp(firebaseConfig);
             db = firebase.database();
         } catch (e) {
-            console.warn("Firebase initialization failed, falling back to local mode.", e);
+            console.warn("Firebase fallback mode.", e);
         }
 
         // CURRENCY CONVERTER LOGIC
@@ -910,7 +897,7 @@
         const defaultActivities = [
             { id: 1, title: 'מגלשות אלפיניות Lucky Flitzer', day: 'יום 8 (06.08)', category: 'אקסטרים ומגלשות', location: 'Flachau', target: 'חובה לילדים!', desc: 'מגלשות הרים באורך 1.1 ק"מ, חוויה מטורפת לילדים ולמבוגרים.', cost: '€ 120', payer: 'גיל בונדה', fileData: null, fileName: null },
             { id: 2, title: 'הר Ahorn & רכבל Ahornbahn', day: 'יום 3 (01.08)', category: 'טבע ומסלולים', location: 'מיירהופן', target: 'לכל המשפחה', desc: 'עלייה ברכבל הגדול באוסטריה, תצפית אלפים מרהיבה.', cost: '€ 180', payer: 'אפי כהן', fileData: null, fileName: null },
-            { id: 3, title: 'מרכז הספא והבריכות Erlebnisbad Mayrhofen', day: 'יום 4 (02.08)', category: 'מים וספא', location: 'מיירהופן', target: 'חובה לילדים!', desc: 'מגלשות מים, בריכות מחוממות ומתחם רגיעה לכל המשפחה.', cost: '€ 95', payer: 'ליאת בונדה', fileData: null, fileName: null },
+            { id: 3, title: 'מרכז הספא Erlebnisbad Mayrhofen', day: 'יום 4 (02.08)', category: 'מים וספא', location: 'מיירהופן', target: 'חובה לילדים!', desc: 'מגלשות מים, בריכות מחוממות ומתחם רגיעה לכל המשפחה.', cost: '€ 95', payer: 'ליאת בונדה', fileData: null, fileName: null },
             { id: 4, title: 'קרחון דאכשטיין Dachstein Glacier', day: 'יום 9 (07.08)', category: 'טבע ומסלולים', location: 'שילדמינג', target: 'לכל המשפחה', desc: 'קרחון דאכשטיין, גשר תלוי מעל התהום והיכל הקרח המודגש.', cost: '€ 210', payer: 'גיל בונדה', fileData: null, fileName: null }
         ];
 
@@ -927,7 +914,7 @@
         let activities = defaultActivities;
         let budgetItems = defaultBudgetItems;
 
-        // Static Knowledge Base for Hybrid Local Search
+        // Static Knowledge Base
         const LODGINGS = [
             { id: 1, name: 'Gästehaus Zehmerhof', station: 'הדירה הראשונה / לילה 1', address: 'Hauptstr. 7 a, 85469 Walpertskirchen, Germany', phone: '+49 8122 959200', city: 'Erding / Munich' },
             { id: 2, name: 'Alpen Resort Schrofenblick', station: 'הדירה השנייה / תחנה 2 (5 לילות)', address: 'Burgstall 373, Mayrhofen, Tirol 6290, Austria', booking: '4SCHPB5H81', city: 'Mayrhofen, Zillertal' },
@@ -935,7 +922,7 @@
             { id: 4, name: 'WunderLocke Munich', station: 'הדירה הרביעית / תחנה 4 (3 לילות - 3 דירות)', address: 'Gmunder Strasse 27, 81379 Munich, Germany', phone: '+49 89 262089070', booking: '5474868284 + 5601602631', city: 'Munich' }
         ];
 
-        // Init App & Firebase Realtime Listeners
+        // Init App & Listeners
         window.addEventListener('DOMContentLoaded', () => {
             initCountdown();
             renderChecklists();
@@ -977,12 +964,17 @@
         function switchTab(tabId) {
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.bottom-nav-item').forEach(btn => btn.classList.remove('active'));
 
             const targetSection = document.getElementById(`sec-${tabId}`);
             const targetTabBtn = document.getElementById(`tab-${tabId}`);
+            const targetBNavBtn = document.getElementById(`bnav-${tabId}`);
 
             if (targetSection) targetSection.classList.remove('hidden');
             if (targetTabBtn) targetTabBtn.classList.add('active');
+            if (targetBNavBtn) targetBNavBtn.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Dedicated Locked Handler for Budget Tab
@@ -1049,7 +1041,7 @@
             if (localAns) {
                 appendBotMessage(localAns, 'bot');
             } else {
-                appendBotMessage('⏳ <em>חושב ומתייעץ עם AI...</em>', 'bot-loading');
+                appendBotMessage('⏳ <em>חוקר עבורך ב-AI...</em>', 'bot-loading');
                 await fetchOpenRouterAIResponse(query);
             }
         }
@@ -1060,7 +1052,7 @@
             if (sender === 'bot-loading') {
                 const loadingMsg = document.createElement('div');
                 loadingMsg.id = 'geminiLoadingMsg';
-                loadingMsg.className = 'bg-slate-800 border border-slate-700/60 text-slate-400 p-2.5 rounded-2xl text-xs text-center animate-pulse';
+                loadingMsg.className = 'bg-slate-800 border border-slate-700/60 text-slate-400 p-2 rounded-2xl text-[11px] text-center animate-pulse';
                 loadingMsg.innerHTML = text;
                 box.appendChild(loadingMsg);
                 box.scrollTop = box.scrollHeight;
@@ -1072,9 +1064,9 @@
 
             const msg = document.createElement('div');
             if (sender === 'user') {
-                msg.className = 'bg-purple-600 text-white p-2.5 rounded-2xl rounded-bl-none text-left max-w-[85%] mr-auto font-medium';
+                msg.className = 'bg-purple-600 text-white p-2.5 rounded-2xl rounded-bl-none text-left max-w-[85%] mr-auto font-medium text-xs';
             } else {
-                msg.className = 'bg-slate-800 border border-slate-700/60 text-slate-200 p-3 rounded-2xl rounded-br-none max-w-[90%] leading-relaxed space-y-1';
+                msg.className = 'bg-slate-800 border border-slate-700/60 text-slate-200 p-2.5 rounded-2xl rounded-br-none max-w-[90%] leading-relaxed space-y-1 text-xs';
             }
             
             msg.innerHTML = text;
@@ -1099,29 +1091,18 @@
                             <strong>📍 ${house.station}: ${house.name}</strong><br>
                             🏢 <strong>כתובת:</strong> ${house.address}<br>
                             ${house.phone ? `📞 <strong>טלפון:</strong> ${house.phone}<br>` : ''}
-                            ${house.booking ? `🔑 <strong>מספרי הזמנה:</strong> ${house.booking}` : ''}
+                            ${house.booking ? `🔑 <strong>הזמנה:</strong> ${house.booking}` : ''}
                         `;
                     }
                 }
             }
 
-            if (qLower.includes('טיסה') || qLower.includes('טיסות') || qLower.includes('אל על') || qLower.includes('צ\'ק אין')) {
+            if (qLower.includes('טיסה') || qLower.includes('טיסות') || qLower.includes('אל על')) {
                 return `
                     ✈️ <strong>טיסת אל על LY351:</strong><br>
-                    • <strong>יציאה:</strong> 30.07.2026 בשעה 15:45 (נתב"ג T3)<br>
-                    • <strong>נחיתה:</strong> 30.07.2026 בשעה 18:50 (מינכן T1)<br>
-                    • <strong>קוד PNR:</strong> YHUICS<br>
-                    ⏰ <strong>פתיחת צ'ק-אין:</strong> 29.07 בשעה 15:45 בדיוק!
-                `;
-            }
-
-            if (qLower.includes('רכב') || qLower.includes('השכרה') || qLower.includes('sixt')) {
-                return `
-                    🚗 <strong>השכרת רכב SIXT:</strong><br>
-                    • <strong>מספר הזמנה:</strong> 9730234401<br>
-                    • <strong>קבוצה:</strong> IWAR | נהג: Gil Bonda<br>
-                    • <strong>איסוף:</strong> 30.07 בשעה 19:30 שדה תעופה מינכן<br>
-                    • <strong>החזרה:</strong> 12.08 בשעה 21:00 תחנה מרכזית מינכן
+                    • <strong>יציאה:</strong> 30.07.2026 (15:45)<br>
+                    • <strong>נחיתה:</strong> 30.07.2026 (18:50)<br>
+                    • <strong>PNR:</strong> YHUICS | ⏰ צ'ק-אין: 29.07 בשעה 15:45!
                 `;
             }
 
@@ -1135,9 +1116,9 @@
                 תחנות הטיול:
                 1. לילה 1: Gästehaus Zehmerhof (Erding/Munich)
                 2. 5 לילות: Alpen Resort Schrofenblick (Mayrhofen, Austria)
-                3. 6 לילות: Bergresort Hauser Kaibling (Schladming, Austria) - בקתת פרימיום עם סאונה ובריכה
+                3. 6 לילות: Bergresort Hauser Kaibling (Schladming, Austria)
                 4. 3 לילות: WunderLocke Munich (Munich, Germany)
-                ענה תמיד בעברית, בצורה אדיבה, תמציתית, מעוצבת וברורה.
+                ענה תמיד בעברית, בצורה תמציתית, קולעת ומותאמת לקריאה בנייד.
             `;
 
             try {
@@ -1158,11 +1139,6 @@
 
                 const data = await response.json();
 
-                if (data.error) {
-                    appendBotMessage(`⚠️ שגיאת API: ${data.error.message || JSON.stringify(data.error)}`, 'bot');
-                    return;
-                }
-
                 if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
                     let textAns = data.choices[0].message.content;
                     textAns = textAns.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
@@ -1171,7 +1147,7 @@
                     appendBotMessage('⚠️ מצטער, לא הצלחתי לקבל תשובה כרגע.', 'bot');
                 }
             } catch (err) {
-                appendBotMessage('⚠️ שגיאה בתקשורת עם AI. אנא בדוק את החיבור לרשת או את המפתח.', 'bot');
+                appendBotMessage('⚠️ שגיאה בתקשורת עם AI.', 'bot');
             }
         }
 
@@ -1189,8 +1165,8 @@
             if (currentUser) {
                 currentUser = null;
                 document.getElementById('userInfo').classList.add('hidden');
-                document.getElementById('authBtnText').innerText = 'התחברות עריכה';
-                document.getElementById('authIcon').className = 'fa-solid fa-lock text-amber-400';
+                document.getElementById('authBtnText').innerText = 'עריכה';
+                document.getElementById('authIcon').className = 'fa-solid fa-lock text-amber-400 text-xs';
                 updateSettingsUI();
 
                 if (!document.getElementById('sec-budget').classList.contains('hidden')) {
@@ -1213,9 +1189,9 @@
                 document.getElementById('authError').classList.add('hidden');
                 document.getElementById('authModal').classList.add('hidden');
                 document.getElementById('userInfo').classList.remove('hidden');
-                document.getElementById('userNameDisplay').innerText = currentUser.name;
+                document.getElementById('userNameDisplay').innerText = currentUser.name.split(' ')[0];
                 document.getElementById('authBtnText').innerText = 'התנתק';
-                document.getElementById('authIcon').className = 'fa-solid fa-unlock text-emerald-400';
+                document.getElementById('authIcon').className = 'fa-solid fa-unlock text-emerald-400 text-xs';
                 
                 updateSettingsUI();
 
@@ -1336,43 +1312,43 @@
 
             filtered.forEach(act => {
                 const card = document.createElement('div');
-                card.className = 'glass-card rounded-2xl p-5 shadow-lg border border-slate-800 flex flex-col justify-between';
+                card.className = 'glass-card rounded-2xl p-4 shadow-lg border border-slate-800 flex flex-col justify-between';
                 
                 let fileBtn = '';
                 if (act.fileData) {
                     fileBtn = `
-                        <a href="${act.fileData}" download="${act.fileName || 'ticket.pdf'}" target="_blank" class="text-xs bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2.5 py-1 rounded-xl flex items-center gap-1 hover:bg-sky-500/30 transition">
-                            <i class="fa-solid fa-file-pdf text-red-400"></i> כרטיס/אישור PDF
+                        <a href="${act.fileData}" download="${act.fileName || 'ticket.pdf'}" target="_blank" class="text-[10px] bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2 py-0.5 rounded-lg flex items-center gap-1">
+                            <i class="fa-solid fa-file-pdf text-red-400"></i> כרטיס
                         </a>
                     `;
                 }
 
-                let costBadge = act.cost ? `<span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">${act.cost}</span>` : '';
+                let costBadge = act.cost ? `<span class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">${act.cost}</span>` : '';
 
                 card.innerHTML = `
                     <div>
-                        <div class="flex justify-between items-start gap-2 mb-2">
-                            <span class="text-[11px] font-bold bg-slate-950 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-full">${act.day || 'כללי'}</span>
-                            <span class="text-[10px] font-semibold bg-alpine-500/20 text-alpine-300 px-2 py-0.5 rounded border border-alpine-500/30">${act.target}</span>
+                        <div class="flex justify-between items-start gap-1 mb-1.5">
+                            <span class="text-[10px] font-bold bg-slate-950 text-slate-300 border border-slate-800 px-2 py-0.5 rounded-full">${act.day || 'כללי'}</span>
+                            <span class="text-[9px] font-semibold bg-alpine-500/20 text-alpine-300 px-1.5 py-0.5 rounded border border-alpine-500/30">${act.target}</span>
                         </div>
                         <div class="flex justify-between items-center mb-1">
-                            <h4 class="font-bold text-lg text-white">${act.title}</h4>
+                            <h4 class="font-bold text-sm text-white">${act.title}</h4>
                             ${costBadge}
                         </div>
-                        <p class="text-xs text-slate-400 mb-2"><i class="fa-solid fa-location-dot ml-1 text-red-400"></i>${act.location}</p>
-                        <p class="text-sm text-slate-300 leading-relaxed">${act.desc}</p>
+                        <p class="text-[11px] text-slate-400 mb-2"><i class="fa-solid fa-location-dot ml-1 text-red-400"></i>${act.location}</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">${act.desc}</p>
                     </div>
 
-                    <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
-                        <div class="flex items-center gap-2">
-                            <span class="text-slate-500">${act.category}</span>
+                    <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-center text-xs">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] text-slate-500">${act.category}</span>
                             ${fileBtn}
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="protectedAction(() => openEditActivityModal(${act.id}))" class="text-slate-400 hover:text-amber-400 transition">
+                        <div class="flex gap-3">
+                            <button onclick="protectedAction(() => openEditActivityModal(${act.id}))" class="text-slate-400 hover:text-amber-400 text-xs">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button onclick="protectedAction(() => deleteActivity(${act.id}))" class="text-slate-400 hover:text-red-400 transition">
+                            <button onclick="protectedAction(() => deleteActivity(${act.id}))" class="text-slate-400 hover:text-red-400 text-xs">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
@@ -1395,7 +1371,7 @@
 
         function openAddExpenseModal() {
             document.getElementById('expEditId').value = '';
-            document.getElementById('expenseModalTitle').innerText = '+ הוספת הוצאה חדשה';
+            document.getElementById('expenseModalTitle').innerText = '+ הוספת הוצאה';
             document.getElementById('expDesc').value = '';
             document.getElementById('expVendor').value = '';
             document.getElementById('expAmount').value = '';
@@ -1465,9 +1441,9 @@
         }
 
         function renderBudget() {
-            const tbody = document.getElementById('budgetTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
+            const cardsContainer = document.getElementById('budgetMobileCards');
+            if (!cardsContainer) return;
+            cardsContainer.innerHTML = '';
 
             let totalNisEst = 0;
             const rate = parseFloat(document.getElementById('eurRate').value) || 3.47;
@@ -1482,11 +1458,11 @@
                     statusClass = 'bg-sky-500/20 text-sky-300 border border-sky-500/30';
                 }
 
-                let amountDisplay = `<div class="font-bold text-alpine-400">${item.amount}</div>`;
+                let amountDisplay = `<span class="font-bold text-alpine-400 text-sm">${item.amount}</span>`;
                 if (item.status === 'מקדמה שולמה' && item.depositPaid) {
                     amountDisplay = `
                         <div>
-                            <span class="font-bold text-emerald-400">${item.depositPaid}</span>
+                            <span class="font-bold text-emerald-400 text-sm">${item.depositPaid}</span>
                             <span class="text-slate-400 text-xs"> / ${item.amount}</span>
                         </div>
                         ${item.depositRemaining ? `<div class="text-[10px] text-amber-400">יתרה: ${item.depositRemaining}</div>` : ''}
@@ -1500,26 +1476,33 @@
                     totalNisEst += numVal;
                 }
 
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-900/50 transition';
-                tr.innerHTML = `
-                    <td class="p-3 font-semibold text-white">${item.desc}</td>
-                    <td class="p-3 text-slate-400 text-xs">${item.vendor}</td>
-                    <td class="p-3">${amountDisplay}</td>
-                    <td class="p-3">
-                        <span class="text-[11px] font-bold px-2.5 py-1 rounded-full ${statusClass}">${item.status}</span>
-                    </td>
-                    <td class="p-3 text-slate-300 text-xs">${item.payer}</td>
-                    <td class="p-3 text-center flex justify-center gap-3 no-pdf">
-                        <button onclick="protectedAction(() => openEditExpenseModal(${item.id}))" class="text-slate-400 hover:text-amber-400 transition">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button onclick="protectedAction(() => deleteExpense(${item.id}))" class="text-slate-400 hover:text-red-400 transition">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900/90 p-3 rounded-2xl border border-slate-800/80 space-y-2';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start gap-2">
+                        <div>
+                            <h4 class="font-bold text-xs text-white">${item.desc}</h4>
+                            <p class="text-[10px] text-slate-400">${item.vendor}</p>
+                        </div>
+                        <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${statusClass} shrink-0">${item.status}</span>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-1 border-t border-slate-800/60 text-xs">
+                        <div>${amountDisplay}</div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] text-slate-400">משלם: <strong class="text-slate-200">${item.payer}</strong></span>
+                            <div class="flex gap-2">
+                                <button onclick="protectedAction(() => openEditExpenseModal(${item.id}))" class="text-slate-400 hover:text-amber-400 text-xs">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button onclick="protectedAction(() => deleteExpense(${item.id}))" class="text-slate-400 hover:text-red-400 text-xs">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                cardsContainer.appendChild(card);
             });
 
             document.getElementById('budgetTotalDisplay').innerText = `~ ₪ ${Math.round(totalNisEst).toLocaleString()}`;
@@ -1528,18 +1511,14 @@
         function exportBudgetPDF() {
             const element = document.getElementById('pdfExportArea');
             const opt = {
-                margin:       0.5,
-                filename:     'סיכום_תקציב_טיול_אלפים_2026.pdf',
+                margin:       0.3,
+                filename:     'תקציב_טיול_אלפים_2026.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#090d16' },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
-            document.querySelectorAll('.no-pdf').forEach(el => el.style.display = 'none');
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.querySelectorAll('.no-pdf').forEach(el => el.style.display = '');
-            });
+            html2pdf().set(opt).from(element).save();
         }
 
         function renderChecklists() {
@@ -1548,28 +1527,28 @@
             container.innerHTML = '';
 
             const packingListCategories = [
-                { title: '1. ביגוד חם (עבור ההרים והפסגות האלפיניות)', icon: '🏔️', items: ['מיקרו-פליז / ג\'קט חם', 'מעיל רוח / מעיל גשם נגד מים', 'מכנסיים ארוכים נוחים', 'גרביים עבות', 'כובע צמר/חם + כפפות קלות'] },
-                { title: '2. ביגוד קיצי / יומיומי', icon: '☀️', items: ['חולצות קצרות / דרייפיט', 'מכנסיים קצרים', 'לבנים וגרביים יומיומיות', 'בגדי ים + מגבת מיקרופייבר', 'פיג\'מה / בגדי שינה'] },
-                { title: '3. הנעלה', icon: '🥾', items: ['נעלי הליכה/טרקים עמידות למים', 'נעלי ספורט/הליכה קלות', 'סנדלים / כפכפים'] },
-                { title: '4. ציוד נלווה ואביזרים', icon: '🎒', items: ['תרמיל גב יומי (20–30 ליטר)', 'משקפי שמש', 'קרם הגנה מהשמש', 'בקבוק מים רב-פעמי', 'מטריה מתקפלת קלה'] }
+                { title: '1. ביגוד חם (עבור האלפים)', icon: '🏔️', items: ['מיקרו-פליז / ג\'קט חם', 'מעיל רוח / גשם', 'מכנסיים ארוכים', 'גרביים עבות', 'כובע צמר + כפפות'] },
+                { title: '2. ביגוד קיצי / יומיומי', icon: '☀️', items: ['חולצות קצרות / דרייפיט', 'מכנסיים קצרים', 'בגדי ים + מגבת מיקרופייבר', 'בגדי שינה'] },
+                { title: '3. הנעלה', icon: '🥾', items: ['נעלי הליכה/טרקים עמידות למים', 'נעלי ספורט קלות', 'סנדלים / כפכפים'] },
+                { title: '4. ציוד נלווה', icon: '🎒', items: ['תרמיל גב יומי', 'משקפי שמש + קרם הגנה', 'בקבוק מים רב-פעמי', 'מטריה מתקפלת'] }
             ];
 
             packingListCategories.forEach(cat => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-5 rounded-3xl border border-slate-800 space-y-3';
+                card.className = 'glass-card p-4 rounded-3xl border border-slate-800 space-y-2';
                 
                 const itemsHtml = cat.items.map(item => `
-                    <li class="flex items-start gap-2 text-sm text-slate-300">
-                        <input type="checkbox" class="mt-1 rounded bg-slate-950 border-slate-800 text-alpine-500 focus:ring-alpine-500">
+                    <li class="flex items-start gap-2 text-xs text-slate-300">
+                        <input type="checkbox" class="mt-0.5 rounded bg-slate-950 border-slate-800 text-alpine-500 focus:ring-alpine-500">
                         <span>${item}</span>
                     </li>
                 `).join('');
 
                 card.innerHTML = `
-                    <h3 class="font-bold text-base text-white flex items-center gap-2">
+                    <h3 class="font-bold text-xs text-white flex items-center gap-1.5">
                         <span>${cat.icon}</span> ${cat.title}
                     </h3>
-                    <ul class="space-y-2 pt-2 border-t border-slate-800">
+                    <ul class="space-y-1.5 pt-1.5 border-t border-slate-800">
                         ${itemsHtml}
                     </ul>
                 `;
@@ -1585,14 +1564,14 @@
 
             if (currentUser) {
                 if (userNameEl) userNameEl.innerText = currentUser.name;
-                if (userRoleEl) userRoleEl.innerText = 'משתמש מורשה (גישת עריכה מלאה + תקציב)';
+                if (userRoleEl) userRoleEl.innerText = 'מחובר (עריכה + תקציב)';
                 if (avatarEl) avatarEl.innerText = '🔑';
-                if (actionBtn) actionBtn.innerText = 'התנתק מהמערכת';
+                if (actionBtn) actionBtn.innerText = 'התנתק';
             } else {
-                if (userNameEl) userNameEl.innerText = 'אורח (מצב צפייה בלבד)';
-                if (userRoleEl) userRoleEl.innerText = 'ללא הרשאות עריכה או צפייה בתקציב';
+                if (userNameEl) userNameEl.innerText = 'אורח (צפייה בלבד)';
+                if (userRoleEl) userRoleEl.innerText = 'ללא הרשאות עריכה';
                 if (avatarEl) avatarEl.innerText = '👤';
-                if (actionBtn) actionBtn.innerText = 'התחבר למערכת';
+                if (actionBtn) actionBtn.innerText = 'התחבר';
             }
         }
     </script>
