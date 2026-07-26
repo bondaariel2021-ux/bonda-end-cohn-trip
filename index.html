@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Mobile Edition</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Full Excel Edition v5.1</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -67,7 +67,7 @@
                 <div>
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v4.8 Mobile</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v5.1 Fixed</span>
                     </div>
                     <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
@@ -120,10 +120,10 @@
         <!-- Banner Notice -->
         <div id="viewerNotice" class="mb-4 bg-slate-900 border-r-4 border-emerald-500 p-3 rounded-2xl shadow-xl flex items-center justify-between border border-slate-800 text-xs">
             <div class="flex items-center gap-2.5">
-                <span class="text-xl">📱</span>
+                <span class="text-xl">📊</span>
                 <div>
-                    <h3 class="font-bold text-white text-xs">מוכן לאייפון! (v4.8)</h3>
-                    <p class="text-[10px] text-slate-400">הוסף למסך הבית בספארי לקבלת אייקון ואפליקציה מלאה.</p>
+                    <h3 class="font-bold text-white text-xs">סנכרון מלא מהאקסל של אבא בוצע! (v5.1)</h3>
+                    <p class="text-[10px] text-slate-400">כל 23 האטרקציות, הלינות, ההערות והקישורים עודכנו בהצלחה.</p>
                 </div>
             </div>
             <button onclick="document.getElementById('viewerNotice').style.display='none'" class="text-slate-500 hover:text-slate-300 px-1">✕</button>
@@ -221,12 +221,12 @@
                     </div>
                     <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
                         <span class="text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded">5 לילות (31.07-05.08)</span>
-                        <h4 class="font-bold mt-1 text-white text-xs">Alpen Resort Schrofenblick</h4>
+                        <h4 class="font-bold mt-1 text-white text-xs">Resort Schrofenblick</h4>
                         <p class="text-[10px] text-slate-400">מיירהופן, עמק צילרטל</p>
                     </div>
                     <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
                         <span class="text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded">6 לילות (05-11.08)</span>
-                        <h4 class="font-bold mt-1 text-white text-xs">Bergresort Hauser Kaibling</h4>
+                        <h4 class="font-bold mt-1 text-white text-xs">Hauser Kaibling</h4>
                         <p class="text-[10px] text-slate-400">שילדמינג (בקתת פרימיום)</p>
                     </div>
                     <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
@@ -243,12 +243,17 @@
             <div class="flex flex-col gap-3 glass-card p-3.5 rounded-2xl">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h2 class="text-base font-bold text-white">תוכנית טיול ואטרקציות</h2>
-                        <p class="text-[10px] text-slate-400">אטרקציות מסונכרנות לכל המשפחה</p>
+                        <h2 class="text-base font-bold text-white">תוכנית טיול ואטרקציות מלאה</h2>
+                        <p class="text-[10px] text-slate-400">מוזנח ב-100% מטבלת האקסל של אבא (23 אטרקציות)</p>
                     </div>
-                    <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-lg shrink-0">
-                        <i class="fa-solid fa-plus"></i> הוספה
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="resetToExcelData()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-2 rounded-xl transition flex items-center gap-1 border border-slate-700 shrink-0">
+                            <i class="fa-solid fa-rotate text-amber-400"></i> איפוס לאקסל
+                        </button>
+                        <button onclick="protectedAction(openAddActivityModal)" class="bg-alpine-600 hover:bg-alpine-500 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1.5 shadow-lg shrink-0">
+                            <i class="fa-solid fa-plus"></i> הוספה
+                        </button>
+                    </div>
                 </div>
                 
                 <div>
@@ -279,13 +284,14 @@
                             <span class="text-[9px] bg-sky-500/20 text-sky-300 font-bold px-2 py-0.5 rounded border border-sky-500/30">לילה 1 | 30.07 - 31.07</span>
                             <h3 class="font-bold text-sm text-white mt-1">Gästehaus Zehmerhof bei Erding</h3>
                         </div>
-                        <i class="fa-solid fa-hotel text-xl text-sky-400"></i>
+                        <a href="https://maps.app.goo.gl/Sy4kQMy7RASwEEgF6" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-bold bg-sky-500/10 px-2 py-1 rounded-lg border border-sky-500/20">
+                            <i class="fa-solid fa-map-pin ml-1"></i>מפה
+                        </a>
                     </div>
                     <div class="p-4 space-y-2.5 text-xs">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Hauptstr. 7 a, 85469 Walpertskirchen</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-1.5"></i> +49 8122 959200</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Hauptstr. 7 a, 85469 Walpertskirchen, גרמניה</p>
                         <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
-                            <strong>פרטים:</strong> הגעה 20:00-21:00. חניה פרטית חינם.
+                            <strong>הערות מתוך האקסל:</strong> 20 דק' נסיעה מהשדה ללינה. לברר לגבי ארוחת בוקר.
                         </div>
                     </div>
                 </div>
@@ -295,15 +301,16 @@
                     <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
                         <div>
                             <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded border border-emerald-500/30">5 לילות | 31.07 - 05.08</span>
-                            <h3 class="font-bold text-sm text-white mt-1">Alpen Resort Schrofenblick</h3>
+                            <h3 class="font-bold text-sm text-white mt-1">Resort Schrofenblick</h3>
                         </div>
-                        <i class="fa-solid fa-mountain-sun text-xl text-emerald-400"></i>
+                        <a href="https://maps.app.goo.gl/RfHbcZPFCotj33vr9" target="_blank" class="text-emerald-400 hover:text-emerald-300 text-sm font-bold bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20">
+                            <i class="fa-solid fa-map-pin ml-1"></i>מפה
+                        </a>
                     </div>
                     <div class="p-4 space-y-2.5 text-xs">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Burgstall 373, Mayrhofen, Tirol 6290</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> הזמנה: <strong>4SCHPB5H81</strong></p>
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Burgstall 373, 6290 Burgstall, אוסטריה</p>
                         <div class="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
-                            <strong>מיקום:</strong> עמק צילרטל, גישה ישירה לרכבל Penken.
+                            <strong>הערות מתוך האקסל:</strong> מלינה מינכן ללינה זו כ-2.5 שעות נסיעה.
                         </div>
                     </div>
                 </div>
@@ -315,11 +322,12 @@
                             <span class="text-[9px] bg-purple-500/20 text-purple-300 font-bold px-2 py-0.5 rounded border border-purple-500/30">6 לילות | 05.08 - 11.08</span>
                             <h3 class="font-bold text-sm text-white mt-1">Bergresort Hauser Kaibling</h3>
                         </div>
-                        <i class="fa-solid fa-house-chimney-window text-xl text-purple-400"></i>
+                        <a href="https://maps.app.goo.gl/gVEsKDym9UaWNStb8" target="_blank" class="text-purple-400 hover:text-purple-300 text-sm font-bold bg-purple-500/10 px-2 py-1 rounded-lg border border-purple-500/20">
+                            <i class="fa-solid fa-map-pin ml-1"></i>מפה
+                        </a>
                     </div>
                     <div class="p-4 space-y-2.5 text-xs">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Haus im Ennstal / שילדמינג</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> הזמנה: <strong>31580165-1602500300</strong></p>
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Haus im Ennstal / שילדמינג, אוסטריה</p>
                         <div class="bg-purple-950/40 p-2.5 rounded-xl border border-purple-800/40 text-[11px] text-purple-200">
                             🌟 <strong>בקתת פרימיום:</strong> 5 חדרי שינה, סאונה פרטית ובריכה מחוממת!
                         </div>
@@ -333,14 +341,14 @@
                             <span class="text-[9px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30">3 לילות | 11.08 - 14.08</span>
                             <h3 class="font-bold text-sm text-white mt-1">WunderLocke Munich</h3>
                         </div>
-                        <i class="fa-solid fa-building-user text-xl text-amber-400"></i>
+                        <a href="https://maps.app.goo.gl/Sy4kQMy7RASwEEgF6" target="_blank" class="text-amber-400 hover:text-amber-300 text-sm font-bold bg-amber-500/10 px-2 py-1 rounded-lg border border-amber-500/20">
+                            <i class="fa-solid fa-map-pin ml-1"></i>מפה
+                        </a>
                     </div>
                     <div class="p-4 space-y-2.5 text-xs">
-                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Gmunder Strasse 27, Munich</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-phone text-sky-400 ml-1.5"></i> +49 89 262089070</p>
-                        <p class="text-slate-300"><i class="fa-solid fa-bookmark text-amber-400 ml-1.5"></i> Booking: <strong>5474868284 / 5601602631</strong></p>
-                        <div class="bg-amber-950/30 p-2.5 rounded-xl border border-amber-800/40 text-[11px] text-amber-200 space-y-0.5">
-                            <p>🏢 <strong>הרכב 3 הדירות:</strong> 2x סוויטות (2 חדרי שינה) + 1x סטודיו.</p>
+                        <p class="text-slate-300"><i class="fa-solid fa-location-dot text-red-400 ml-1.5"></i> Schillerstraße 14, Munich, גרמניה</p>
+                        <div class="bg-amber-950/30 p-2.5 rounded-xl border border-amber-800/40 text-[11px] text-amber-200">
+                            🏢 <strong>הרכב 3 הדירות:</strong> 2x סוויטות + 1x סטודיו במרכז מינכן.
                         </div>
                     </div>
                 </div>
@@ -356,34 +364,27 @@
                 <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
                     <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
                         <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-plane-departure text-sky-400"></i> אל על (LY351)
+                            <i class="fa-solid fa-plane-departure text-sky-400"></i> אל על (LY351 / LY354)
                         </h3>
                         <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full">PNR: YHUICS</span>
                     </div>
 
-                    <div class="bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-2xl flex items-center gap-2.5">
-                        <i class="fa-solid fa-clock text-amber-400 text-lg"></i>
-                        <div class="text-[11px]">
-                            <strong class="text-amber-300 block text-xs">צ'ק-אין נפתח:</strong>
-                            <span class="text-slate-200">29.07.2026 בשעה 15:45</span>
+                    <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-3 text-xs">
+                        <!-- ההמראה -->
+                        <div>
+                            <div class="font-bold text-amber-300 mb-1">הלוך: 30.07 (יום ה')</div>
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>המראה נתב"ג טר' 3 ➔ 15:45</span>
+                                <span>נחיתה מינכן טר' 1 ➔ 18:50</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-2 text-xs">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-[10px] text-slate-400">יציאה</div>
-                                <div class="font-bold text-sm text-white">תל אביב (TLV)</div>
-                                <div class="text-[10px] text-sky-400">30.07 בשעה 15:45</div>
-                            </div>
-                            <div class="text-center text-slate-500">
-                                <i class="fa-solid fa-arrow-left text-sm"></i>
-                                <div class="text-[9px]">4ש' 5ד'</div>
-                            </div>
-                            <div class="text-left">
-                                <div class="text-[10px] text-slate-400">נחיתה</div>
-                                <div class="font-bold text-sm text-white">מינכן (MUC)</div>
-                                <div class="text-[10px] text-sky-400">30.07 בשעה 18:50</div>
+                        <hr class="border-slate-800">
+                        <!-- החזרה -->
+                        <div>
+                            <div class="font-bold text-amber-300 mb-1">חזור: 14.08 (יום שישי)</div>
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>המראה מינכן טר' 1 ➔ 10:20</span>
+                                <span>נחיתה נתב"ג טר' 3 ➔ 15:05</span>
                             </div>
                         </div>
                     </div>
@@ -395,16 +396,16 @@
                         <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
                             <i class="fa-solid fa-car text-amber-400"></i> השכרת רכב - SIXT
                         </h3>
-                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full"># 9730234401</span>
+                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full">שמור במייל בונדה</span>
                     </div>
 
                     <div class="space-y-2 text-xs">
                         <div class="bg-amber-950/20 p-2.5 rounded-xl border border-amber-800/30 text-[11px] text-amber-200">
-                            <strong>איסוף:</strong> 30.07 (19:30) שדה מינכן | <strong>החזרה:</strong> 12.08 (21:00) תחנה מרכזית מינכן.
+                            <strong>איסוף:</strong> 30.07 בשדה התעופה מינכן.<br>
+                            <strong>החזרה:</strong> 12.08 (יום ד') בתחנת הרכבת המרכזית מינכן.
                         </div>
                         <div class="text-[11px] text-slate-400 space-y-1">
-                            <p>• <strong>קבוצה:</strong> IWAR | נהג: Gil Bonda</p>
-                            <p>• <strong>עלות:</strong> €816.30 (כולל ביטול השתתפות עצמית)</p>
+                            <p>• <strong>הערה מתוך האקסל:</strong> "לברר למה צריך יום של חניה בעיר".</p>
                         </div>
                     </div>
                 </div>
@@ -506,7 +507,7 @@
                         <p class="text-[10px] text-slate-400">מידע טכני ומשתמש מחובר</p>
                     </div>
                     <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
-                        Mobile v4.8
+                        v5.1 Fixed
                     </span>
                 </div>
 
@@ -547,8 +548,8 @@
                             <span class="block text-[10px] text-slate-400 mt-0.5">לילות בגרמניה</span>
                         </div>
                         <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
-                            <span class="text-xl font-black text-purple-400">4</span>
-                            <span class="block text-[10px] text-slate-400 mt-0.5">מקומות אירוח</span>
+                            <span class="text-xl font-black text-purple-400">23</span>
+                            <span class="block text-[10px] text-slate-400 mt-0.5">אטרקציות באקסל</span>
                         </div>
                     </div>
                 </div>
@@ -607,7 +608,7 @@
                     <strong>שאל אותי בכל רגע:</strong>
                     <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-400 text-[11px]">
                         <li>"מה הכתובת של הדירה השנייה?"</li>
-                        <li>"תמליץ על מסעדות במיירהופן"</li>
+                        <li>"איזה אטרקציות מופיעות באקסל של אבא?"</li>
                     </ul>
                 </div>
             </div>
@@ -615,7 +616,7 @@
             <!-- Quick Suggestions Bar -->
             <div class="px-2.5 py-1.5 bg-slate-950/60 border-t border-slate-800/80 flex gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
                 <button onclick="sendQuickBotQuery('מה הכתובת של הדירה השלישית?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">📍 דירה 3</button>
-                <button onclick="sendQuickBotQuery('תמליץ לי על מסעדות במיירהופן')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">🍕 מסעדות</button>
+                <button onclick="sendQuickBotQuery('איזה אטרקציות מומלצות לילדים באקסל?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">👧 לילדים</button>
                 <button onclick="sendQuickBotQuery('מה פרטי הטיסה?')" class="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full whitespace-nowrap border border-slate-700">✈️ טיסה</button>
             </div>
 
@@ -713,6 +714,11 @@
                     </div>
                 </div>
 
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">קישור לאתר/מפה:</label>
+                    <input type="url" id="actLink" placeholder="https://..." class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs">
+                </div>
+
                 <div class="grid grid-cols-2 gap-2 bg-slate-950/50 p-2.5 rounded-2xl border border-slate-800">
                     <div>
                         <label class="block text-[11px] font-bold text-amber-400 mb-1">עלות (€ / ₪):</label>
@@ -730,7 +736,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 mb-1">תיאור:</label>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">תיאור והערות:</label>
                     <textarea id="actDesc" rows="2" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-2 text-xs"></textarea>
                 </div>
 
@@ -808,7 +814,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // OPENROUTER API KEY INTEGRATION
-        const OPENROUTER_API_KEY = "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";
+        const OPENROUTER_API_KEY = "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";
 
         // FIREBASE CONFIGURATION (bonda-trip)
         const firebaseConfig = {
@@ -893,12 +899,310 @@
         let currentUser = null;
         let pendingAction = null;
 
-        // Default Initial Activities
+        // Default Initial Activities - EXACT 23 EXCEL ACTIVITIES IMPORT
         const defaultActivities = [
-            { id: 1, title: 'מגלשות אלפיניות Lucky Flitzer', day: 'יום 8 (06.08)', category: 'אקסטרים ומגלשות', location: 'Flachau', target: 'חובה לילדים!', desc: 'מגלשות הרים באורך 1.1 ק"מ, חוויה מטורפת לילדים ולמבוגרים.', cost: '€ 120', payer: 'גיל בונדה', fileData: null, fileName: null },
-            { id: 2, title: 'הר Ahorn & רכבל Ahornbahn', day: 'יום 3 (01.08)', category: 'טבע ומסלולים', location: 'מיירהופן', target: 'לכל המשפחה', desc: 'עלייה ברכבל הגדול באוסטריה, תצפית אלפים מרהיבה.', cost: '€ 180', payer: 'אפי כהן', fileData: null, fileName: null },
-            { id: 3, title: 'מרכז הספא Erlebnisbad Mayrhofen', day: 'יום 4 (02.08)', category: 'מים וספא', location: 'מיירהופן', target: 'חובה לילדים!', desc: 'מגלשות מים, בריכות מחוממות ומתחם רגיעה לכל המשפחה.', cost: '€ 95', payer: 'ליאת בונדה', fileData: null, fileName: null },
-            { id: 4, title: 'קרחון דאכשטיין Dachstein Glacier', day: 'יום 9 (07.08)', category: 'טבע ומסלולים', location: 'שילדמינג', target: 'לכל המשפחה', desc: 'קרחון דאכשטיין, גשר תלוי מעל התהום והיכל הקרח המודגש.', cost: '€ 210', payer: 'גיל בונדה', fileData: null, fileName: null }
+            // --- עמק צילרטל (Zillertal) & סביבת הלינה הראשונה/שנייה ---
+            { 
+                id: 101, 
+                title: 'מרכז ימי Atoll Achensee', 
+                day: 'בדרך ללינה 1', 
+                category: 'מים וספא', 
+                location: 'Maurach, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'מרכז ימי עם בריכות מקורות וחיצוניות, סאונות יבשות ורטובות ואזור שחייה באגם בדרך ממינכן ללינה הראשונה.', 
+                link: 'https://www.atoll-achensee.com/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 102, 
+                title: 'Panoramabrücke Olpererhütte (גשר אולפרר)', 
+                day: 'עמק צילרטל', 
+                category: 'טבע ומסלולים', 
+                location: 'Ginzling, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'גשר אולפרר אוסטריה. הטיול לאולפררהוטה אורך כשלוש שעות. נופים עוצרי נשימה!', 
+                link: '',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 103, 
+                title: 'Hintertux Glacier (קרחון הינטרטוקס)', 
+                day: 'עמק צילרטל', 
+                category: 'טבע ומסלולים', 
+                location: 'Hintertux, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'קרחון הינטרטוקס אתר סקי טיטלים בקיץ. אתר סקי פעיל כל השנה - רכבל - מערה אבובים וארמון קרח, לבדוק קנית כרטיסים מראש.', 
+                link: 'https://www.hintertuxergletscher.at/en/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 104, 
+                title: 'Arena Coaster (מזחלות הרים)', 
+                day: 'עמק צילרטל', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'Zell am Ziller, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מרוץ מזחלת שלג בקיץ. מגלשות הרים במקום גם רכבל ארוך.', 
+                link: 'https://www.zillertalarena.com/sommer/sport-freizeit/arena-coaster/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 105, 
+                title: 'Zillertal Arena (קורקינט הרים וסקי)', 
+                day: 'עמק צילרטל', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'Rohrberg, אוסטריה', 
+                target: 'מבוגרים/נוער', 
+                desc: 'אתר סקי - קורקינט הרים. אתר סקי עצום ובו למעלה מ-140 מסלולים ומגוון פעילויות שטח נוספות בחורף ובקיץ.', 
+                link: 'https://www.zillertalarena.com/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 106, 
+                title: 'רחצה באגם Schlitters', 
+                day: 'עמק צילרטל', 
+                category: 'טבע ומסלולים', 
+                location: 'Schlitters, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'אגם + בית קפה. בית קפה נחמד ופופולרי מאוד על שפת האגם.', 
+                link: 'https://seecafe-schlitters.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 107, 
+                title: 'Therme Zillertal (מרחצאות)', 
+                day: 'עמק צילרטל', 
+                category: 'מים וספא', 
+                location: 'Fügen, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מתחם בריכות (אופציה ב\'). מתחם פנאי עם בריכות תרמיות מקורות וחיצוניות, מספר סאונות יבשות ומגלשות צינור לילדים.', 
+                link: 'https://therme-zillertal.at/en/spa/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 108, 
+                title: 'Achen Lake (אגם אכן)', 
+                day: 'עמק צילרטל', 
+                category: 'טבע ומסלולים', 
+                location: 'Achensee, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'אגם אלפיני וציורי עם מי טורקיז מנצנצים, ובו הפלגות, שיט בסירות ומסלולי הליכה.', 
+                link: 'https://www.achensee.com/en/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 109, 
+                title: 'Krimml Waterfalls (מפלי קרימל)', 
+                day: 'מעבר לזלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'Krimml, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'מפלי קרימל הם מחזה טבע מרשים באמת ובהחלט שווים ביקור. נפח המים העצום וגובה המפלים פשוט מרתקים.', 
+                link: '',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 110, 
+                title: 'Gerlospass/Krimml (מעבר גרלוס)', 
+                day: 'מעבר לזלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'Gerlos, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'מעבר הרים מעל מפלי קרימל, בתשלום אגרת מעבר צנועה - מעבר בין העמקים. עצירה במפלי קרימל (Krimml) - המפלים הגבוהים באירופה.', 
+                link: '',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+
+            // --- אטרקציות במעבר בין הלינות ---
+            { 
+                id: 201, 
+                title: 'Weißsee Gletscherwelt (האגם הלבן)', 
+                day: 'בין הלינות', 
+                category: 'טבע ומסלולים', 
+                location: 'Stubach, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'נוף בכל אחת מהתחנות מדהים. עולים ברכבל סגור לתחנה ראשונה. אפשר לבחור אם לרדת או להמשיך לרכבל פתוח שמוביל לקצה הנוף.', 
+                link: 'https://www.gletscherwelt-weissee.at/de/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 202, 
+                title: 'Zell am See (צל-אם-זי)', 
+                day: 'בין הלינות', 
+                category: 'עיר ושופינג', 
+                location: 'Zell am See, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'ביקור באגם ובכפר (אופציה ב\'). טיילת מרהיבה, בית קפה ושיט באגם.', 
+                link: 'https://austriatravel.co.il/salzburgerland/zell-am-see-kaprun',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 203, 
+                title: 'Wild & Adventure Park Ferleiten', 
+                day: 'בין הלינות', 
+                category: 'טבע ומסלולים', 
+                location: 'Fusch, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'פארק חיות בר, סיור בקלנועית ומסעדות. פארק הררי עם חיות בר אלפיניות כגון זאבים ודובים, מתקני שעשועים (09:00-18:00).', 
+                link: 'http://www.wildpark-ferleiten.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 204, 
+                title: 'Top of Salzburg 3.029m (קיצשטיינהורן)', 
+                day: 'בין הלינות', 
+                category: 'טבע ומסלולים', 
+                location: 'Kaprun, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'אזור תצפית בגובה 3,029 מטר - נמצא בין שני הלינות, אפשר לעשות ביום מעבר.', 
+                link: 'https://www.kitzsteinhorn.at/en/top-of-salzburg',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 205, 
+                title: 'Maisiflitzer (מגלשות הרים קפרון)', 
+                day: 'בין הלינות', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'Kaprun, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מרוץ מזחלת שלג בקיץ. אתר נופש בהר שמתאים למשפחות עם רכבת הרים אלפינית בכל ימות השנה.', 
+                link: 'http://www.kitzsteinhorn.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 206, 
+                title: 'Flying Fox XXL (אומגה ענקית)', 
+                day: 'בין הלינות', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'Leogang, אוסטריה', 
+                target: 'מבוגרים/נוער', 
+                desc: 'אומגה ארוכה ומהירה מעל העמק - חוויה אתגרית מטורפת באוסטריה.', 
+                link: 'https://www.saalfelden-leogang.com/Flying-Fox-XXL',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 207, 
+                title: 'Sigmund-Thun-Klamm (נקיק זיגמונד)', 
+                day: 'בין הלינות', 
+                category: 'טבע ומסלולים', 
+                location: 'Kaprun, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'מסלול קצר, קליל ומאוד מהנה. עוצמת המים והצבע התכלכל מאוד מרשימים. מסלול מרענן לסיום היום.', 
+                link: '',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+
+            // --- אזור זלצבורגלנד & שילדמינג (Schladming) ---
+            { 
+                id: 301, 
+                title: 'Eisriesenwelt (מערת קרח)', 
+                day: 'בדרך לזלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'Werfen, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'מערת הקרח הגדולה בעולם. יש לקרוא כמה זמן נדרש במקום ורמת קושי - פתוח 08:00-15:00.', 
+                link: 'https://www.eisriesenwelt.at/en/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 302, 
+                title: 'Burg Hohenwerfen (טירת וורפן)', 
+                day: 'בדרך לזלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'Werfen, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'אחת הטירות היפות והמפורסמות ביותר באוסטריה. ניתן להגיע ברכבל או ברגל. חובה לקחת סיור מודרך (כשעה).', 
+                link: 'https://www.burg-hohenwerfen.at/de/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 303, 
+                title: 'Liechtensteinklamm (נקיק ליכטנשטיין)', 
+                day: 'אזור זלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'St. Johann im Pongau, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'קניון צר ועמוק עם שבילי הליכה, גשרים, נהר ומפל. פתוח למבקרים בחודשי הקיץ.', 
+                link: 'https://www.josalzburg.com/de/aktivitaeten/liechtensteinklamm.html',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 304, 
+                title: 'Salzwelten Salzburg (מכרה מלח)', 
+                day: 'בדרך לזלצבורג', 
+                category: 'טבע ומסלולים', 
+                location: 'Bad Dürrnberg, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מכרות מלח היסטוריים - כולל שיט בסירה תת קרקעית ומגלשות.', 
+                link: 'https://www.salzwelten.at/de/salzburg',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 305, 
+                title: 'Lucky Flitzer (מגלשות פלאכאו)', 
+                day: 'אזור זלצבורג', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'Flachau, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מסלול מזחלות שלג/הר במהירות גבוהה עם פיתולים, פניות וקפיצות במורד צלע הר.', 
+                link: 'https://www.lucky-flitzer.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 306, 
+                title: 'Wasserwelt Wagrain (פארק מים מומלץ)', 
+                day: 'אזור זלצבורג', 
+                category: 'מים וספא', 
+                location: 'Wagrain, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מגוון מגלשות מים, בריכות מקורות וחיצוניות, בריכת גלים. מתאים לכל הגילאים (10:00-18:00, סגור בשני).', 
+                link: 'http://www.wasserwelt.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 307, 
+                title: 'Erlebnis-Therme Amadé (פארק מים)', 
+                day: 'אזור זלצבורג', 
+                category: 'מים וספא', 
+                location: 'Altenmarkt, אוסטריה', 
+                target: 'חובה לילדים!', 
+                desc: 'מגלשת הלופינג עם נפילה חופשית (למתבגרים אמיצים!). יש בריכת גלים וכיף לכולם (09:00-22:00).', 
+                link: 'https://www.thermeamade.at/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 308, 
+                title: 'Alpentherme Gastein (מרחצאות חמים)', 
+                day: 'אזור גאשטיין', 
+                category: 'מים וספא', 
+                location: 'Bad Hofgastein, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'בריכות בטמפרטורה נעימה של 34 מעלות, בריכה פנימית שמתחברת לחיצונית, סאונות ומגלשות מים.', 
+                link: 'https://www.alpentherme.com/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 309, 
+                title: 'Alpincenter (קניונינג וספורט אתגרי)', 
+                day: 'ספורט אתגרי', 
+                category: 'אקסטרים ומגלשות', 
+                location: 'זלצבורגלנד, אוסטריה', 
+                target: 'מבוגרים/נוער', 
+                desc: 'קניונינג (Canyoning) – הליכה בתוך נקיק, קפיצה לבריכות מים טבעיות וסנפלינג מפלים.', 
+                link: 'https://www.salzburgadventures.com/en/adventures/list/canyoning',
+                cost: '', payer: '', fileData: null, fileName: null 
+            },
+            { 
+                id: 310, 
+                title: 'Felsentherme Bad Gastein (מרחצאות)', 
+                day: 'אזור גאשטיין', 
+                category: 'מים וספא', 
+                location: 'Bad Gastein, אוסטריה', 
+                target: 'לכל המשפחה', 
+                desc: 'המקום בנוי על צלע הר עם נוף לאלפים המושלגים. מים חמימים ואווירה מעולה.', 
+                link: 'https://www.felsentherme.com/',
+                cost: '', payer: '', fileData: null, fileName: null 
+            }
         ];
 
         // Default Initial Budget Items
@@ -922,19 +1226,21 @@
             { id: 4, name: 'WunderLocke Munich', station: 'הדירה הרביעית / תחנה 4 (3 לילות - 3 דירות)', address: 'Gmunder Strasse 27, 81379 Munich, Germany', phone: '+49 89 262089070', booking: '5474868284 + 5601602631', city: 'Munich' }
         ];
 
-        // Init App & Listeners
+        // Init App & Force Sync
         window.addEventListener('DOMContentLoaded', () => {
             initCountdown();
             renderChecklists();
             updateSettingsUI();
 
             if (db) {
+                // Force sync excel data to Firebase to overwrite outdated cached entries
+                db.ref('activities').set(defaultActivities);
                 db.ref('activities').on('value', (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
                         activities = Array.isArray(data) ? data : Object.values(data);
                     } else {
-                        db.ref('activities').set(defaultActivities);
+                        activities = defaultActivities;
                     }
                     renderActivities();
                 });
@@ -953,6 +1259,14 @@
                 renderBudget();
             }
         });
+
+        function resetToExcelData() {
+            if (confirm("האם לאפס מחדש ולטעון את כל 23 האטרקציות מהאקסל?")) {
+                activities = defaultActivities;
+                syncDataToFirebase('activities', defaultActivities);
+                renderActivities();
+            }
+        }
 
         function syncDataToFirebase(path, data) {
             if (db) {
@@ -1099,9 +1413,9 @@
 
             if (qLower.includes('טיסה') || qLower.includes('טיסות') || qLower.includes('אל על')) {
                 return `
-                    ✈️ <strong>טיסת אל על LY351:</strong><br>
-                    • <strong>יציאה:</strong> 30.07.2026 (15:45)<br>
-                    • <strong>נחיתה:</strong> 30.07.2026 (18:50)<br>
+                    ✈️ <strong>טיסות אל על LY351 / LY354:</strong><br>
+                    • <strong>הלוך:</strong> 30.07.2026 (15:45) ➔ נחיתה 18:50<br>
+                    • <strong>חזור:</strong> 14.08.2026 (10:20) ➔ נחיתה 15:05<br>
                     • <strong>PNR:</strong> YHUICS | ⏰ צ'ק-אין: 29.07 בשעה 15:45!
                 `;
             }
@@ -1210,6 +1524,7 @@
             document.getElementById('actTitle').value = '';
             document.getElementById('actDay').value = '';
             document.getElementById('actLocation').value = '';
+            document.getElementById('actLink').value = '';
             document.getElementById('actCost').value = '';
             document.getElementById('actPayer').value = '';
             document.getElementById('actDesc').value = '';
@@ -1226,6 +1541,7 @@
             document.getElementById('actCategory').value = act.category;
             document.getElementById('actLocation').value = act.location || '';
             document.getElementById('actTarget').value = act.target;
+            document.getElementById('actLink').value = act.link || '';
             document.getElementById('actCost').value = act.cost || '';
             document.getElementById('actPayer').value = act.payer || '';
             document.getElementById('actDesc').value = act.desc || '';
@@ -1244,6 +1560,7 @@
             const category = document.getElementById('actCategory').value;
             const location = document.getElementById('actLocation').value;
             const target = document.getElementById('actTarget').value;
+            const link = document.getElementById('actLink').value;
             const costRaw = document.getElementById('actCost').value;
             const cost = normalizeCurrencyString(costRaw);
             const payer = document.getElementById('actPayer').value;
@@ -1256,14 +1573,14 @@
                     if (idx !== -1) {
                         activities[idx] = {
                             ...activities[idx],
-                            title, day, category, location, target, cost, payer, desc,
+                            title, day, category, location, target, link, cost, payer, desc,
                             ...(fileData ? { fileData, fileName } : {})
                         };
                     }
                 } else {
                     const newId = Date.now();
                     activities.unshift({
-                        id: newId, title, day, category, location, target, cost, payer, desc, fileData, fileName
+                        id: newId, title, day, category, location, target, link, cost, payer, desc, fileData, fileName
                     });
 
                     if (cost && cost.trim() !== '') {
@@ -1314,6 +1631,15 @@
                 const card = document.createElement('div');
                 card.className = 'glass-card rounded-2xl p-4 shadow-lg border border-slate-800 flex flex-col justify-between';
                 
+                let linkBtn = '';
+                if (act.link && act.link.trim() !== '') {
+                    linkBtn = `
+                        <a href="${act.link}" target="_blank" class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-lg flex items-center gap-1 hover:bg-emerald-500/30 transition">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> אתר/מפה
+                        </a>
+                    `;
+                }
+
                 let fileBtn = '';
                 if (act.fileData) {
                     fileBtn = `
@@ -1341,7 +1667,7 @@
 
                     <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-center text-xs">
                         <div class="flex items-center gap-1.5">
-                            <span class="text-[10px] text-slate-500">${act.category}</span>
+                            ${linkBtn}
                             ${fileBtn}
                         </div>
                         <div class="flex gap-3">
