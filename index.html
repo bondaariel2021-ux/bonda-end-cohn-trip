@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Async Edition v5.8</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Async Edition v5.9</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -105,7 +105,7 @@
                 <div>
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v5.8 Async AI</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v5.9 Vision Fix</span>
                     </div>
                     <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
@@ -696,7 +696,7 @@
                         <p class="text-[10px] text-slate-400">התאמת תצוגה אישית לכל משתמש</p>
                     </div>
                     <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
-                        v5.8 Async AI
+                        v5.9 Vision Fix
                     </span>
                 </div>
 
@@ -1605,7 +1605,7 @@
             }
         }
 
-        // Fast Vision AI Query via Gemini Flash on OpenRouter
+        // Updated Vision AI Query with JSON parsing and TRIP separation logic
         async function extractKmFromImage(base64Image) {
             try {
                 const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -1619,17 +1619,25 @@
                         messages: [{
                             role: "user",
                             content: [
-                                { type: "text", text: "Return ONLY the total odometer number in km from this dashboard image as an integer. Return no extra words." },
+                                { 
+                                    type: "text", 
+                                    text: "Look at this car dashboard image. Ignore TRIP meter numbers (e.g. TRIP A or TRIP B). Find ONLY the main total odometer reading in km (the total distance the car has driven, e.g. 148732). Return STRICTLY a JSON object in this format: {\"km\": 148732}" 
+                                },
                                 { type: "image_url", image_url: { url: base64Image } }
                             ]
                         }]
                     })
                 });
                 const data = await response.json();
-                const text = data.choices[0].message.content.replace(/[^0-9]/g, '');
-                return parseInt(text) || null;
+                const content = data.choices[0].message.content;
+                const jsonMatch = content.match(/\{.*\}/s);
+                if (jsonMatch) {
+                    const parsed = JSON.parse(jsonMatch[0]);
+                    return parseInt(parsed.km) || null;
+                }
+                return null;
             } catch (err) {
-                console.error(err);
+                console.error("Error extracting KM:", err);
                 return null;
             }
         }
@@ -1647,7 +1655,7 @@
                         messages: [{
                             role: "user",
                             content: [
-                                { type: "text", text: "Analyze this fuel pump or receipt image. Extract total cost in euros and fuel quantity in liters. Return strictly JSON: {\"amount\": number, \"litres\": number}" },
+                                { type: "text", text: "Analyze this fuel pump display or receipt image. Extract total cost in euros and fuel quantity in liters. Return strictly JSON: {\"amount\": number, \"litres\": number}" },
                                 { type: "image_url", image_url: { url: base64Image } }
                             ]
                         }]
@@ -1658,7 +1666,7 @@
                 const jsonMatch = content.match(/\{.*\}/s);
                 return jsonMatch ? JSON.parse(jsonMatch[0]) : null;
             } catch (err) {
-                console.error(err);
+                console.error("Error extracting Pump Data:", err);
                 return null;
             }
         }
