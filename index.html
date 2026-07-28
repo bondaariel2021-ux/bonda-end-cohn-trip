@@ -124,6 +124,10 @@
                 <button onclick="handleBudgetTabClick()" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-budget">
                     <i class="fa-solid fa-wallet text-amber-400"></i> תקציב 🔒
                 </button>
+                <!-- FUEL TAB: Visible strictly to Gil, Liat, Ariel -->
+                <button onclick="handleFuelTabClick()" class="tab-btn py-3 px-4 hidden items-center gap-2 transition text-orange-400" id="tab-fuel">
+                    <i class="fa-solid fa-gas-pump"></i> מחשבון דלק AI 🔒
+                </button>
                 <button onclick="switchTab('checklist')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-checklist">
                     <i class="fa-solid fa-list-check"></i> ציוד
                 </button>
@@ -190,7 +194,7 @@
                     <div class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-base border border-amber-500/20 shrink-0">🚗</div>
                     <div>
                         <div class="text-[10px] text-slate-400">רכב שכור</div>
-                        <div class="font-bold text-white text-xs">SIXT IWAR</div>
+                        <div class="font-bold text-white text-xs">Skoda Octavia Estate</div>
                         <div class="text-[10px] text-slate-400">איסוף: מינכן</div>
                     </div>
                 </div>
@@ -392,22 +396,70 @@
                     </div>
                 </div>
 
-                <!-- Rental Car Card -->
-                <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
-                        <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-car text-amber-400"></i> השכרת רכב - SIXT
-                        </h3>
-                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full">שמור במייל בונדה</span>
+                <!-- Custom Skoda Octavia Estate Showcase Card -->
+                <div class="glass-card rounded-3xl border border-slate-800 overflow-hidden shadow-xl flex flex-col justify-between">
+                    <!-- Header -->
+                    <div class="p-4 pb-3 border-b border-slate-800/80 bg-slate-900/60 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-base">
+                                🚗
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-sm text-white">Skoda Octavia Estate</h3>
+                                <p class="text-[10px] text-slate-400">רכב שכור - קבוצת IWAR (סטיישן/קומבי)</p>
+                            </div>
+                        </div>
+                        <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                            SIXT
+                        </span>
                     </div>
 
-                    <div class="space-y-2 text-xs">
-                        <div class="bg-amber-950/20 p-2.5 rounded-xl border border-amber-800/30 text-[11px] text-amber-200">
-                            <strong>איסוף:</strong> 30.07 בשדה התעופה מינכן.<br>
-                            <strong>החזרה:</strong> 12.08 (יום ד') בתחנת הרכבת המרכזית מינכן.
+                    <!-- Vehicle Image Showcase -->
+                    <div class="relative bg-slate-950/80 p-3 border-b border-slate-800/80 flex items-center justify-center overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop" alt="Skoda Octavia Estate" class="w-full h-44 object-cover rounded-2xl border border-slate-800 shadow-lg">
+                        <div class="absolute bottom-5 right-5 bg-slate-950/80 backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-xl border border-slate-700/80 font-semibold shadow">
+                             Skoda Octavia Combi / Estate
                         </div>
-                        <div class="text-[11px] text-slate-400 space-y-1">
-                            <p>• <strong>הערה:</strong> לברר למה צריך יום של חניה בעיר.</p>
+                    </div>
+
+                    <!-- Specs Badges -->
+                    <div class="p-4 space-y-3">
+                        <div class="grid grid-cols-4 gap-1.5 text-center">
+                            <div class="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80">
+                                <span class="block text-xs">🧳</span>
+                                <span class="text-[10px] font-bold text-white block mt-0.5">640L</span>
+                                <span class="text-[8px] text-slate-400">תא מטען</span>
+                            </div>
+                            <div class="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80">
+                                <span class="block text-xs">💺</span>
+                                <span class="text-[10px] font-bold text-white block mt-0.5">5 מקומות</span>
+                                <span class="text-[8px] text-slate-400">נוחות מירבית</span>
+                            </div>
+                            <div class="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80">
+                                <span class="block text-xs">⚙️</span>
+                                <span class="text-[10px] font-bold text-white block mt-0.5">אוטומטי</span>
+                                <span class="text-[8px] text-slate-400">גיר DSG</span>
+                            </div>
+                            <div class="bg-slate-950/70 p-2 rounded-xl border border-slate-800/80">
+                                <span class="block text-xs">⛽</span>
+                                <span class="text-[10px] font-bold text-emerald-400 block mt-0.5">חסכוני</span>
+                                <span class="text-[8px] text-slate-400">דלק/דיזל</span>
+                            </div>
+                        </div>
+
+                        <!-- Logistics Details -->
+                        <div class="bg-slate-950/60 p-3 rounded-2xl border border-slate-800/80 space-y-1.5 text-xs">
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="text-slate-400">📍 איסוף רכב:</span>
+                                <span class="font-bold text-white">30.07 | נמל התעופה מינכן</span>
+                            </div>
+                            <div class="flex justify-between items-center text-[11px]">
+                                <span class="text-slate-400">🏁 החזרת רכב:</span>
+                                <span class="font-bold text-white">12.08 | תחנה מרכזית מינכן</span>
+                            </div>
+                            <div class="text-[10px] text-amber-300/90 pt-1 border-t border-slate-800/80">
+                                • <strong>תזכורת:</strong> השובר שמור במייל בונדה. לברר הסדר חניה ליום בעיר מינכן.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -486,6 +538,88 @@
             </div>
         </section>
 
+        <!-- AI VISION FUEL TRACKER (Strict Access: Gil, Liat, Ariel) -->
+        <section id="sec-fuel" class="space-y-4 hidden">
+            <!-- Hidden File Input Elements for Camera Captures -->
+            <input type="file" id="startKmCam" accept="image/*" capture="environment" class="hidden" onchange="processStartKmImage(event)">
+            <input type="file" id="endKmCam" accept="image/*" capture="environment" class="hidden" onchange="processEndKmImage(event)">
+            <input type="file" id="refuelOdoCam" accept="image/*" capture="environment" class="hidden" onchange="onRefuelOdoCaptured(event)">
+            <input type="file" id="refuelPumpCam" accept="image/*" capture="environment" class="hidden" onchange="onRefuelPumpCaptured(event)">
+
+            <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-gas-pump text-orange-400"></i> מחשבון דלק AI Vision 🔒
+                        </h2>
+                        <p class="text-[10px] text-slate-400">מעקב תדלוקים וקילומטראז' אוטומטי בעזרת צילום ו-AI</p>
+                    </div>
+                    <span id="tripStatusBadge" class="bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                        טרם הוחל טיול
+                    </span>
+                </div>
+
+                <!-- Step Action Control Buttons -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                    <button onclick="triggerStartKmCam()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 text-xs transition">
+                        <span class="text-lg">🚀</span>
+                        <span>תחילת טיול</span>
+                    </button>
+
+                    <button onclick="triggerRefuelFlow()" class="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 text-xs transition">
+                        <span class="text-lg">⛽</span>
+                        <span>בוצע תדלוק</span>
+                    </button>
+
+                    <button onclick="switchTab('fuel')" class="bg-gradient-to-r from-sky-600 to-alpine-600 hover:from-sky-500 hover:to-alpine-500 text-white font-bold p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 text-xs transition">
+                        <span class="text-lg">📊</span>
+                        <span>תצוגת ביניים</span>
+                    </button>
+
+                    <button onclick="triggerEndKmCam()" class="bg-gradient-to-r from-purple-600 to-rose-600 hover:from-purple-500 hover:to-rose-500 text-white font-bold p-3 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 text-xs transition">
+                        <span class="text-lg">🏁</span>
+                        <span>סיום טיול</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- DASHBOARD / REAL TIME METRICS -->
+            <div id="fuelDashboardArea" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div class="glass-card p-3 rounded-2xl border border-slate-800">
+                    <div class="text-[10px] text-slate-400">סה"כ מרחק כעת</div>
+                    <div id="metricTotalKm" class="text-base font-black text-sky-400 mt-0.5">0 ק"מ</div>
+                </div>
+                <div class="glass-card p-3 rounded-2xl border border-slate-800">
+                    <div class="text-[10px] text-slate-400">סה"כ הוצאות דלק</div>
+                    <div id="metricTotalCost" class="text-base font-black text-amber-400 mt-0.5">€ 0.00</div>
+                </div>
+                <div class="glass-card p-3 rounded-2xl border border-slate-800">
+                    <div class="text-[10px] text-slate-400">צריכת דלק ממוצעת</div>
+                    <div id="metricAvgConsumption" class="text-base font-black text-emerald-400 mt-0.5">0 ק"מ/ליטר</div>
+                </div>
+                <div class="glass-card p-3 rounded-2xl border border-slate-800">
+                    <div class="text-[10px] text-slate-400">עלות ממוצעת לק"מ</div>
+                    <div id="metricCostPerKm" class="text-base font-black text-purple-400 mt-0.5">€ 0.00/ק"מ</div>
+                </div>
+            </div>
+
+            <!-- REFUEL HISTORY AND PHOTOS CONTAINER -->
+            <div id="fuelTripReportArea" class="glass-card rounded-3xl p-4 bg-slate-950 border border-slate-800 space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                    <h3 class="font-bold text-xs text-white flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-numeric text-orange-400"></i> יומן תדלוקים ותצלומים מתיק הטיול
+                    </h3>
+                    <button onclick="exportFuelPDF()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
+                        <i class="fa-solid fa-file-pdf"></i> הופק דוח PDF
+                    </button>
+                </div>
+
+                <div id="fuelLogsContainer" class="space-y-2.5">
+                    <!-- Dynamic Log Cards -->
+                </div>
+            </div>
+        </section>
+
         <!-- TAB 6: PACKING CHECKLIST -->
         <section id="sec-checklist" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800">
@@ -498,7 +632,7 @@
             </div>
         </section>
 
-        <!-- NEW TAB: DEDICATED AI CHAT PAGE (When mode is 'tab') -->
+        <!-- TAB: DEDICATED AI CHAT PAGE (When mode is 'tab') -->
         <section id="sec-botpage" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
                 <div class="flex items-center gap-2 border-b border-slate-800 pb-2.5">
@@ -618,6 +752,11 @@
             <i class="fa-solid fa-wallet text-base text-amber-400"></i>
             <span>תקציב</span>
         </button>
+        <!-- MOBILE FUEL TAB: Visible strictly to Gil, Liat, Ariel -->
+        <button onclick="handleFuelTabClick()" class="bottom-nav-item hidden flex-col items-center gap-0.5 text-orange-400 text-[10px]" id="bnav-fuel">
+            <i class="fa-solid fa-gas-pump text-base"></i>
+            <span>דלק AI</span>
+        </button>
         <button onclick="switchTab('checklist')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-checklist">
             <i class="fa-solid fa-list-check text-base"></i>
             <span>ציוד</span>
@@ -627,6 +766,36 @@
             <i class="fa-solid fa-robot text-base"></i>
             <span>עוזר AI</span>
         </button>
+    </div>
+
+    <!-- REFUEL CONFIRMATION POPUP MODAL -->
+    <div id="refuelConfirmModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-sm p-5 relative border border-slate-800 space-y-3">
+            <h3 class="text-base font-bold text-white text-center">⛽ אישור נתוני תדלוק מ-AI</h3>
+            <p class="text-[11px] text-slate-400 text-center">אנא וודא כי הנתונים שחולצו מהתמונות מדויקים:</p>
+
+            <div class="space-y-2 text-xs">
+                <div>
+                    <label class="block text-[10px] text-slate-400 mb-0.5">קילומטראז' נוכחי (Current KM):</label>
+                    <input type="number" id="popCurrentKm" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-white font-bold">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[10px] text-slate-400 mb-0.5">סכום לתשלום (€):</label>
+                        <input type="number" step="0.01" id="popAmount" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-amber-400 font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-400 mb-0.5">כמות ליטרים:</label>
+                        <input type="number" step="0.01" id="popLitres" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-sky-400 font-bold">
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 flex gap-2">
+                <button onclick="closeRefuelConfirmModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                <button onclick="confirmAndSaveRefuel()" class="w-1/2 py-2 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-xs shadow-lg">אישור ושמירה</button>
+            </div>
+        </div>
     </div>
 
     <!-- FLOATING SMART BOT CHAT WIDGET -->
@@ -886,11 +1055,11 @@
 
         // Authorized System Users
         const USERS = [
-            { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה' },
-            { username: 'liat.bonda', pass: 'L!atB#2026$nd', name: 'ליאת בונדה' },
-            { username: 'effi.cohen', pass: 'E3f!Ch#2026$', name: 'אפי כהן' },
-            { username: 'shelly.cohen', pass: 'Sh3ll!C#2026$', name: 'שלי כהן' },
-            { username: 'arielbonda', pass: 'bonda2196', name: 'אריאל בונדה (מאסטר)' }
+            { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה', fuelAccess: true },
+            { username: 'liat.bonda', pass: 'L!atB#2026$nd', name: 'ליאת בונדה', fuelAccess: true },
+            { username: 'effi.cohen', pass: 'E3f!Ch#2026$', name: 'אפי כהן', fuelAccess: false },
+            { username: 'shelly.cohen', pass: 'Sh3ll!C#2026$', name: 'שלי כהן', fuelAccess: false },
+            { username: 'arielbonda', pass: 'bonda2196', name: 'אריאל בונדה (מאסטר)', fuelAccess: true }
         ];
 
         let currentUser = null;
@@ -929,12 +1098,25 @@
 
         const defaultBudgetItems = [
             { id: 1, desc: 'כרטיסי טיסה אל על (10 נוסעים)', vendor: 'EL AL Israel Airlines', amount: '₪ 18,500', status: 'שולם במלואו', payer: 'גיל & אפי' },
-            { id: 2, desc: 'השכרת רכב קבוצת IWAR', vendor: 'SIXT München Airport', amount: '€ 816.30', status: 'שולם במלואו', payer: 'גיל בונדה' },
+            { id: 2, desc: 'השכרת רכב קבוצת IWAR (Skoda Octavia)', vendor: 'SIXT München Airport', amount: '€ 816.30', status: 'שולם במלואו', payer: 'גיל בונדה' },
             { id: 3, desc: 'לינה 1: Gästehaus Zehmerhof', vendor: 'Booking.com', amount: '€ 492.80', status: 'לתשלום במקום', payer: 'ליאת בונדה' },
             { id: 4, desc: 'לינה 2: Alpen Resort Schrofenblick', vendor: 'Resort Schrofenblick', amount: '€ 2,450', status: 'מקדמה שולמה', depositPaid: '€ 500', depositRemaining: '€ 1,950', payer: 'ליאת בונדה' },
             { id: 5, desc: 'לינה 3: בקתת פרימיום Hauser Kaibling', vendor: 'ALPS RESORTS', amount: '€ 4,897.40', status: 'מקדמה שולמה', depositPaid: '€ 1,000', depositRemaining: '€ 3,897.40', payer: 'גיל בונדה' },
             { id: 6, desc: 'לינה 4: WunderLocke Munich (3 דירות)', vendor: 'Booking.com (5474868284 + 5601602631)', amount: '€ 2,097', status: 'לתשלום במקום', payer: 'ליאת בונדה' }
         ];
+
+        // AI Fuel Trip Object
+        let fuelTrip = {
+            active: false,
+            startKm: null,
+            startKmImg: null,
+            endKm: null,
+            endKmImg: null,
+            refuels: [] // { id, currentKm, amount, litres, kmDiff, kml, odoImg, pumpImg, date }
+        };
+
+        let tempOdoImg = null;
+        let tempPumpImg = null;
 
         let activities = defaultActivities;
         let budgetItems = defaultBudgetItems;
@@ -945,6 +1127,16 @@
             { id: 3, name: 'Bergresort Hauser Kaibling', station: 'הדירה השלישית / תחנה 3 (6 לילות)', address: 'Haus im Ennstal / Schladming, Austria', booking: '31580165-1602500300', city: 'Schladming' },
             { id: 4, name: 'WunderLocke Munich', station: 'הדירה הרביעית / תחנה 4 (3 לילות - 3 דירות)', address: 'Gmunder Strasse 27, 81379 Munich, Germany', phone: '+49 89 262089070', booking: '5474868284 + 5601602631', city: 'Munich' }
         ];
+
+        // Utility Function for Currency Format
+        function normalizeCurrencyString(val) {
+            if (!val) return '';
+            val = val.toString().trim();
+            if (!val.includes('€') && !val.includes('₪')) {
+                return '€ ' + val;
+            }
+            return val;
+        }
 
         // Init & Listeners
         window.addEventListener('DOMContentLoaded', () => {
@@ -973,9 +1165,19 @@
                     }
                     renderBudget();
                 });
+
+                db.ref('fuelTrip').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        fuelTrip = data;
+                        if (!fuelTrip.refuels) fuelTrip.refuels = [];
+                    }
+                    renderFuelDashboard();
+                });
             } else {
                 renderActivities();
                 renderBudget();
+                renderFuelDashboard();
             }
         });
 
@@ -1015,7 +1217,7 @@
             }
         }
 
-        // Apply Dynamic UI Changes
+        // Apply Dynamic UI Changes & Dynamic Tab Access
         function applyUISettings() {
             // Theme Mode
             const htmlEl = document.documentElement;
@@ -1046,6 +1248,21 @@
                 bnavTab.classList.remove('flex');
                 
                 if (!document.getElementById('sec-botpage').classList.contains('hidden')) {
+                    switchTab('dashboard');
+                }
+            }
+
+            // Fuel Tab Permission Visibility Control (Gil, Liat, Ariel ONLY)
+            const fuelNavBtn = document.getElementById('tab-fuel');
+            const fuelBNavBtn = document.getElementById('bnav-fuel');
+
+            if (currentUser && currentUser.fuelAccess) {
+                if (fuelNavBtn) { fuelNavBtn.classList.remove('hidden'); fuelNavBtn.classList.add('flex'); }
+                if (fuelBNavBtn) { fuelBNavBtn.classList.remove('hidden'); fuelBNavBtn.classList.add('flex'); }
+            } else {
+                if (fuelNavBtn) { fuelNavBtn.classList.add('hidden'); fuelNavBtn.classList.remove('flex'); }
+                if (fuelBNavBtn) { fuelBNavBtn.classList.add('hidden'); fuelBNavBtn.classList.remove('flex'); }
+                if (!document.getElementById('sec-fuel').classList.contains('hidden')) {
                     switchTab('dashboard');
                 }
             }
@@ -1086,6 +1303,15 @@
             }
         }
 
+        function handleFuelTabClick() {
+            if (!currentUser || !currentUser.fuelAccess) {
+                alert('לשונית זו מוגנת ומיועדת לגיל, ליאת ואריאל בלבד.');
+                return;
+            }
+            switchTab('fuel');
+            renderFuelDashboard();
+        }
+
         function initCountdown() {
             const targetDate = new Date('2026-07-30T15:45:00').getTime();
 
@@ -1109,6 +1335,348 @@
 
             update();
             setInterval(update, 60000);
+        }
+
+        // --- VISION AI ENGINE FOR FUEL FEATURE ---
+
+        function triggerStartKmCam() {
+            if (!currentUser || !currentUser.fuelAccess) return alert('אין הרשאה לפעולה זו.');
+            document.getElementById('startKmCam').click();
+        }
+
+        function triggerRefuelFlow() {
+            if (!currentUser || !currentUser.fuelAccess) return alert('אין הרשאה לפעולה זו.');
+            if (!fuelTrip.active) return alert('יש להתחיל טיול תחילה (כפתור "תחילת טיול").');
+            tempOdoImg = null;
+            tempPumpImg = null;
+            alert('שלב 1 מתוך 2: צלם את לוח השעונים (מד הקילומטראז\').');
+            document.getElementById('refuelOdoCam').click();
+        }
+
+        function triggerEndKmCam() {
+            if (!currentUser || !currentUser.fuelAccess) return alert('אין הרשאה לפעולה זו.');
+            if (!fuelTrip.active) return alert('אין טיול פעיל לסיום.');
+            document.getElementById('endKmCam').click();
+        }
+
+        async function processStartKmImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const base64 = await fileToBase64(file);
+
+            alert('⏳ Vision AI מעבד את תמונת לוח השעונים...');
+            const extractedKm = await extractKmFromImage(base64);
+
+            if (extractedKm) {
+                fuelTrip = {
+                    active: true,
+                    startKm: extractedKm,
+                    startKmImg: base64,
+                    endKm: null,
+                    endKmImg: null,
+                    refuels: []
+                };
+                syncDataToFirebase('fuelTrip', fuelTrip);
+                alert(`✅ הקילומטראז' ההתחלתי נקלט בהצלחה: ${extractedKm.toLocaleString()} ק"מ! הטיול נפתח.`);
+                renderFuelDashboard();
+            } else {
+                alert('⚠️ לא הצלחנו לפענח את הקילומטראז\'. אנא נסה לצלם שוב בבירור.');
+            }
+        }
+
+        async function onRefuelOdoCaptured(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            tempOdoImg = await fileToBase64(file);
+            alert('שלב 2 מתוך 2: כעת צלם את קבלת/משאבת התדלוק.');
+            document.getElementById('refuelPumpCam').click();
+        }
+
+        async function onRefuelPumpCaptured(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            tempPumpImg = await fileToBase64(file);
+
+            alert('⏳ AI מעבד במקביל את תמונת לוח השעונים ותמונת המשאבה...');
+
+            const [curKm, pumpData] = await Promise.all([
+                extractKmFromImage(tempOdoImg),
+                extractPumpDataFromImage(tempPumpImg)
+            ]);
+
+            document.getElementById('popCurrentKm').value = curKm || '';
+            document.getElementById('popAmount').value = pumpData ? pumpData.amount : '';
+            document.getElementById('popLitres').value = pumpData ? pumpData.litres : '';
+
+            document.getElementById('refuelConfirmModal').classList.remove('hidden');
+        }
+
+        function closeRefuelConfirmModal() {
+            document.getElementById('refuelConfirmModal').classList.add('hidden');
+        }
+
+        function confirmAndSaveRefuel() {
+            const currentKm = parseFloat(document.getElementById('popCurrentKm').value);
+            const amount = parseFloat(document.getElementById('popAmount').value);
+            const litres = parseFloat(document.getElementById('popLitres').value);
+
+            if (!currentKm || !amount || !litres) {
+                return alert('נא לוודא כי כל הנתונים מולאו נכון.');
+            }
+
+            const prevKm = fuelTrip.refuels.length > 0 
+                ? fuelTrip.refuels[fuelTrip.refuels.length - 1].currentKm 
+                : fuelTrip.startKm;
+
+            const kmDiff = currentKm - prevKm;
+            const kml = litres > 0 ? (kmDiff / litres).toFixed(2) : 0;
+
+            const refuelObj = {
+                id: Date.now(),
+                currentKm,
+                amount,
+                litres,
+                kmDiff,
+                kml,
+                odoImg: tempOdoImg,
+                pumpImg: tempPumpImg,
+                date: new Date().toLocaleDateString('he-IL')
+            };
+
+            fuelTrip.refuels.push(refuelObj);
+            syncDataToFirebase('fuelTrip', fuelTrip);
+
+            closeRefuelConfirmModal();
+            alert('⛽ התדלוק נשמר בהצלחה והדשבורד עודכן!');
+            renderFuelDashboard();
+        }
+
+        async function processEndKmImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const base64 = await fileToBase64(file);
+
+            alert('⏳ Vision AI מעבד את תמונת הסיום...');
+            const extractedKm = await extractKmFromImage(base64);
+
+            if (extractedKm) {
+                fuelTrip.endKm = extractedKm;
+                fuelTrip.endKmImg = base64;
+                fuelTrip.active = false;
+
+                syncDataToFirebase('fuelTrip', fuelTrip);
+                alert(`🏁 הטיול נסגר בהצלחה! קילומטראז' סופי: ${extractedKm.toLocaleString()} ק"מ.`);
+                renderFuelDashboard();
+            } else {
+                alert('⚠️ לא הצלחנו לפענח את הנתון. נסה לצלם שוב.');
+            }
+        }
+
+        // Vision AI API Prompt Queries via OpenRouter
+        async function extractKmFromImage(base64Image) {
+            try {
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "openrouter/free",
+                        messages: [{
+                            role: "user",
+                            content: [
+                                { type: "text", text: "Return ONLY the total odometer number in km from this dashboard image as an integer. Return no extra words." },
+                                { type: "image_url", image_url: { url: base64Image } }
+                            ]
+                        }]
+                    })
+                });
+                const data = await response.json();
+                const text = data.choices[0].message.content.replace(/[^0-9]/g, '');
+                return parseInt(text) || null;
+            } catch (err) {
+                console.error(err);
+                return null;
+            }
+        }
+
+        async function extractPumpDataFromImage(base64Image) {
+            try {
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "openrouter/free",
+                        messages: [{
+                            role: "user",
+                            content: [
+                                { type: "text", text: "Analyze this fuel pump or receipt image. Extract total cost in euros and fuel quantity in liters. Return strictly JSON: {\"amount\": number, \"litres\": number}" },
+                                { type: "image_url", image_url: { url: base64Image } }
+                            ]
+                        }]
+                    })
+                });
+                const data = await response.json();
+                const content = data.choices[0].message.content;
+                const jsonMatch = content.match(/\{.*\}/s);
+                return jsonMatch ? JSON.parse(jsonMatch[0]) : null;
+            } catch (err) {
+                console.error(err);
+                return null;
+            }
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function renderFuelDashboard() {
+            const badge = document.getElementById('tripStatusBadge');
+            if (badge) {
+                if (fuelTrip.active) {
+                    badge.className = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full animate-pulse';
+                    badge.innerText = `טיול פעיל (התחלה: ${fuelTrip.startKm ? fuelTrip.startKm.toLocaleString() : 0} ק"מ)`;
+                } else if (fuelTrip.endKm) {
+                    badge.className = 'bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full';
+                    badge.innerText = 'טיול נסגר ונעול';
+                } else {
+                    badge.className = 'bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full';
+                    badge.innerText = 'טרם הוחל טיול';
+                }
+            }
+
+            let totalKm = 0;
+            let lastKm = fuelTrip.startKm || 0;
+
+            if (fuelTrip.refuels && fuelTrip.refuels.length > 0) {
+                lastKm = fuelTrip.refuels[fuelTrip.refuels.length - 1].currentKm;
+            }
+            if (fuelTrip.endKm) {
+                lastKm = fuelTrip.endKm;
+            }
+
+            if (fuelTrip.startKm && lastKm) {
+                totalKm = lastKm - fuelTrip.startKm;
+            }
+
+            let totalCost = 0;
+            let totalLiters = 0;
+
+            if (fuelTrip.refuels) {
+                fuelTrip.refuels.forEach(r => {
+                    totalCost += parseFloat(r.amount) || 0;
+                    totalLiters += parseFloat(r.litres) || 0;
+                });
+            }
+
+            const avgKml = totalLiters > 0 ? (totalKm / totalLiters).toFixed(2) : '0.00';
+            const costPerKm = totalKm > 0 ? (totalCost / totalKm).toFixed(2) : '0.00';
+
+            document.getElementById('metricTotalKm').innerText = `${totalKm.toLocaleString()} ק"מ`;
+            document.getElementById('metricTotalCost').innerText = `€ ${totalCost.toFixed(2)}`;
+            document.getElementById('metricAvgConsumption').innerText = `${avgKml} ק"מ/ליטר`;
+            document.getElementById('metricCostPerKm').innerText = `€ ${costPerKm}/ק"מ`;
+
+            // Render logs
+            const logsBox = document.getElementById('fuelLogsContainer');
+            if (!logsBox) return;
+            logsBox.innerHTML = '';
+
+            if (fuelTrip.startKmImg) {
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900/90 p-3 rounded-2xl border border-slate-800 flex justify-between items-center text-xs';
+                card.innerHTML = `
+                    <div>
+                        <span class="text-emerald-400 font-bold">🚀 נקודת זינוק</span>
+                        <div class="text-white font-bold mt-0.5">${fuelTrip.startKm.toLocaleString()} ק"מ</div>
+                    </div>
+                    <a href="${fuelTrip.startKmImg}" target="_blank" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded-lg border border-slate-700">🖼️ צילום מד אוץ</a>
+                `;
+                logsBox.appendChild(card);
+            }
+
+            if (fuelTrip.refuels) {
+                fuelTrip.refuels.forEach((r, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-slate-900/90 p-3 rounded-2xl border border-slate-800 space-y-2 text-xs';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-orange-400 font-bold">⛽ תדלוק #${idx + 1} (${r.date})</span>
+                                <div class="text-white font-bold mt-0.5">${r.currentKm.toLocaleString()} ק"מ (+${r.kmDiff} ק"מ)</div>
+                            </div>
+                            <div class="text-left">
+                                <div class="font-black text-amber-400">€ ${r.amount}</div>
+                                <div class="text-[10px] text-sky-400">${r.litres} ליטרים (${r.kml} ק"מ/ליטר)</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 pt-1 border-t border-slate-800">
+                            ${r.odoImg ? `<a href="${r.odoImg}" target="_blank" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">📷 מד אוץ</a>` : ''}
+                            ${r.pumpImg ? `<a href="${r.pumpImg}" target="_blank" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">🧾 קבלה/משאבה</a>` : ''}
+                        </div>
+                    `;
+                    logsBox.appendChild(card);
+                });
+            }
+
+            if (fuelTrip.endKmImg) {
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900/90 p-3 rounded-2xl border border-slate-800 flex justify-between items-center text-xs';
+                card.innerHTML = `
+                    <div>
+                        <span class="text-purple-400 font-bold">🏁 נקודת סיום</span>
+                        <div class="text-white font-bold mt-0.5">${fuelTrip.endKm.toLocaleString()} ק"מ</div>
+                    </div>
+                    <a href="${fuelTrip.endKmImg}" target="_blank" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded-lg border border-slate-700">🖼️ צילום מד אוץ סופי</a>
+                `;
+                logsBox.appendChild(card);
+            }
+        }
+
+        function exportFuelPDF() {
+            const element = document.getElementById('fuelTripReportArea');
+            const opt = {
+                margin:       0.3,
+                filename:     'דוח_דלק_וצריכה_אלפים_2026.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#090d16' },
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // --- OTHER APPLICATION LOGIC ---
+
+        function convertCurrency(source) {
+            const rate = parseFloat(document.getElementById('eurRate').value) || 3.47;
+            const eurInput = document.getElementById('calcEur');
+            const ilsInput = document.getElementById('calcIls');
+
+            if (source === 'eur') {
+                const val = parseFloat(eurInput.value);
+                if (!isNaN(val)) {
+                    ilsInput.value = (val * rate).toFixed(2);
+                } else {
+                    ilsInput.value = '';
+                }
+            } else if (source === 'ils') {
+                const val = parseFloat(ilsInput.value);
+                if (!isNaN(val)) {
+                    eurInput.value = (val / rate).toFixed(2);
+                } else {
+                    eurInput.value = '';
+                }
+            }
         }
 
         // Bot Functions
@@ -1263,7 +1831,7 @@
             }
         }
 
-        // Auth Functions
+        // Auth & Protected Actions
         function protectedAction(actionCallback) {
             if (currentUser) {
                 actionCallback();
@@ -1284,7 +1852,7 @@
                 document.getElementById('authIcon').className = 'fa-solid fa-lock text-amber-400 text-xs';
                 updateSettingsUI();
 
-                if (!document.getElementById('sec-budget').classList.contains('hidden')) {
+                if (!document.getElementById('sec-budget').classList.contains('hidden') || !document.getElementById('sec-fuel').classList.contains('hidden')) {
                     switchTab('dashboard');
                 }
             } else {
@@ -1308,7 +1876,6 @@
                 document.getElementById('authBtnText').innerText = 'התנתק';
                 document.getElementById('authIcon').className = 'fa-solid fa-unlock text-emerald-400 text-xs';
                 
-                // Fetch personal preferences
                 loadUserPreferences(currentUser.username);
 
                 if (pendingAction) {
