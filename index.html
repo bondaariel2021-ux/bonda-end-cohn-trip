@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Bulletproof Edition v6.4 Table Budget</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Bulletproof Edition v6.6 Full Nav</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -81,7 +81,7 @@
                 <div>
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v6.4 Table Budget</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v6.6 Full Nav</span>
                     </div>
                     <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
@@ -116,7 +116,7 @@
                 <button onclick="switchTab('lodging')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-lodging">
                     <i class="fa-solid fa-bed"></i> מלונות (4)
                 </button>
-                <button onclick="switchTab('transport')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-transport">
+                <button onclick="switchTab('transport')" class="tab-btn py-3 px-4 flex items-center gap-2 transition text-sky-400" id="tab-transport">
                     <i class="fa-solid fa-plane"></i> טיסות ורכב
                 </button>
                 <button onclick="handleBudgetTabClick()" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-budget">
@@ -151,19 +151,23 @@
                         <p class="text-slate-400 text-xs mt-0.5">16 ימים | 2 משפחות (10 מטיילים)</p>
                     </div>
 
-                    <!-- Countdown Timer -->
-                    <div class="flex gap-2 justify-between text-center pt-1">
-                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
-                            <span id="cd-days" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                    <!-- Countdown Timer with Seconds (4 columns) -->
+                    <div class="grid grid-cols-4 gap-2 text-center pt-1">
+                        <div class="bg-slate-950/80 backdrop-blur-md px-2 py-2 rounded-2xl border border-slate-800 shadow-inner">
+                            <span id="cd-days" class="text-lg md:text-2xl font-black text-amber-400 block">00</span>
                             <span class="block text-[9px] text-slate-400 uppercase mt-0.5">ימים</span>
                         </div>
-                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
-                            <span id="cd-hours" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                        <div class="bg-slate-950/80 backdrop-blur-md px-2 py-2 rounded-2xl border border-slate-800 shadow-inner">
+                            <span id="cd-hours" class="text-lg md:text-2xl font-black text-amber-400 block">00</span>
                             <span class="block text-[9px] text-slate-400 uppercase mt-0.5">שעות</span>
                         </div>
-                        <div class="bg-slate-950/80 backdrop-blur-md px-3 py-2 rounded-2xl border border-slate-800 flex-1 shadow-inner">
-                            <span id="cd-mins" class="text-xl md:text-2xl font-black text-amber-400 block">00</span>
+                        <div class="bg-slate-950/80 backdrop-blur-md px-2 py-2 rounded-2xl border border-slate-800 shadow-inner">
+                            <span id="cd-mins" class="text-lg md:text-2xl font-black text-amber-400 block">00</span>
                             <span class="block text-[9px] text-slate-400 uppercase mt-0.5">דקות</span>
+                        </div>
+                        <div class="bg-slate-950/80 backdrop-blur-md px-2 py-2 rounded-2xl border border-slate-800 shadow-inner">
+                            <span id="cd-secs" class="text-lg md:text-2xl font-black text-sky-400 block">00</span>
+                            <span class="block text-[9px] text-slate-400 uppercase mt-0.5">שניות</span>
                         </div>
                     </div>
                 </div>
@@ -659,7 +663,7 @@
                         <p class="text-[10px] text-slate-400">התאמת תצוגה אישית לכל משתמש</p>
                     </div>
                     <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
-                        v6.4 Table Budget
+                        v6.6 Full Nav
                     </span>
                 </div>
 
@@ -725,6 +729,10 @@
         <button onclick="switchTab('lodging')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-lodging">
             <i class="fa-solid fa-bed text-base"></i>
             <span>מלונות</span>
+        </button>
+        <button onclick="switchTab('transport')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-sky-400 text-[10px]" id="bnav-transport">
+            <i class="fa-solid fa-plane text-base"></i>
+            <span>טיסות</span>
         </button>
         <button onclick="handleBudgetTabClick()" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-budget">
             <i class="fa-solid fa-wallet text-base text-amber-400"></i>
@@ -1014,7 +1022,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        const OPENROUTER_API_KEY = "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";
+        const OPENROUTER_API_KEY = "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";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCRBkulDNqrtDlQQB4AC1yX3YpzrKQWRTE",
@@ -1290,20 +1298,25 @@
 
                 if (diff <= 0) {
                     document.getElementById('cd-days').innerText = '00';
+                    document.getElementById('cd-hours').innerText = '00';
+                    document.getElementById('cd-mins').innerText = '00';
+                    document.getElementById('cd-secs').innerText = '00';
                     return;
                 }
 
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
                 document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
                 document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
                 document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+                document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
             }
 
             update();
-            setInterval(update, 60000);
+            setInterval(update, 1000);
         }
 
         function openSetInitialKmModal() {
