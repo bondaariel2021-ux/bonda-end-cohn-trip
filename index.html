@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
-    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Bulletproof Edition v6.2</title>
+    <title>טיול משפחתי - גרמניה ואוסטריה 2026 | Bulletproof Edition v6.4 Table Budget</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -73,39 +73,15 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-24 md:pb-12 selection:bg-alpine-500 selection:text-white relative transition-colors duration-200">
 
-    <!-- FLOATING ASYNC AI PROCESSOR BANNER -->
-    <div id="aiAsyncBanner" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md bg-slate-900/95 border border-alpine-500/50 backdrop-blur-xl p-3.5 rounded-2xl shadow-2xl hidden transition-all duration-300">
-        <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-alpine-500/20 text-alpine-400 flex items-center justify-center text-lg shrink-0 border border-alpine-500/30 animate-pulse">
-                    <i class="fa-solid fa-spinner fa-spin"></i>
-                </div>
-                <div>
-                    <h4 class="font-extrabold text-xs text-white" id="aiAsyncTitle">מנתח טקסט דלק ברקע...</h4>
-                    <p class="text-[10px] text-slate-300 mt-0.5" id="aiAsyncStatus">תוכל להמשיך להשתמש באתר כרגיל</p>
-                </div>
-            </div>
-            <div class="text-left shrink-0">
-                <span id="aiTimerCount" class="text-base font-black text-amber-400 block font-mono">0.0s</span>
-                <span class="text-[8px] text-slate-400 block uppercase">זמן משוער</span>
-            </div>
-        </div>
-        <!-- Progress Bar Line -->
-        <div class="w-full bg-slate-800 h-1.5 rounded-full mt-2.5 overflow-hidden">
-            <div id="aiProgressBar" class="bg-gradient-to-r from-alpine-500 to-purple-500 h-full w-0 transition-all duration-200"></div>
-        </div>
-    </div>
-
     <!-- Top Navigation Bar -->
     <header class="bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md shadow-2xl transition-colors">
         <div class="max-w-7xl mx-auto px-3 py-2.5 flex justify-between items-center">
             <div class="flex items-center gap-2.5">
-                <!-- הלוגו -->
                 <img src="logo.jpg" alt="מסע באוסטריה וגרמניה" class="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full shadow-lg border border-slate-700/60 bg-slate-950">
                 <div>
                     <div class="flex items-center gap-1.5">
                         <h1 class="text-base md:text-xl font-extrabold text-white tracking-wide">אלפים 2026</h1>
-                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v6.2 FreeText</span>
+                        <span class="bg-purple-500/20 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-purple-500/30">v6.4 Table Budget</span>
                     </div>
                     <p class="text-[10px] md:text-xs text-slate-400">בונדה & כהן | 30.07 - 14.08</p>
                 </div>
@@ -113,7 +89,6 @@
 
             <!-- Auth & Settings Controls -->
             <div class="flex items-center gap-2">
-                <!-- כפתור גלגל שיניים להגדרות -->
                 <button onclick="switchTab('settings')" title="הגדרות" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white w-8 h-8 md:w-9 md:h-9 rounded-xl transition flex items-center justify-center shadow-sm">
                     <i class="fa-solid fa-gear text-sm md:text-base text-alpine-400"></i>
                 </button>
@@ -148,7 +123,7 @@
                     <i class="fa-solid fa-wallet text-amber-400"></i> תקציב 🔒
                 </button>
                 <button onclick="handleFuelTabClick()" class="tab-btn py-3 px-4 hidden items-center gap-2 transition text-orange-400" id="tab-fuel">
-                    <i class="fa-solid fa-gas-pump"></i> מחשבון דלק חופשי AI 🔒
+                    <i class="fa-solid fa-gas-pump"></i> מחשבון דלק 🔒
                 </button>
                 <button onclick="switchTab('checklist')" class="tab-btn py-3 px-4 flex items-center gap-2 transition" id="tab-checklist">
                     <i class="fa-solid fa-list-check"></i> ציוד
@@ -483,7 +458,7 @@
             </div>
         </section>
 
-        <!-- TAB 5: BUDGET & INVOICES -->
+        <!-- TAB 5: BUDGET & INVOICES (TABLE DESIGN) -->
         <section id="sec-budget" class="space-y-4 hidden">
             <div class="flex flex-col gap-3 glass-card p-3.5 rounded-2xl">
                 <div class="flex justify-between items-center">
@@ -535,56 +510,66 @@
                 </div>
             </div>
 
-            <!-- Budget Container -->
-            <div id="pdfExportArea" class="glass-card rounded-2xl overflow-hidden border border-slate-800 p-3 bg-slate-950 space-y-3">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <!-- Budget Container Table -->
+            <div id="pdfExportArea" class="glass-card rounded-2xl overflow-hidden border border-slate-800 p-4 bg-slate-950 space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                     <div>
-                        <h3 class="font-bold text-sm text-white">סיכום הוצאות</h3>
+                        <h3 class="font-bold text-sm text-white">סיכום הוצאות הטיול</h3>
                         <p class="text-[10px] text-slate-400">משפחות בונדה & כהן</p>
                     </div>
                     <div class="text-left">
-                        <div class="text-[10px] text-slate-400">סה"כ משוער</div>
-                        <div id="budgetTotalDisplay" class="text-base font-black text-emerald-400">₪ 0</div>
+                        <div class="text-[10px] text-slate-400">סה"כ משוער בשקלים</div>
+                        <div id="budgetTotalDisplay" class="text-base md:text-lg font-black text-emerald-400">₪ 0</div>
                     </div>
                 </div>
 
-                <!-- Responsive Budget Cards for Mobile -->
-                <div id="budgetMobileCards" class="space-y-2">
-                    <!-- Dynamic Content -->
+                <!-- Responsive Table Wrapper -->
+                <div class="overflow-x-auto hide-scrollbar rounded-xl border border-slate-800">
+                    <table class="w-full text-right text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/90 text-slate-400 border-b border-slate-800">
+                                <th class="p-3 font-semibold">תיאור ההוצאה</th>
+                                <th class="p-3 font-semibold">ספק</th>
+                                <th class="p-3 font-semibold">סכום</th>
+                                <th class="p-3 font-semibold">סטטוס תשלום</th>
+                                <th class="p-3 font-semibold">משלם</th>
+                                <th class="p-3 font-semibold text-center">פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="budgetTableBody" class="divide-y divide-slate-800/60">
+                            <!-- Dynamic Table Rows -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- AI FREE TEXT FUEL TRACKER (Strict Access: Gil, Liat, Ariel) -->
+        <!-- MANUAL FUEL TRACKER -->
         <section id="sec-fuel" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
                     <div>
                         <h2 class="text-base font-bold text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-gas-pump text-orange-400"></i> מחשבון דלק כתיבה חופשית AI 🔒
+                            <i class="fa-solid fa-gas-pump text-orange-400"></i> מחשבון דלק רכב 🔒
                         </h2>
-                        <p class="text-[10px] text-slate-400">כתוב בחופשיות את פרטי התדלוק וה-AI יפענח ויוסיף ליומן</p>
+                        <p class="text-[10px] text-slate-400">ניהול תדלוקים והוצאות דלק לפי קטגוריות</p>
                     </div>
-                    <span id="tripStatusBadge" class="bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                        מוכן לקליטה
-                    </span>
+                    <button onclick="openSetInitialKmModal()" class="bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 text-[11px] font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-gauge"></i> קילומטרז' קבלת הרכב
+                    </button>
                 </div>
 
-                <!-- Free Text Input Box -->
-                <div class="space-y-2 pt-1">
-                    <label class="block text-xs font-bold text-slate-300">תיאור חופשי של התדלוק:</label>
-                    <textarea id="fuelFreeTextInput" rows="3" placeholder="לדוגמה: תדלקתי בתחנה, הקילומטראז' הוא 148500, שמתי 45 ליטר ושילמתי 78.50 יורו" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 text-xs outline-none focus:border-alpine-500"></textarea>
-                    
-                    <button onclick="processFuelFreeText()" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold p-3 rounded-2xl shadow-lg flex items-center justify-center gap-2 text-xs transition">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> פענח והוסף תדלוק באמצעות AI
+                <div class="flex justify-between items-center pt-1">
+                    <span class="text-xs text-slate-300">הוספת תדלוק חדש לרשימה:</span>
+                    <button onclick="openAddFuelModal()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus"></i> הוסף תדלוק
                     </button>
                 </div>
             </div>
 
-            <!-- DASHBOARD / REAL TIME METRICS -->
             <div id="fuelDashboardArea" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <div class="glass-card p-3 rounded-2xl border border-slate-800">
-                    <div class="text-[10px] text-slate-400">סה"כ מרחק כעת</div>
+                    <div class="text-[10px] text-slate-400">סה"כ מרחק שנוסע</div>
                     <div id="metricTotalKm" class="text-base font-black text-sky-400 mt-0.5">0 ק"מ</div>
                 </div>
                 <div class="glass-card p-3 rounded-2xl border border-slate-800">
@@ -601,11 +586,10 @@
                 </div>
             </div>
 
-            <!-- REFUEL HISTORY CONTAINER -->
             <div id="fuelTripReportArea" class="glass-card rounded-3xl p-4 bg-slate-950 border border-slate-800 space-y-3">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                     <h3 class="font-bold text-xs text-white flex items-center gap-1.5">
-                        <i class="fa-solid fa-list-numeric text-orange-400"></i> יומן תדלוקים (כתיבה חופשית)
+                        <i class="fa-solid fa-list text-orange-400"></i> יומן תדלוקים (קטגוריות)
                     </h3>
                     <button onclick="exportFuelPDF()" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold px-2.5 py-1 rounded-lg border border-slate-700 flex items-center gap-1">
                         <i class="fa-solid fa-file-pdf"></i> הופק דוח PDF
@@ -622,7 +606,7 @@
         <section id="sec-checklist" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800">
                 <h2 class="text-base font-bold text-white">רשימת ציוד מומלצת לאלפים</h2>
-                <p class="text-[10px] text-slate-400 mt-0.5">💡 שיטת ה"בצל" (שכבות) هي הכי יעילה בקיץ האלפיני.</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">💡 שיטת ה"בצל" (שכבות) היא הכי יעילה בקיץ האלפיני.</p>
             </div>
 
             <div id="checklistCategoriesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -630,7 +614,7 @@
             </div>
         </section>
 
-        <!-- TAB: DEDICATED AI CHAT PAGE (When mode is 'tab') -->
+        <!-- TAB: DEDICATED AI CHAT PAGE -->
         <section id="sec-botpage" class="space-y-4 hidden">
             <div class="glass-card p-4 rounded-3xl border border-slate-800 space-y-3">
                 <div class="flex items-center gap-2 border-b border-slate-800 pb-2.5">
@@ -675,7 +659,7 @@
                         <p class="text-[10px] text-slate-400">התאמת תצוגה אישית לכל משתמש</p>
                     </div>
                     <span class="bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full">
-                        v6.2 FreeText
+                        v6.4 Table Budget
                     </span>
                 </div>
 
@@ -748,7 +732,7 @@
         </button>
         <button onclick="handleFuelTabClick()" class="bottom-nav-item hidden flex-col items-center gap-0.5 text-orange-400 text-[10px]" id="bnav-fuel">
             <i class="fa-solid fa-gas-pump text-base"></i>
-            <span>דלק חופשי</span>
+            <span>דלק</span>
         </button>
         <button onclick="switchTab('checklist')" class="bottom-nav-item flex flex-col items-center gap-0.5 text-slate-400 text-[10px]" id="bnav-checklist">
             <i class="fa-solid fa-list-check text-base"></i>
@@ -835,6 +819,51 @@
                 <div class="pt-2 flex gap-2">
                     <button type="button" onclick="toggleAuthModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
                     <button type="submit" class="w-1/2 py-2 bg-alpine-600 hover:bg-alpine-500 text-white font-bold rounded-xl text-xs shadow-lg">התחבר</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- INITIAL KM MODAL -->
+    <div id="initialKmModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-sm p-5 relative border border-slate-800">
+            <button onclick="closeInitialKmModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-base">✕</button>
+            <h3 class="text-base font-bold text-white mb-3">🚗 קילומטרז' קבלת הרכב</h3>
+            <form onsubmit="saveInitialKm(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">קילומטרז' התחלתי:</label>
+                    <input type="number" id="inputInitialKm" required placeholder="לדוגמה: 145000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeInitialKmModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-alpine-600 text-white font-bold rounded-xl text-xs shadow-lg">שמור</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT FUEL MODAL -->
+    <div id="fuelModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden p-3">
+        <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md p-5 relative border border-slate-800">
+            <button onclick="closeFuelModal()" class="absolute left-4 top-4 text-slate-400 hover:text-white text-base">✕</button>
+            <h3 class="text-base font-bold text-white mb-3" id="fuelModalTitle">⛽ הוספת תדלוק לרכב</h3>
+            <form onsubmit="saveFuelRefuel(event)" class="space-y-3">
+                <input type="hidden" id="fuelEditId">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">עלות ביורו (€):</label>
+                    <input type="number" step="0.01" id="fuelAmount" required placeholder="78.50" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">כמות ליטרים:</label>
+                    <input type="number" step="0.01" id="fuelLitres" required placeholder="45" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">קילומטרז' כללי נוכחי של הרכב:</label>
+                    <input type="number" id="fuelCurrentKm" required placeholder="148500" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white outline-none">
+                </div>
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeFuelModal()" class="w-1/2 py-2 border border-slate-800 rounded-xl text-xs text-slate-300">ביטול</button>
+                    <button type="submit" class="w-1/2 py-2 bg-orange-600 text-white font-bold rounded-xl text-xs shadow-lg">שמור תדלוק</button>
                 </div>
             </form>
         </div>
@@ -985,10 +1014,8 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // OPENROUTER API KEY INTEGRATION
         const OPENROUTER_API_KEY = "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";
 
-        // FIREBASE CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyCRBkulDNqrtDlQQB4AC1yX3YpzrKQWRTE",
             authDomain: "bonda-trip.firebaseapp.com",
@@ -1008,13 +1035,11 @@
             console.warn("Firebase fallback mode.", e);
         }
 
-        // Default Guest UI State
         let currentUIConfig = {
             theme: 'dark',
             botMode: 'floating'
         };
 
-        // Authorized System Users
         const USERS = [
             { username: 'gil.bonda', pass: 'G!lB#2026$nd', name: 'גיל בונדה', fuelAccess: true },
             { username: 'liat.bonda', pass: 'L!atB#2026$nd', name: 'ליאת בונדה', fuelAccess: true },
@@ -1026,7 +1051,6 @@
         let currentUser = null;
         let pendingAction = null;
 
-        // Default Activities Data
         const defaultActivities = [
             { id: 101, title: 'מרכז ימי Atoll Achensee', day: 'בדרך ללינה 1', category: 'מים וספא', location: 'Maurach, אוסטריה', target: 'לכל המשפחה', desc: 'מרכז ימי עם בריכות מקורות וחיצוניות, סאונות יבשות ורטובות ואזור שחייה באגם בדרך ממינכן ללינה הראשונה.', link: 'https://www.atoll-achensee.com/', cost: '', payer: '', fileData: null, fileName: null },
             { id: 102, title: 'Panoramabrücke Olpererhütte (גשר אולפרר)', day: 'עמק צילרטל', category: 'טבע ומסלולים', location: 'Ginzling, אוסטריה', target: 'לכל המשפחה', desc: 'גשר אולפרר אוסטריה. הטיול לאולפררהוטה אורך כשלוש שעות. נופים עוצרי נשימה!', link: '', cost: '', payer: '', fileData: null, fileName: null },
@@ -1066,8 +1090,8 @@
             { id: 6, desc: 'לינה 4: WunderLocke Munich (3 דירות)', vendor: 'Booking.com (5474868284 + 5601602631)', amount: '€ 2,097', status: 'לתשלום במקום', payer: 'ליאת בונדה' }
         ];
 
-        // AI Free Text Fuel Trip Object
         let fuelTrip = {
+            initialKm: 0,
             refuels: []
         };
 
@@ -1090,7 +1114,6 @@
             return val;
         }
 
-        // Init & Listeners
         window.addEventListener('DOMContentLoaded', () => {
             initCountdown();
             renderChecklists();
@@ -1118,7 +1141,7 @@
                     renderBudget();
                 });
 
-                db.ref('fuelTripFreeText').on('value', (snapshot) => {
+                db.ref('fuelTripManual').on('value', (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
                         fuelTrip = data;
@@ -1283,136 +1306,101 @@
             setInterval(update, 60000);
         }
 
-        // --- AI FREE TEXT FUEL PARSER v6.2 ---
-        let asyncTimerInterval = null;
-
-        function startAiAsyncProgress(title, estimatedSecs) {
-            const banner = document.getElementById('aiAsyncBanner');
-            const titleEl = document.getElementById('aiAsyncTitle');
-            const timerEl = document.getElementById('aiTimerCount');
-            const progressBar = document.getElementById('aiProgressBar');
-
-            titleEl.innerText = title;
-            banner.classList.remove('hidden');
-            progressBar.style.width = '0%';
-
-            let startTime = Date.now();
-            let duration = estimatedSecs * 1000;
-
-            clearInterval(asyncTimerInterval);
-            asyncTimerInterval = setInterval(() => {
-                let elapsed = Date.now() - startTime;
-                let remaining = Math.max(0, (duration - elapsed) / 1000);
-                let pct = Math.min(95, (elapsed / duration) * 100);
-
-                timerEl.innerText = `${remaining.toFixed(1)}s`;
-                progressBar.style.width = `${pct}%`;
-
-                if (remaining <= 0) {
-                    timerEl.innerText = '0.0s';
-                }
-            }, 100);
+        function openSetInitialKmModal() {
+            document.getElementById('inputInitialKm').value = fuelTrip.initialKm || '';
+            document.getElementById('initialKmModal').classList.remove('hidden');
         }
 
-        function stopAiAsyncProgress() {
-            clearInterval(asyncTimerInterval);
-            const progressBar = document.getElementById('aiProgressBar');
-            const banner = document.getElementById('aiAsyncBanner');
-            
-            if (progressBar) progressBar.style.width = '100%';
-            setTimeout(() => {
-                if (banner) banner.classList.add('hidden');
-            }, 400);
+        function closeInitialKmModal() {
+            document.getElementById('initialKmModal').classList.add('hidden');
         }
 
-        async function processFuelFreeText() {
-            if (!currentUser || !currentUser.fuelAccess) return alert('אין הרשאה לפעולה זו.');
-            const inputEl = document.getElementById('fuelFreeTextInput');
-            const textVal = inputEl.value.trim();
-            if (!textVal) return alert('נא להזין טקסט חופשי לתדלוק.');
+        function saveInitialKm(e) {
+            e.preventDefault();
+            const km = parseFloat(document.getElementById('inputInitialKm').value) || 0;
+            fuelTrip.initialKm = km;
+            syncDataToFirebase('fuelTripManual', fuelTrip);
+            closeInitialKmModal();
+            renderFuelDashboard();
+        }
 
-            startAiAsyncProgress('מנתח נתוני תדלוק בכתיבה חופשית...', 2.0);
+        function openAddFuelModal() {
+            document.getElementById('fuelEditId').value = '';
+            document.getElementById('fuelModalTitle').innerText = '⛽ הוספת תדלוק לרכב';
+            document.getElementById('fuelAmount').value = '';
+            document.getElementById('fuelLitres').value = '';
+            document.getElementById('fuelCurrentKm').value = '';
+            document.getElementById('fuelModal').classList.remove('hidden');
+        }
 
-            try {
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        model: "google/gemini-2.0-flash-001",
-                        messages: [{
-                            role: "user",
-                            content: `Analyze this Hebrew free-text regarding a car refuel: "${textVal}". Extract the current odometer mileage (currentKm), total cost in euros (amount), and fuel quantity in liters (litres). Return strictly JSON format: {"currentKm": number, "amount": number, "litres": number}`
-                        }]
-                    })
-                });
+        function openEditFuelModal(id) {
+            const ref = fuelTrip.refuels.find(r => r.id === id);
+            if (!ref) return;
+            document.getElementById('fuelEditId').value = ref.id;
+            document.getElementById('fuelModalTitle').innerText = '✏️ עריכת תדלוק';
+            document.getElementById('fuelAmount').value = ref.amount;
+            document.getElementById('fuelLitres').value = ref.litres;
+            document.getElementById('fuelCurrentKm').value = ref.currentKm;
+            document.getElementById('fuelModal').classList.remove('hidden');
+        }
 
-                const data = await response.json();
-                stopAiAsyncProgress();
+        function closeFuelModal() {
+            document.getElementById('fuelModal').classList.add('hidden');
+        }
 
-                if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-                    throw new Error('Invalid response');
-                }
+        function saveFuelRefuel(e) {
+            e.preventDefault();
+            const editId = document.getElementById('fuelEditId').value;
+            const amount = parseFloat(document.getElementById('fuelAmount').value) || 0;
+            const litres = parseFloat(document.getElementById('fuelLitres').value) || 0;
+            const currentKm = parseFloat(document.getElementById('fuelCurrentKm').value) || 0;
 
-                const content = data.choices[0].message.content;
-                const jsonMatch = content.match(/\{[\s\S]*\}/);
-                if (!jsonMatch) throw new Error('No JSON found');
+            const refObj = {
+                id: editId ? Number(editId) : Date.now(),
+                amount,
+                litres,
+                currentKm,
+                date: new Date().toLocaleDateString('he-IL')
+            };
 
-                const parsed = JSON.parse(jsonMatch[0]);
-                if (!parsed.currentKm || !parsed.amount || !parsed.litres) {
-                    throw new Error('Missing fields');
-                }
-
-                const prevKm = fuelTrip.refuels.length > 0 
-                    ? fuelTrip.refuels[fuelTrip.refuels.length - 1].currentKm 
-                    : (parsed.currentKm - 400); // fallback start estimation if first
-
-                const kmDiff = parsed.currentKm - prevKm;
-                const kml = parsed.litres > 0 ? (kmDiff / parsed.litres).toFixed(2) : 0;
-
-                const refuelObj = {
-                    id: Date.now(),
-                    currentKm: parsed.currentKm,
-                    amount: parsed.amount,
-                    litres: parsed.litres,
-                    kmDiff: kmDiff > 0 ? kmDiff : 400,
-                    kml,
-                    rawText: textVal,
-                    date: new Date().toLocaleDateString('he-IL')
-                };
-
-                fuelTrip.refuels.push(refuelObj);
-                syncDataToFirebase('fuelTripFreeText', fuelTrip);
-
-                inputEl.value = '';
-                alert('⛽ התדלוק פוענח ונשמר בהצלחה מטקסט חופשי!');
-                renderFuelDashboard();
-
-            } catch (err) {
-                stopAiAsyncProgress();
-                alert('⚠️ שגיאה בניתוח הטקסט על ידי ה-AI. אנא נסח שוב בברור יותר (למשל: קילומטר 148500, עלות 78.5 יורו, 45 ליטר).');
+            if (editId) {
+                const idx = fuelTrip.refuels.findIndex(r => r.id == editId);
+                if (idx !== -1) fuelTrip.refuels[idx] = refObj;
+            } else {
+                fuelTrip.refuels.push(refObj);
             }
+
+            syncDataToFirebase('fuelTripManual', fuelTrip);
+            closeFuelModal();
+            renderFuelDashboard();
+        }
+
+        function deleteFuelRefuel(id) {
+            fuelTrip.refuels = fuelTrip.refuels.filter(r => r.id !== id);
+            syncDataToFirebase('fuelTripManual', fuelTrip);
+            renderFuelDashboard();
         }
 
         function renderFuelDashboard() {
-            let totalKm = 0;
             let totalCost = 0;
             let totalLiters = 0;
+            let maxKm = fuelTrip.initialKm || 0;
 
             if (fuelTrip.refuels && fuelTrip.refuels.length > 0) {
                 fuelTrip.refuels.forEach(r => {
                     totalCost += parseFloat(r.amount) || 0;
                     totalLiters += parseFloat(r.litres) || 0;
-                    totalKm += parseFloat(r.kmDiff) || 0;
+                    if ((parseFloat(r.currentKm) || 0) > maxKm) {
+                        maxKm = parseFloat(r.currentKm) || 0;
+                    }
                 });
             }
 
-            const avgKml = totalLiters > 0 ? (totalKm / totalLiters).toFixed(2) : '0.00';
-            const costPerKm = totalKm > 0 ? (totalCost / totalKm).toFixed(2) : '0.00';
+            const totalKmDriven = fuelTrip.initialKm > 0 ? Math.max(0, maxKm - fuelTrip.initialKm) : 0;
+            const avgKml = totalLiters > 0 ? (totalKmDriven / totalLiters).toFixed(2) : '0.00';
+            const costPerKm = totalKmDriven > 0 ? (totalCost / totalKmDriven).toFixed(2) : '0.00';
 
-            document.getElementById('metricTotalKm').innerText = `${totalKm.toLocaleString()} ק"מ`;
+            document.getElementById('metricTotalKm').innerText = `${totalKmDriven.toLocaleString()} ק"מ`;
             document.getElementById('metricTotalCost').innerText = `€ ${totalCost.toFixed(2)}`;
             document.getElementById('metricAvgConsumption').innerText = `${avgKml} ק"מ/ליטר`;
             document.getElementById('metricCostPerKm').innerText = `€ ${costPerKm}/ק"מ`;
@@ -1429,13 +1417,16 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="text-orange-400 font-bold">⛽ תדלוק #${idx + 1} (${r.date})</span>
-                                <div class="text-white font-bold mt-0.5">${r.currentKm.toLocaleString()} ק"מ (+${r.kmDiff} ק"מ)</div>
-                                <div class="text-[10px] text-slate-400 mt-1 italic">"${r.rawText}"</div>
+                                <div class="text-white font-bold mt-0.5">קילומטרז' כללי: ${r.currentKm.toLocaleString()} ק"מ</div>
                             </div>
                             <div class="text-left">
                                 <div class="font-black text-amber-400">€ ${r.amount}</div>
-                                <div class="text-[10px] text-sky-400">${r.litres} ליטרים (${r.kml} ק"מ/ליטר)</div>
+                                <div class="text-[10px] text-sky-400">${r.litres} ליטרים</div>
                             </div>
+                        </div>
+                        <div class="flex justify-end gap-3 pt-1 border-t border-slate-800">
+                            <button onclick="openEditFuelModal(${r.id})" class="text-slate-400 hover:text-amber-400"><i class="fa-solid fa-pen-to-square"></i> ערוך</button>
+                            <button onclick="deleteFuelRefuel(${r.id})" class="text-slate-400 hover:text-red-400"><i class="fa-solid fa-trash"></i> מחק</button>
                         </div>
                     `;
                     logsBox.appendChild(card);
@@ -1449,12 +1440,11 @@
             const element = document.getElementById('fuelTripReportArea');
             const opt = {
                 margin:       0.3,
-                filename:     'דוח_דלק_כתיבה_חופשית_אלפים_2026.pdf',
+                filename:     'דוח_דלק_אלפים_2026.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#090d16' },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-
             html2pdf().set(opt).from(element).save();
         }
 
@@ -1933,9 +1923,9 @@
         }
 
         function renderBudget() {
-            const cardsContainer = document.getElementById('budgetMobileCards');
-            if (!cardsContainer) return;
-            cardsContainer.innerHTML = '';
+            const tableBody = document.getElementById('budgetTableBody');
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
 
             let totalNisEst = 0;
             const rate = parseFloat(document.getElementById('eurRate').value) || 3.47;
@@ -1950,14 +1940,14 @@
                     statusClass = 'bg-sky-500/20 text-sky-300 border border-sky-500/30';
                 }
 
-                let amountDisplay = `<span class="font-bold text-alpine-400 text-sm">${item.amount}</span>`;
+                let amountDisplay = `<span class="font-bold text-alpine-400">${item.amount}</span>`;
                 if (item.status === 'מקדמה שולמה' && item.depositPaid) {
                     amountDisplay = `
                         <div>
-                            <span class="font-bold text-emerald-400 text-sm">${item.depositPaid}</span>
-                            <span class="text-slate-400 text-xs"> / ${item.amount}</span>
+                            <span class="font-bold text-emerald-400">${item.depositPaid}</span>
+                            <span class="text-slate-400 text-[10px]"> / ${item.amount}</span>
                         </div>
-                        ${item.depositRemaining ? `<div class="text-[10px] text-amber-400">יתרה: ${item.depositRemaining}</div>` : ''}
+                        ${item.depositRemaining ? `<div class="text-[9px] text-amber-400">יתרה: ${item.depositRemaining}</div>` : ''}
                     `;
                 }
 
@@ -1968,33 +1958,36 @@
                     totalNisEst += numVal;
                 }
 
-                const card = document.createElement('div');
-                card.className = 'bg-slate-900/90 p-3 rounded-2xl border border-slate-800/80 space-y-2';
-                card.innerHTML = `
-                    <div class="flex justify-between items-start gap-2">
-                        <div>
-                            <h4 class="font-bold text-xs text-white">${item.desc}</h4>
-                            <p class="text-[10px] text-slate-400">${item.vendor}</p>
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-slate-900/50 transition border-b border-slate-800/40';
+                row.innerHTML = `
+                    <td class="p-3">
+                        <div class="font-bold text-white">${item.desc}</div>
+                    </td>
+                    <td class="p-3 text-slate-400 text-[11px]">
+                        ${item.vendor}
+                    </td>
+                    <td class="p-3 whitespace-nowrap">
+                        ${amountDisplay}
+                    </td>
+                    <td class="p-3">
+                        <span class="text-[9px] font-bold px-2 py-0.5 rounded-full inline-block ${statusClass}">${item.status}</span>
+                    </td>
+                    <td class="p-3 text-slate-300 font-medium">
+                        ${item.payer}
+                    </td>
+                    <td class="p-3 text-center whitespace-nowrap">
+                        <div class="flex items-center justify-center gap-2.5">
+                            <button onclick="protectedAction(() => openEditExpenseModal(${item.id}))" class="text-slate-400 hover:text-amber-400 transition" title="ערוך">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button onclick="protectedAction(() => deleteExpense(${item.id}))" class="text-slate-400 hover:text-red-400 transition" title="מחק">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </div>
-                        <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${statusClass} shrink-0">${item.status}</span>
-                    </div>
-
-                    <div class="flex justify-between items-center pt-1 border-t border-slate-800/60 text-xs">
-                        <div>${amountDisplay}</div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[10px] text-slate-400">משלם: <strong class="text-slate-200">${item.payer}</strong></span>
-                            <div class="flex gap-2">
-                                <button onclick="protectedAction(() => openEditExpenseModal(${item.id}))" class="text-slate-400 hover:text-amber-400 text-xs">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button onclick="protectedAction(() => deleteExpense(${item.id}))" class="text-slate-400 hover:text-red-400 text-xs">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    </td>
                 `;
-                cardsContainer.appendChild(card);
+                tableBody.appendChild(row);
             });
 
             document.getElementById('budgetTotalDisplay').innerText = `~ ₪ ${Math.round(totalNisEst).toLocaleString()}`;
@@ -2009,7 +2002,6 @@
                 html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#090d16' },
                 jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-
             html2pdf().set(opt).from(element).save();
         }
 
